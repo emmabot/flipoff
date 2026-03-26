@@ -14,6 +14,7 @@ class SplitFlapBoardView: UIView {
     private var tiles: [[SplitFlapTileView]] = []
     private var currentGrid: [[Character]] = []
     private(set) var isTransitioning = false
+    private var pendingMessage: [String]?
 
     // MARK: - Init
 
@@ -83,7 +84,10 @@ class SplitFlapBoardView: UIView {
     /// Display a message as 5 rows of strings. Each string is centered in the 22-column grid.
     func display(message: [String]) {
         print("[FlipOff] Displaying: \(message)")
-        guard !isTransitioning else { return }
+        if isTransitioning {
+            pendingMessage = message
+            return
+        }
         isTransitioning = true
 
         let newGrid = formatToGrid(message)
@@ -114,11 +118,20 @@ class SplitFlapBoardView: UIView {
         // Clear transitioning flag after all animations complete
         let totalDuration = Double(Self.gridCols) * Self.staggerDelay + 0.6
         DispatchQueue.main.asyncAfter(deadline: .now() + totalDuration) { [weak self] in
-            self?.isTransitioning = false
+            guard let self = self else { return }
+            self.isTransitioning = false
+            if let pending = self.pendingMessage {
+                self.pendingMessage = nil
+                self.display(message: pending)
+            }
         }
 
         if !hasChanges {
             isTransitioning = false
+            if let pending = pendingMessage {
+                pendingMessage = nil
+                display(message: pending)
+            }
         }
     }
 
