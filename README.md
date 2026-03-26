@@ -1,85 +1,99 @@
 # FlipOff.
 
-**Turn any TV into a retro split-flap display.** The classic flip-board look, without the $3,500 hardware. And it's free.
+**A kid-friendly split-flap display for your family TV.** Jokes, riddles, quotes, weather, and morning/bedtime routines — all in retro flip-board style.
+
+🔴 **Live now:** [emmabot.github.io/flipoff](https://emmabot.github.io/flipoff/)
 
 ![FlipOff Screenshot](screenshot.png)
 
 ## What is this?
 
-FlipOff is a free, open-source web app that emulates a classic mechanical split-flap (flip-board) airport terminal display — the kind you'd see at train stations and airports. It runs full-screen in any browser, turning a TV or large monitor into a beautiful retro display.
+FlipOff turns any TV or monitor into a warm, clackety split-flap display — the kind you'd see at old train stations. It's built for families: kid-friendly jokes, riddles with delayed reveals, quotes from Star Wars and Percy Jackson, and time-aware reminders for morning routines and bedtime.
 
-No accounts. No subscriptions. No $199 fee. Just open `index.html` and go.
+No accounts. No frameworks. No subscriptions. Just open it and go.
 
-## Features
+## What's on the board
 
-- Realistic split-flap animation with colorful scramble transitions
-- Authentic mechanical clacking sound (recorded from a real split-flap display)
-- Auto-rotating inspirational quotes
-- Fullscreen TV mode (press `F`)
-- Keyboard controls for manual navigation
-- Works offline — zero external dependencies
-- Responsive from mobile to 4K displays
-- Pure vanilla HTML/CSS/JS — no frameworks, no build tools, no npm
+- **207 jokes & puns** — kid-friendly, groan-worthy, parent-approved
+- **30 riddles** — answer reveals after a 10-second pause
+- **24 quotes** — Star Wars, Harry Potter, Percy Jackson, Greek & Norse mythology
+- **Morning mode** (7–8am) — routine reminders + live weather for Berkeley, CA
+- **Bedtime mode** (7:30–8:30pm) — wind-down reminders + calming quotes
+- **Retro warm palette** — amber, coral, sky blue, sage, cream, lavender
 
 ## Quick Start
 
-1. Clone the repo
-2. Open `index.html` in a browser (or serve with any static file server)
-3. Click anywhere to enable audio
-4. Press `F` for fullscreen TV mode
+**Easiest:** Just open [emmabot.github.io/flipoff](https://emmabot.github.io/flipoff/) on your TV browser.
 
+**Local:**
 ```bash
-# Or serve locally:
+git clone https://github.com/emmabot/flipoff.git
+cd flipoff
 python3 -m http.server 8080
-# Then open http://localhost:8080
+# Open http://localhost:8080
 ```
+
+Press `F` for fullscreen. Click anywhere to enable sound.
 
 ## Keyboard Shortcuts
 
 | Key | Action |
 |-----|--------|
 | `Enter` / `Space` | Next message |
-| `Arrow Left` | Previous message |
-| `Arrow Right` | Next message |
+| `←` / `→` | Previous / Next message |
 | `F` | Toggle fullscreen |
-| `M` | Toggle mute |
+| `M` | Toggle sound |
 | `Escape` | Exit fullscreen |
 
-## How It Works
+## Apple TV (tvOS)
 
-Each tile on the board is an independent element that can animate through a scramble sequence (rapid random characters with colored backgrounds) before settling on the final character. Only tiles whose content changes between messages animate — just like a real mechanical board.
+There's a native tvOS app in `tvos/` that loads content from the GitHub Pages site.
 
-The sound is a single recorded audio clip of a real split-flap transition, played once per message change to perfectly sync with the visual animation.
+1. Open `tvos/FlipOff.xcodeproj` in Xcode
+2. Build and deploy to your Apple TV
+3. The app fetches content on launch — no rebuilds needed for content updates
+
+## Customization
+
+Everything lives in `js/constants.js`. Edit it to change:
+
+- **Content** — jokes, riddles, quotes, morning/bedtime reminders
+- **Time slots** — when morning and bedtime modes activate
+- **Weather** — location for weather fetches
+- **Grid size** — `GRID_COLS` and `GRID_ROWS`
+- **Colors** — the warm retro palette
+- **Timing** — scramble speed, stagger delay, rotation interval
+
+Push to `main` and GitHub Pages auto-deploys. The tvOS app picks up changes on next launch.
 
 ## File Structure
 
 ```
 flipoff/
-  index.html           — Single-page app
+  index.html              — Single-page app
   css/
-    reset.css          — CSS reset
-    layout.css         — Page layout (header, hero, board)
-    board.css          — Board container and accent bars
-    tile.css           — Tile styling and 3D flip animation
-    responsive.css     — Media queries for all screen sizes
+    reset.css             — CSS reset
+    layout.css            — Full-screen edge-to-edge layout
+    board.css             — Board container and accent bars
+    tile.css              — Tile styling (1.5× aspect ratio)
+    responsive.css        — Media queries for all screen sizes
   js/
-    main.js            — Entry point and UI wiring
-    Board.js           — Grid manager and transition orchestration
-    Tile.js            — Individual tile animation logic
-    SoundEngine.js     — Audio playback with Web Audio API
-    MessageRotator.js  — Quote rotation timer
+    main.js               — Entry point and UI wiring
+    Board.js              — Grid manager and transition orchestration
+    Tile.js               — Individual tile animation logic
+    SoundEngine.js        — Audio playback with Web Audio API
+    MessageRotator.js     — Content rotation and time-of-day routing
     KeyboardController.js — Keyboard shortcut handling
-    constants.js       — Configuration (grid size, colors, quotes)
-    flapAudio.js       — Embedded audio data (base64)
+    constants.js          — All content, config, colors, time slots
+    flapAudio.js          — Embedded flip sound (base64)
+  tvos/
+    FlipOff/              — Native tvOS app source
+    FlipOff.xcodeproj     — Xcode project
 ```
 
-## Customization
+## Tech
 
-Edit `js/constants.js` to change:
-- **Messages**: Add your own quotes or text
-- **Grid size**: Adjust `GRID_COLS` and `GRID_ROWS`
-- **Timing**: Tweak `SCRAMBLE_DURATION`, `STAGGER_DELAY`, etc.
-- **Colors**: Modify `SCRAMBLE_COLORS` and `ACCENT_COLORS`
+Pure vanilla HTML/CSS/JS. No frameworks, no build tools, no npm. Works offline (except weather).
 
 ## License
 
