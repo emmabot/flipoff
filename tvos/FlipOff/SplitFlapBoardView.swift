@@ -27,15 +27,19 @@ class SplitFlapBoardView: UIView {
         setupBoard()
     }
 
+    private var hasDisplayedFirstMessage = false
+
     private func setupBoard() {
         backgroundColor = .black
 
         for r in 0..<Self.gridRows {
             var row: [SplitFlapTileView] = []
             var charRow: [Character] = []
-            for _ in 0..<Self.gridCols {
+            for c in 0..<Self.gridCols {
                 let tile = SplitFlapTileView()
                 tile.translatesAutoresizingMaskIntoConstraints = false
+                // Tag first tile for debug logging
+                if r == 0 && c == 0 { tile.tag = 1 }
                 tile.setChar(" ")
                 addSubview(tile)
                 row.append(tile)
@@ -78,10 +82,19 @@ class SplitFlapBoardView: UIView {
 
     /// Display a message as 5 rows of strings. Each string is centered in the 22-column grid.
     func display(message: [String]) {
+        print("[FlipOff] Displaying: \(message)")
         guard !isTransitioning else { return }
         isTransitioning = true
 
         let newGrid = formatToGrid(message)
+
+        // First message: set characters directly (no animation) to verify rendering
+        if !hasDisplayedFirstMessage {
+            hasDisplayedFirstMessage = true
+            displayWithoutAnimation(grid: newGrid)
+            return
+        }
+
         var hasChanges = false
 
         for r in 0..<Self.gridRows {
@@ -107,6 +120,19 @@ class SplitFlapBoardView: UIView {
         if !hasChanges {
             isTransitioning = false
         }
+    }
+
+    /// Display grid content immediately without flip animation (used for first message).
+    private func displayWithoutAnimation(grid: [[Character]]) {
+        print("[FlipOff] displayWithoutAnimation — setting chars directly")
+        for r in 0..<Self.gridRows {
+            for c in 0..<Self.gridCols {
+                let char = grid[r][c]
+                tiles[r][c].setChar(char)
+            }
+        }
+        currentGrid = grid
+        isTransitioning = false
     }
 
     // MARK: - Grid Formatting

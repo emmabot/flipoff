@@ -80,21 +80,24 @@ class SplitFlapTileView: UIView {
             splitLine.trailingAnchor.constraint(equalTo: trailingAnchor),
             splitLine.heightAnchor.constraint(equalToConstant: 1),
 
+            // Each label is full-tile height, centered at the split line.
+            // topHalf clips to show upper portion, bottomHalf clips to show lower.
             topLabel.centerXAnchor.constraint(equalTo: topHalf.centerXAnchor),
-            topLabel.bottomAnchor.constraint(equalTo: topHalf.bottomAnchor, constant: 0),
-            topLabel.leadingAnchor.constraint(equalTo: topHalf.leadingAnchor, constant: 1),
-            topLabel.trailingAnchor.constraint(equalTo: topHalf.trailingAnchor, constant: -1),
+            topLabel.centerYAnchor.constraint(equalTo: topHalf.bottomAnchor),
+            topLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -2),
+            topLabel.heightAnchor.constraint(equalTo: heightAnchor),
 
             bottomLabel.centerXAnchor.constraint(equalTo: bottomHalf.centerXAnchor),
-            bottomLabel.topAnchor.constraint(equalTo: bottomHalf.topAnchor, constant: 0),
-            bottomLabel.leadingAnchor.constraint(equalTo: bottomHalf.leadingAnchor, constant: 1),
-            bottomLabel.trailingAnchor.constraint(equalTo: bottomHalf.trailingAnchor, constant: -1),
+            bottomLabel.centerYAnchor.constraint(equalTo: bottomHalf.topAnchor),
+            bottomLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -2),
+            bottomLabel.heightAnchor.constraint(equalTo: heightAnchor),
         ])
     }
 
     func configureFont(size: CGFloat) {
         let font = UIFont(name: "Menlo-Bold", size: size)
             ?? .monospacedSystemFont(ofSize: size, weight: .bold)
+        print("[FlipOff] Font: \(font.fontName) size=\(font.pointSize)")
         topLabel.font = font
         bottomLabel.font = font
     }
@@ -108,6 +111,10 @@ class SplitFlapTileView: UIView {
         bottomLabel.text = text
         topLabel.textColor = color
         bottomLabel.textColor = color
+        // Debug: log for first tile only (tag == 1 set by board)
+        if tag == 1 && char != " " {
+            print("[FlipOff] Tile[0,0] setChar='\(char)' topFrame=\(topLabel.frame) botFrame=\(bottomLabel.frame)")
+        }
     }
 
     // MARK: - Flip Animation
@@ -123,7 +130,7 @@ class SplitFlapTileView: UIView {
         }
         isAnimating = true
 
-        let scrambleCount = 10 + Int.random(in: 0..<4)
+        let scrambleCount = 3 + Int.random(in: 0..<2)
         let scrambleInterval: TimeInterval = 0.035
         let targetChar = character
 
