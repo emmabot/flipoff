@@ -475,9 +475,74 @@ const MATH_PUZZLES = [
   { type: 'riddle', question: ['', '', 'WHAT IS 11 x 11?', '', ''], answer: ['', '', '121!', '', ''] }
 ];
 
+// --- GEOGRAPHY FACTS (15) ---
+
+const GEOGRAPHY = [
+  ['', 'GEOGRAPHY FACT!', 'THE PACIFIC IS THE', 'BIGGEST OCEAN', ''],
+  ['', 'GEOGRAPHY FACT!', 'MT EVEREST IS THE', 'TALLEST MOUNTAIN', ''],
+  ['', 'GEOGRAPHY FACT!', 'THERE ARE SEVEN', 'CONTINENTS ON EARTH', ''],
+  ['', 'GEOGRAPHY FACT!', 'THE NILE IS THE', 'LONGEST RIVER', ''],
+  ['', 'GEOGRAPHY FACT!', 'VATICAN CITY IS THE', 'SMALLEST COUNTRY', ''],
+  ['', 'GEOGRAPHY FACT!', 'ANTARCTICA IS THE', 'COLDEST CONTINENT', ''],
+  ['', 'GEOGRAPHY FACT!', 'SAHARA IS THE', 'LARGEST HOT DESERT', ''],
+  ['', 'GEOGRAPHY FACT!', 'EARTH HAS FIVE', 'OCEANS', ''],
+  ['', 'GEOGRAPHY FACT!', 'MARIANA TRENCH IS', 'THE DEEPEST POINT', ''],
+  ['', 'GEOGRAPHY FACT!', 'AMAZON RAINFOREST', 'IS THE LARGEST', ''],
+  ['', 'GEOGRAPHY FACT!', 'AUSTRALIA IS BOTH', 'COUNTRY AND CONTINENT', ''],
+  ['', 'GEOGRAPHY FACT!', 'RUSSIA IS THE', 'BIGGEST COUNTRY', ''],
+  ['', 'GEOGRAPHY FACT!', 'AFRICA HAS 54', 'COUNTRIES', ''],
+  ['', 'GEOGRAPHY FACT!', 'THE DEAD SEA IS', 'THE LOWEST POINT', ''],
+  ['', 'GEOGRAPHY FACT!', 'GREENLAND IS THE', 'BIGGEST ISLAND', '']
+];
+
+// --- SEASONAL FACTS (20) ---
+
+const SEASONAL_FACTS = [
+  ['', 'SPRING FACT!', 'BABY ANIMALS ARE', 'BORN IN SPRING', ''],
+  ['', 'SPRING FACT!', 'FLOWERS START TO', 'BLOOM IN SPRING', ''],
+  ['', 'SPRING FACT!', 'DAYS GET LONGER', 'IN SPRINGTIME', ''],
+  ['', 'SPRING FACT!', 'BUTTERFLIES COME', 'BACK IN SPRING', ''],
+  ['', 'SPRING FACT!', 'APRIL SHOWERS BRING', 'MAY FLOWERS', ''],
+  ['', 'SUMMER FACT!', 'JUNE 21 IS THE', 'LONGEST DAY', ''],
+  ['', 'SUMMER FACT!', 'FIREFLIES GLOW TO', 'FIND THEIR FRIENDS', ''],
+  ['', 'SUMMER FACT!', 'THE SUN DOESNT SET', 'IN PARTS OF ALASKA', ''],
+  ['', 'SUMMER FACT!', 'ICE CREAM WAS', 'INVENTED IN CHINA', ''],
+  ['', 'SUMMER FACT!', 'WATERMELONS ARE', '92 PERCENT WATER', ''],
+  ['', 'FALL FACT!', 'LEAVES CHANGE COLOR', 'BECAUSE LESS SUNLIGHT', ''],
+  ['', 'FALL FACT!', 'BIRDS FLY SOUTH', 'FOR THE WINTER', ''],
+  ['', 'FALL FACT!', 'SQUIRRELS HIDE NUTS', 'FOR THE WINTER', ''],
+  ['', 'FALL FACT!', 'FALL IS ALSO CALLED', 'AUTUMN', ''],
+  ['', 'FALL FACT!', 'PUMPKINS ARE FRUIT', 'NOT VEGETABLES', ''],
+  ['', 'WINTER FACT!', 'NO TWO SNOWFLAKES', 'ARE THE SAME', ''],
+  ['', 'WINTER FACT!', 'BEARS HIBERNATE', 'ALL WINTER LONG', ''],
+  ['', 'WINTER FACT!', 'DEC 21 IS THE', 'SHORTEST DAY', ''],
+  ['', 'WINTER FACT!', 'AURORA BOREALIS IS', 'THE NORTHERN LIGHTS', ''],
+  ['', 'WINTER FACT!', 'SOME LAKES FREEZE', 'SOLID IN WINTER', '']
+];
+
+// --- UNSCRAMBLE PUZZLES (15) ---
+
+const UNSCRAMBLE = [
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'NCOEA', '', ''], answer: ['', '', 'OCEAN!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'LENPAT', '', ''], answer: ['', '', 'PLANET!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'TIRGUA', '', ''], answer: ['', '', 'GUITAR!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'KNYEMO', '', ''], answer: ['', '', 'MONKEY!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'GRAODN', '', ''], answer: ['', '', 'DRAGON!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'STACLE', '', ''], answer: ['', '', 'CASTLE!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'TRIPAE', '', ''], answer: ['', '', 'PIRATE!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'CKROTE', '', ''], answer: ['', '', 'ROCKET!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'GLNUJE', '', ''], answer: ['', '', 'JUNGLE!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'HPINDOL', '', ''], answer: ['', '', 'DOLPHIN!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'WBORANI', '', ''], answer: ['', '', 'RAINBOW!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'COLVANO', '', ''], answer: ['', '', 'VOLCANO!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'GUNEPIN', '', ''], answer: ['', '', 'PENGUIN!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'SAUNIROD', '', ''], answer: ['', '', 'DINOSAUR!', '', ''] },
+  { type: 'riddle', question: ['', 'UNSCRAMBLE THIS!', 'SURTEARE', '', ''], answer: ['', '', 'TREASURE!', '', ''] }
+];
+
 // --- COMBINED DEFAULT SET (quotes + jokes + riddles + new categories) ---
 
-export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES];
+export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES, ...GEOGRAPHY, ...SEASONAL_FACTS, ...UNSCRAMBLE];
 
 export const TIME_SLOTS = [
   { startHour: 7, endHour: 8, messages: MORNING_MESSAGES },
