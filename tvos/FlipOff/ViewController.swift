@@ -12,28 +12,35 @@ class ViewController: UIViewController {
 
     // MARK: - Message types
 
-    private struct TimeSlot {
-        let startHour: Double
-        let endHour: Double
-        let messages: [[String]]
+    private enum Message {
+        case plain([String])
+        case riddle(question: [String], answer: [String])
+
+        var displayLines: [String] {
+            switch self {
+            case .plain(let lines): return lines
+            case .riddle(let question, _): return question
+            }
+        }
     }
 
     // MARK: - Properties
 
-    private var allMessages: [[String]] = []
-    private var morningMessages: [[String]] = []
-    private var bedtimeMessages: [[String]] = []
-    private var defaultMessages: [[String]] = []
+    private var allMessages: [Message] = []
+    private var morningMessages: [Message] = []
+    private var bedtimeMessages: [Message] = []
+    private var defaultMessages: [Message] = []
 
-    private var activeMessages: [[String]] = []
+    private var activeMessages: [Message] = []
     private var currentIndex: Int = -1
     private var autoTimer: Timer?
     private var timeCheckTimer: Timer?
+    private var riddleTimer: DispatchWorkItem?
 
     private let boardView = SplitFlapBoardView()
     private let statusLabel = UILabel()
 
-    private let fallbackMessage = ["", "", "W + S", "", ""]
+    private let fallbackMessage: Message = .plain(["", "", "W + S", "", ""])
 
     // MARK: - Lifecycle
 
@@ -145,47 +152,85 @@ class ViewController: UIViewController {
         }.resume()
     }
 
-    private func parseMessages(from js: String) -> [[String]] {
-        var results: [[String]] = []
-        let pattern = #"\[\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*\]"#
-        guard let regex = try? NSRegularExpression(pattern: pattern) else {
-            print("[FlipOff] ERROR: Failed to create regex")
+    private func parseMessages(from js: String) -> [Message] {
+        var results: [Message] = []
+
+        // Parse flat 5-element arrays as plain messages
+        let plainPattern = #"\[\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*\]"#
+        if let regex = try? NSRegularExpression(pattern: plainPattern) {
+            let nsString = js as NSString
+            let matches = regex.matches(in: js, range: NSRange(location: 0, length: nsString.length))
+            print("[FlipOff] parseMessages: found \(matches.count) plain array matches")
+
+            for match in matches {
+                var row: [String] = []
+                for i in 1...5 {
+                    let range = match.range(at: i)
+                    row.append(range.location != NSNotFound ? nsString.substring(with: range) : "")
+                }
+                if row.contains(where: { !$0.isEmpty }) {
+                    results.append(.plain(row))
+                }
+            }
+        }
+
+        // Parse riddle objects
+        let riddles = parseRiddles(from: js)
+        print("[FlipOff] parseMessages: found \(riddles.count) riddles")
+        results.append(contentsOf: riddles)
+
+        return results
+    }
+
+    private func parseRiddles(from js: String) -> [Message] {
+        var results: [Message] = []
+        let riddlePattern = #"type:\s*'riddle'\s*,\s*question:\s*\[\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*\]\s*,\s*answer:\s*\[\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*\]"#
+        guard let regex = try? NSRegularExpression(pattern: riddlePattern) else {
+            print("[FlipOff] ERROR: Failed to create riddle regex")
             return []
         }
 
         let nsString = js as NSString
         let matches = regex.matches(in: js, range: NSRange(location: 0, length: nsString.length))
-        print("[FlipOff] parseMessages: found \(matches.count) regex matches")
 
         for match in matches {
-            var row: [String] = []
+            var question: [String] = []
+            var answer: [String] = []
             for i in 1...5 {
                 let range = match.range(at: i)
-                row.append(range.location != NSNotFound ? nsString.substring(with: range) : "")
+                question.append(range.location != NSNotFound ? nsString.substring(with: range) : "")
             }
-            if row.contains(where: { !$0.isEmpty }) {
-                results.append(row)
+            for i in 6...10 {
+                let range = match.range(at: i)
+                answer.append(range.location != NSNotFound ? nsString.substring(with: range) : "")
             }
+            results.append(.riddle(question: question, answer: answer))
         }
         return results
     }
 
-    private func categorizeSections(from js: String, allMessages: [[String]])
-        -> (morning: [[String]], bedtime: [[String]], defaults: [[String]]) {
-        // Find MORNING_REMINDERS section messages (first 10 after morning marker)
-        // Find BEDTIME section messages
-        // The rest are defaults
-        // Simple heuristic: use known content markers
+    /// Helper to get joined display text for content matching (only works on plain messages).
+    private func plainJoined(_ msg: Message) -> String? {
+        if case .plain(let lines) = msg { return lines.joined() }
+        return nil
+    }
 
-        var morning: [[String]] = []
-        var bedtime: [[String]] = []
+    private func categorizeSections(from js: String, allMessages: [Message])
+        -> (morning: [Message], bedtime: [Message], defaults: [Message]) {
+        // Riddles only go into default set (matching web behavior).
+        // Morning/bedtime categorization uses string content matching on plain messages only.
+
+        var morning: [Message] = []
+        var bedtime: [Message] = []
+        var morningJoined: [String] = []
 
         for msg in allMessages {
-            let joined = msg.joined()
+            guard let joined = plainJoined(msg) else { continue }
             if joined.contains("BRUSH YOUR TEETH") || joined.contains("BRUSH YOUR HAIR")
                 || joined.contains("PUT YOUR SOCKS ON") || joined.contains("BE NICE")
                 || joined.contains("GET READY FOR A") {
                 morning.append(msg)
+                morningJoined.append(joined)
             }
             if joined.contains("SWEET DREAMS") || joined.contains("SAY GOODNIGHT")
                 || joined.contains("PACK YOUR BACKPACK") || joined.contains("READ A BOOK")
@@ -202,19 +247,23 @@ class ViewController: UIViewController {
 
         // Morning also includes morning jokes (first 5 that match breakfast/school theme)
         for msg in allMessages {
-            let joined = msg.joined()
+            guard let joined = plainJoined(msg) else { continue }
             if (joined.contains("MICE KRISPIES") || joined.contains("CRACK UP")
                 || joined.contains("HIGH SCHOOL") || joined.contains("ELF-ABET")
                 || joined.contains("BACON") && joined.contains("EGG CRACKED"))
-                && !morning.contains(where: { $0 == msg }) {
+                && !morningJoined.contains(joined) {
                 morning.append(msg)
+                morningJoined.append(joined)
                 if morning.count >= 10 { break }
             }
         }
 
-        // Default = everything not in morning/bedtime
+        // Default = everything not in morning/bedtime (riddles naturally land here)
+        let morningSet = Set(morningJoined)
+        let bedtimeSet = Set(bedtime.compactMap { plainJoined($0) })
         let defaults = allMessages.filter { msg in
-            !morning.contains(where: { $0 == msg }) && !bedtime.contains(where: { $0 == msg })
+            guard let joined = plainJoined(msg) else { return true } // riddles go to default
+            return !morningSet.contains(joined) && !bedtimeSet.contains(joined)
         }
 
         print("[FlipOff] categorizeSections: morning=\(morning.count), bedtime=\(bedtime.count), default=\(defaults.count)")
@@ -266,22 +315,51 @@ class ViewController: UIViewController {
 
     // MARK: - Message Display
 
+    private static let riddleDelay: TimeInterval = 10.0
+
+    private func cancelRiddleTimer() {
+        riddleTimer?.cancel()
+        riddleTimer = nil
+    }
+
+    private func displayMessage(_ msg: Message) {
+        cancelRiddleTimer()
+
+        switch msg {
+        case .plain(let lines):
+            boardView.display(message: lines)
+        case .riddle(let question, let answer):
+            boardView.display(message: question)
+            // Show answer after 10 seconds, then restart auto-rotation
+            let work = DispatchWorkItem { [weak self] in
+                guard let self = self else { return }
+                self.boardView.display(message: answer)
+                self.riddleTimer = nil
+                // Restart auto timer so next message comes after normal interval
+                self.startAutoRotation()
+            }
+            riddleTimer = work
+            DispatchQueue.main.asyncAfter(deadline: .now() + Self.riddleDelay, execute: work)
+        }
+    }
+
     private func showNext() {
         guard !activeMessages.isEmpty else { return }
         currentIndex = (currentIndex + 1) % activeMessages.count
-        boardView.display(message: activeMessages[currentIndex])
+        displayMessage(activeMessages[currentIndex])
     }
 
     private func showPrev() {
         guard !activeMessages.isEmpty else { return }
         currentIndex = (currentIndex - 1 + activeMessages.count) % activeMessages.count
-        boardView.display(message: activeMessages[currentIndex])
+        displayMessage(activeMessages[currentIndex])
     }
 
     // MARK: - Auto-Rotation
 
     private func startAutoRotation() {
         autoTimer?.invalidate()
+        cancelRiddleTimer()
         // ~8 seconds matches MESSAGE_INTERVAL + TOTAL_TRANSITION from web
         autoTimer = Timer.scheduledTimer(withTimeInterval: 8.0, repeats: true) { [weak self] _ in
             self?.showNext()
