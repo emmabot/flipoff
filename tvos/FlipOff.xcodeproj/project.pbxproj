@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A10000010000000000000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000001; };
-		A10000010000000000000002 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000002; };
-		A10000010000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000003; };
-		A10000010000000000000004 /* SplitFlapTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000006; };
-		A10000010000000000000005 /* SplitFlapBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000007; };
+		A10000010000000000000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000001 /* AppDelegate.swift */; };
+		A10000010000000000000002 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000002 /* ViewController.swift */; };
+		A10000010000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000003 /* Assets.xcassets */; };
+		A10000010000000000000004 /* SplitFlapTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000006 /* SplitFlapTileView.swift */; };
+		A10000010000000000000005 /* SplitFlapBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000007 /* SplitFlapBoardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,6 +180,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon";
+				DEVELOPMENT_TEAM = L8BXPCB9GA;
 				INFOPLIST_FILE = FlipOff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -198,6 +199,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon";
+				DEVELOPMENT_TEAM = L8BXPCB9GA;
 				INFOPLIST_FILE = FlipOff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -234,8 +236,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
 	};
 	rootObject = A10000080000000000000001 /* Project object */;
 }
-
