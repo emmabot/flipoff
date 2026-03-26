@@ -36,7 +36,7 @@
 .tile-back span {
   font-size: calc(var(--tile-size) * 0.52);
   font-weight: 700;
-  color: #FFFFFF;
+  color: #E8DCC8;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   line-height: 1;

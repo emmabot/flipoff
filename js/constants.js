@@ -11,13 +11,13 @@ export const RIDDLE_DELAY = 10000;
 export const CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,-!?\'/: ';
 
 export const SCRAMBLE_COLORS = [
-  '#00AAFF', '#00FFCC', '#AA00FF',
-  '#FF2D00', '#FFCC00', '#FFFFFF'
+  '#E8DCC8', '#C4A35A', '#8B8C5E',
+  '#B85C38', '#6B7F99', '#D4CFC4'
 ];
 
 export const ACCENT_COLORS = [
-  '#00FF7F', '#FF4D00', '#AA00FF',
-  '#00AAFF', '#00FFCC'
+  '#C4973B', '#A0553A', '#7D8B6A',
+  '#5E7489', '#9B8E7E'
 ];
 
 // Weather API config for Berkeley, CA (Open-Meteo, no key needed)
