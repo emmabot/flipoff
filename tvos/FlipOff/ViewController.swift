@@ -31,6 +31,9 @@ class ViewController: UIViewController {
     private var timeCheckTimer: Timer?
 
     private let boardView = SplitFlapBoardView()
+    private let statusLabel = UILabel()
+
+    private let fallbackMessage = ["", "", "W + S", "", ""]
 
     // MARK: - Lifecycle
 
@@ -38,6 +41,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         setupBoard()
+        setupStatusLabel()
         setupRemoteGestures()
         fetchMessages()
     }
@@ -55,19 +59,71 @@ class ViewController: UIViewController {
         ])
     }
 
+    private func setupStatusLabel() {
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusLabel.textColor = .white
+        statusLabel.font = UIFont.systemFont(ofSize: 36)
+        statusLabel.textAlignment = .center
+        statusLabel.text = "Loading..."
+        view.addSubview(statusLabel)
+        NSLayoutConstraint.activate([
+            statusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            statusLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+    }
+
     // MARK: - Fetch & Parse Messages
+
+    private func useFallback(reason: String) {
+        print("[FlipOff] Using fallback message: \(reason)")
+        DispatchQueue.main.async {
+            self.statusLabel.text = reason
+            self.allMessages = [self.fallbackMessage]
+            self.morningMessages = [self.fallbackMessage]
+            self.bedtimeMessages = [self.fallbackMessage]
+            self.defaultMessages = [self.fallbackMessage]
+            self.updateActiveMessages()
+            self.statusLabel.removeFromSuperview()
+            self.showNext()
+            self.startAutoRotation()
+            self.startTimeCheck()
+        }
+    }
 
     private func fetchMessages() {
         let urlString = "https://emmabot.github.io/flipoff/js/constants.js"
-        guard let url = URL(string: urlString) else { return }
+        print("[FlipOff] Fetching messages from: \(urlString)")
+        guard let url = URL(string: urlString) else {
+            print("[FlipOff] ERROR: Invalid URL")
+            return
+        }
 
         URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let self = self, let data = data, error == nil,
-                  let js = String(data: data, encoding: .utf8) else {
+            guard let self = self else { return }
+
+            if let error = error {
+                print("[FlipOff] ERROR: Fetch failed: \(error.localizedDescription)")
+                self.useFallback(reason: "Could not load messages")
                 return
             }
 
+            guard let data = data, let js = String(data: data, encoding: .utf8) else {
+                print("[FlipOff] ERROR: No data or failed to decode as UTF-8")
+                self.useFallback(reason: "Could not load messages")
+                return
+            }
+
+            print("[FlipOff] Received \(data.count) bytes")
+            let preview = String(js.prefix(200))
+            print("[FlipOff] JS preview: \(preview)")
+
             let parsed = self.parseMessages(from: js)
+
+            if parsed.isEmpty {
+                self.useFallback(reason: "No messages found")
+                return
+            }
+
             let sections = self.categorizeSections(from: js, allMessages: parsed)
 
             DispatchQueue.main.async {
@@ -77,9 +133,13 @@ class ViewController: UIViewController {
                 self.allMessages = parsed
                 self.updateActiveMessages()
                 if !self.activeMessages.isEmpty {
+                    self.statusLabel.removeFromSuperview()
                     self.showNext()
                     self.startAutoRotation()
                     self.startTimeCheck()
+                } else {
+                    self.statusLabel.text = "No messages found"
+                    print("[FlipOff] activeMessages is empty after updateActiveMessages")
                 }
             }
         }.resume()
@@ -88,10 +148,14 @@ class ViewController: UIViewController {
     private func parseMessages(from js: String) -> [[String]] {
         var results: [[String]] = []
         let pattern = #"\[\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*\]"#
-        guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
+        guard let regex = try? NSRegularExpression(pattern: pattern) else {
+            print("[FlipOff] ERROR: Failed to create regex")
+            return []
+        }
 
         let nsString = js as NSString
         let matches = regex.matches(in: js, range: NSRange(location: 0, length: nsString.length))
+        print("[FlipOff] parseMessages: found \(matches.count) regex matches")
 
         for match in matches {
             var row: [String] = []
@@ -153,6 +217,8 @@ class ViewController: UIViewController {
             !morning.contains(where: { $0 == msg }) && !bedtime.contains(where: { $0 == msg })
         }
 
+        print("[FlipOff] categorizeSections: morning=\(morning.count), bedtime=\(bedtime.count), default=\(defaults.count)")
+
         return (morning.isEmpty ? allMessages : morning,
                 bedtime.isEmpty ? allMessages : bedtime,
                 defaults.isEmpty ? allMessages : defaults)
@@ -170,13 +236,19 @@ class ViewController: UIViewController {
         let hour = currentHourFraction()
         let previousMessages = activeMessages
 
+        let slot: String
         if hour >= 7.0 && hour < 8.0 {
             activeMessages = morningMessages
+            slot = "morning"
         } else if hour >= 19.5 && hour < 20.5 {
             activeMessages = bedtimeMessages
+            slot = "bedtime"
         } else {
             activeMessages = defaultMessages
+            slot = "default"
         }
+
+        print("[FlipOff] updateActiveMessages: slot=\(slot), hour=\(hour), count=\(activeMessages.count)")
 
         // Shuffle when switching sets
         if previousMessages.count != activeMessages.count || previousMessages.isEmpty {
