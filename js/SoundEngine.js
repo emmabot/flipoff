@@ -22,8 +22,9 @@ export class SoundEngine {
         bytes[i] = binaryStr.charCodeAt(i);
       }
       this._audioBuffer = await this.ctx.decodeAudioData(bytes.buffer);
+      console.log('SoundEngine: audio decoded successfully, duration:', this._audioBuffer.duration, 's');
     } catch (e) {
-      console.warn('Failed to decode flap audio:', e);
+      console.warn('SoundEngine: Failed to decode flap audio:', e);
     }
   }
 
