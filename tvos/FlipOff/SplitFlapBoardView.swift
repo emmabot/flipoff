@@ -65,7 +65,7 @@ class SplitFlapBoardView: UIView {
 
         let tileW = availableW / CGFloat(Self.gridCols)
         let tileH = availableH / CGFloat(Self.gridRows)
-        let fontSize = min(tileW * 0.7, tileH * 0.55)
+        let fontSize = min(tileW * 0.85, tileH * 0.75)
 
         for r in 0..<Self.gridRows {
             for c in 0..<Self.gridCols {

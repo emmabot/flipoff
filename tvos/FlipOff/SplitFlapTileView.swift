@@ -43,6 +43,8 @@ class SplitFlapTileView: UIView {
         characterLabel.textColor = Self.creamColor
         characterLabel.translatesAutoresizingMaskIntoConstraints = false
         characterLabel.adjustsFontSizeToFitWidth = true
+        characterLabel.baselineAdjustment = .alignCenters
+        characterLabel.numberOfLines = 1
         characterLabel.minimumScaleFactor = 0.5
         addSubview(characterLabel)
 
@@ -54,7 +56,7 @@ class SplitFlapTileView: UIView {
         NSLayoutConstraint.activate([
             characterLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             characterLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            characterLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -2),
+            characterLabel.widthAnchor.constraint(equalTo: widthAnchor),
             characterLabel.heightAnchor.constraint(equalTo: heightAnchor),
 
             splitLine.centerYAnchor.constraint(equalTo: centerYAnchor),
