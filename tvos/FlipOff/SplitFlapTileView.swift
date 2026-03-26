@@ -1,7 +1,6 @@
 import UIKit
-import QuartzCore
 
-/// A single split-flap character tile with top/bottom halves and 3D flip animation.
+/// A single split-flap character tile with a cosmetic split line and scale-Y flip animation.
 class SplitFlapTileView: UIView {
 
     // MARK: - Constants
@@ -16,10 +15,7 @@ class SplitFlapTileView: UIView {
 
     // MARK: - Subviews
 
-    private let topHalf = UIView()
-    private let bottomHalf = UIView()
-    private let topLabel = UILabel()
-    private let bottomLabel = UILabel()
+    private let characterLabel = UILabel()
     private let splitLine = UIView()
 
     private(set) var currentChar: Character = " "
@@ -42,79 +38,44 @@ class SplitFlapTileView: UIView {
         layer.cornerRadius = 2
         clipsToBounds = true
 
-        for half in [topHalf, bottomHalf] {
-            half.backgroundColor = Self.tileBgColor
-            half.clipsToBounds = true
-            half.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(half)
-        }
+        // Single character label — full tile size, centered
+        characterLabel.textAlignment = .center
+        characterLabel.textColor = Self.creamColor
+        characterLabel.translatesAutoresizingMaskIntoConstraints = false
+        characterLabel.adjustsFontSizeToFitWidth = true
+        characterLabel.minimumScaleFactor = 0.5
+        addSubview(characterLabel)
 
+        // Cosmetic split line overlay at vertical center
         splitLine.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         splitLine.translatesAutoresizingMaskIntoConstraints = false
         addSubview(splitLine)
 
-        for label in [topLabel, bottomLabel] {
-            label.textAlignment = .center
-            label.textColor = Self.creamColor
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.adjustsFontSizeToFitWidth = true
-            label.minimumScaleFactor = 0.5
-        }
-
-        topHalf.addSubview(topLabel)
-        bottomHalf.addSubview(bottomLabel)
-
         NSLayoutConstraint.activate([
-            topHalf.topAnchor.constraint(equalTo: topAnchor),
-            topHalf.leadingAnchor.constraint(equalTo: leadingAnchor),
-            topHalf.trailingAnchor.constraint(equalTo: trailingAnchor),
-            topHalf.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
-
-            bottomHalf.bottomAnchor.constraint(equalTo: bottomAnchor),
-            bottomHalf.leadingAnchor.constraint(equalTo: leadingAnchor),
-            bottomHalf.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bottomHalf.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
+            characterLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            characterLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            characterLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -2),
+            characterLabel.heightAnchor.constraint(equalTo: heightAnchor),
 
             splitLine.centerYAnchor.constraint(equalTo: centerYAnchor),
             splitLine.leadingAnchor.constraint(equalTo: leadingAnchor),
             splitLine.trailingAnchor.constraint(equalTo: trailingAnchor),
             splitLine.heightAnchor.constraint(equalToConstant: 1),
-
-            // Each label is full-tile height, centered at the split line.
-            // topHalf clips to show upper portion, bottomHalf clips to show lower.
-            topLabel.centerXAnchor.constraint(equalTo: topHalf.centerXAnchor),
-            topLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            topLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -2),
-            topLabel.heightAnchor.constraint(equalTo: heightAnchor),
-
-            bottomLabel.centerXAnchor.constraint(equalTo: bottomHalf.centerXAnchor),
-            bottomLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            bottomLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -2),
-            bottomLabel.heightAnchor.constraint(equalTo: heightAnchor),
         ])
     }
 
     func configureFont(size: CGFloat) {
         let font = UIFont(name: "Menlo-Bold", size: size)
             ?? .monospacedSystemFont(ofSize: size, weight: .bold)
-        print("[FlipOff] Font: \(font.fontName) size=\(font.pointSize)")
-        topLabel.font = font
-        bottomLabel.font = font
+        characterLabel.font = font
     }
 
     // MARK: - Character Display
 
     func setChar(_ char: Character, color: UIColor = creamColor) {
         currentChar = char
-        let text = char == " " ? "" : String(char)
-        topLabel.text = text
-        bottomLabel.text = text
-        topLabel.textColor = color
-        bottomLabel.textColor = color
-        // Debug: log for first tile only (tag == 1 set by board)
-        if tag == 1 && char != " " {
-            print("[FlipOff] Tile[0,0] setChar='\(char)' topFrame=\(topLabel.frame) botFrame=\(bottomLabel.frame)")
-        }
+        characterLabel.text = char == " " ? "" : String(char)
+        characterLabel.textColor = color
     }
 
     // MARK: - Flip Animation
@@ -143,7 +104,6 @@ class SplitFlapTileView: UIView {
     private func runScramble(step: Int, total: Int, interval: TimeInterval,
                              target: Character, completion: (() -> Void)?) {
         if step >= total {
-            // Final flip to target character
             performFlipAnimation(to: target) { [weak self] in
                 self?.isAnimating = false
                 completion?()
@@ -151,7 +111,6 @@ class SplitFlapTileView: UIView {
             return
         }
 
-        // Random character + cycling color
         let randChar = Self.charset.randomElement() ?? "A"
         let color = Self.scrambleColors[step % Self.scrambleColors.count]
 
@@ -165,43 +124,17 @@ class SplitFlapTileView: UIView {
 
     private func performFlipAnimation(to char: Character, color: UIColor = creamColor,
                                        completion: (() -> Void)? = nil) {
-        let duration: TimeInterval = 0.025
-
-        // Phase 1: Rotate top half down (hide it)
-        var perspective = CATransform3DIdentity
-        perspective.m34 = -1.0 / 500.0
-        let rotated = CATransform3DRotate(perspective, .pi / 2, 1, 0, 0)
-
-        CATransaction.begin()
-        CATransaction.setDisableActions(false)
-        CATransaction.setAnimationDuration(duration)
-        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .easeIn))
-        CATransaction.setCompletionBlock { [weak self] in
-            guard let self = self else { return }
-            // Swap character while top half is hidden
+        // Scale-Y squish to simulate a flap
+        UIView.animate(withDuration: 0.08, animations: {
+            self.characterLabel.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+        }, completion: { _ in
             self.setChar(char, color: color)
-
-            // Phase 2: Rotate top half back to normal
-            CATransaction.begin()
-            CATransaction.setAnimationDuration(duration)
-            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .easeOut))
-            CATransaction.setCompletionBlock {
+            UIView.animate(withDuration: 0.08, animations: {
+                self.characterLabel.transform = .identity
+            }, completion: { _ in
                 completion?()
-            }
-            self.topHalf.layer.transform = CATransform3DIdentity
-            CATransaction.commit()
-        }
-
-        topHalf.layer.transform = rotated
-        CATransaction.commit()
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        // Set anchor point at bottom of top half for rotation
-        topHalf.layer.anchorPoint = CGPoint(x: 0.5, y: 1.0)
-        // Compensate for anchor point shift
-        topHalf.layer.position = CGPoint(x: bounds.midX, y: bounds.midY)
+            })
+        })
     }
 }
 
