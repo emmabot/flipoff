@@ -1,6 +1,6 @@
 /* Full-viewport board layout */
 body {
-  background: #111;
+  background: #000;
   margin: 0;
   overflow: hidden;
 }
@@ -12,6 +12,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #000;
 }
 
 /* Volume toggle — subtle corner button */
