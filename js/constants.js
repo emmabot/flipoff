@@ -19,7 +19,7 @@ export const ACCENT_COLORS = [
   '#00AAFF', '#00FFCC'
 ];
 
-export const MESSAGES = [
+export const DEFAULT_MESSAGES = [
   [
     '',
     'GOD IS IN',
@@ -62,4 +62,46 @@ export const MESSAGES = [
     '- SALVADOR DALI',
     ''
   ]
+];
+
+export const MORNING_MESSAGES = [
+  [
+    '',
+    '',
+    'BRUSH YOUR TEETH',
+    '',
+    ''
+  ],
+  [
+    '',
+    '',
+    'BRUSH YOUR HAIR',
+    '',
+    ''
+  ],
+  [
+    '',
+    '',
+    'PUT YOUR SOCKS ON',
+    '',
+    ''
+  ],
+  [
+    '',
+    '',
+    'BE NICE',
+    '',
+    ''
+  ],
+  [
+    '',
+    'GET READY FOR A',
+    'BEAUTIFUL DAY',
+    '',
+    ''
+  ]
+];
+
+export const TIME_SLOTS = [
+  { startHour: 7, endHour: 8, messages: MORNING_MESSAGES }
 ];
