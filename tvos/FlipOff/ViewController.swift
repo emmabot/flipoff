@@ -154,15 +154,35 @@ class ViewController: UIViewController {
 
     private func parseMessages(from js: String) -> [Message] {
         var results: [Message] = []
+        let nsString = js as NSString
 
-        // Parse flat 5-element arrays as plain messages
+        // Parse riddle objects first so we can exclude their sub-arrays from plain matching
+        let riddles = parseRiddles(from: js)
+        print("[FlipOff] parseMessages: found \(riddles.count) riddles")
+
+        // Collect byte ranges occupied by riddle objects to skip when parsing plain arrays
+        var riddleRanges: [NSRange] = []
+        let riddleObjPattern = #"\{\s*type:\s*'riddle'\s*,\s*question:\s*\[.*?\]\s*,\s*answer:\s*\[.*?\]\s*\}"#
+        if let riddleObjRegex = try? NSRegularExpression(pattern: riddleObjPattern, options: .dotMatchesLineSeparators) {
+            riddleRanges = riddleObjRegex.matches(in: js, range: NSRange(location: 0, length: nsString.length)).map { $0.range }
+        }
+
+        // Parse flat 5-element arrays as plain messages, skipping any inside riddle objects
         let plainPattern = #"\[\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*\]"#
         if let regex = try? NSRegularExpression(pattern: plainPattern) {
-            let nsString = js as NSString
             let matches = regex.matches(in: js, range: NSRange(location: 0, length: nsString.length))
-            print("[FlipOff] parseMessages: found \(matches.count) plain array matches")
+            print("[FlipOff] parseMessages: found \(matches.count) plain array matches (before riddle filtering)")
 
+            var plainCount = 0
             for match in matches {
+                // Skip arrays that fall inside a riddle object
+                let matchRange = match.range
+                let insideRiddle = riddleRanges.contains { riddleRange in
+                    riddleRange.location <= matchRange.location &&
+                    matchRange.location + matchRange.length <= riddleRange.location + riddleRange.length
+                }
+                if insideRiddle { continue }
+
                 var row: [String] = []
                 for i in 1...5 {
                     let range = match.range(at: i)
@@ -170,13 +190,12 @@ class ViewController: UIViewController {
                 }
                 if row.contains(where: { !$0.isEmpty }) {
                     results.append(.plain(row))
+                    plainCount += 1
                 }
             }
+            print("[FlipOff] parseMessages: \(plainCount) plain messages after riddle filtering")
         }
 
-        // Parse riddle objects
-        let riddles = parseRiddles(from: js)
-        print("[FlipOff] parseMessages: found \(riddles.count) riddles")
         results.append(contentsOf: riddles)
 
         return results
