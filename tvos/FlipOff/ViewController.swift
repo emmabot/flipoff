@@ -8,6 +8,18 @@ import UIKit
 ///
 /// Siri Remote: swipe left = prev, swipe right = next, tap = next
 
+private enum Config {
+    static let autoRotationInterval: TimeInterval = 8.0
+    static let timeCheckInterval: TimeInterval = 60.0
+    static let riddleDelay: TimeInterval = 6.0
+    static let morningStart: Double = 7.0
+    static let morningEnd: Double = 8.0
+    static let bedtimeStart: Double = 19.5
+    static let bedtimeEnd: Double = 20.5
+    static let weatherURL = "https://api.open-meteo.com/v1/forecast?latitude=37.87&longitude=-122.27&current=temperature_2m,weather_code&temperature_unit=fahrenheit"
+    static let contentURL = "https://emmabot.github.io/flipoff/js/constants.js"
+}
+
 class ViewController: UIViewController {
 
     // MARK: - Message types
@@ -43,6 +55,12 @@ class ViewController: UIViewController {
     private let fallbackMessage: Message = .plain(["", "", "W + S", "", ""])
 
     // MARK: - Lifecycle
+
+    deinit {
+        autoTimer?.invalidate()
+        timeCheckTimer?.invalidate()
+        riddleTimer?.cancel()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +117,7 @@ class ViewController: UIViewController {
     }
 
     private func fetchMessages() {
-        let urlString = "https://emmabot.github.io/flipoff/js/constants.js"
+        let urlString = Config.contentURL
         print("[FlipOff] Fetching messages from: \(urlString)")
         guard let url = URL(string: urlString) else {
             print("[FlipOff] ERROR: Invalid URL")
@@ -134,21 +152,45 @@ class ViewController: UIViewController {
 
             let sections = self.categorizeSections(from: js, allMessages: parsed)
 
+            let startUI = {
+                DispatchQueue.main.async {
+                    self.updateActiveMessages()
+                    if !self.activeMessages.isEmpty {
+                        self.statusLabel.removeFromSuperview()
+                        self.showNext()
+                        self.startAutoRotation()
+                        self.startTimeCheck()
+                    } else {
+                        self.statusLabel.text = "No messages found"
+                        print("[FlipOff] activeMessages is empty after updateActiveMessages")
+                    }
+                }
+            }
+
             DispatchQueue.main.async {
                 self.morningMessages = sections.morning
                 self.bedtimeMessages = sections.bedtime
                 self.defaultMessages = sections.defaults
                 self.defaultMessages.shuffle()
                 self.allMessages = parsed
-                self.updateActiveMessages()
-                if !self.activeMessages.isEmpty {
-                    self.statusLabel.removeFromSuperview()
-                    self.showNext()
-                    self.startAutoRotation()
-                    self.startTimeCheck()
+
+                // Fetch weather and insert moon phase if morning slot is active
+                let hour = self.currentHourFraction()
+                if hour >= Config.morningStart && hour < Config.morningEnd {
+                    let moonMsg: Message = .plain(["", "  TONIGHTS MOON", "  \(self.moonPhaseName())", "", ""])
+                    self.fetchWeather { weatherMsg in
+                        DispatchQueue.main.async {
+                            if let weather = weatherMsg {
+                                self.morningMessages.insert(weather, at: 0)
+                                self.morningMessages.insert(moonMsg, at: 1)
+                            } else {
+                                self.morningMessages.insert(moonMsg, at: 0)
+                            }
+                            startUI()
+                        }
+                    }
                 } else {
-                    self.statusLabel.text = "No messages found"
-                    print("[FlipOff] activeMessages is empty after updateActiveMessages")
+                    startUI()
                 }
             }
         }.resume()
@@ -251,58 +293,68 @@ class ViewController: UIViewController {
         }
     }
 
+    /// Extract the text between `const NAME = [` and the matching `];` for a given section name.
+    private func extractSection(named name: String, from js: String) -> String? {
+        let nsJS = js as NSString
+        let pattern = "const \(name)\\s*=\\s*\\["
+        guard let regex = try? NSRegularExpression(pattern: pattern),
+              let match = regex.firstMatch(in: js, range: NSRange(location: 0, length: nsJS.length)) else {
+            return nil
+        }
+        let startIdx = match.range.location + match.range.length
+        let searchRange = NSRange(location: startIdx, length: nsJS.length - startIdx)
+        let endRange = nsJS.range(of: "];", options: [], range: searchRange)
+        guard endRange.location != NSNotFound else { return nil }
+        let sectionRange = NSRange(location: startIdx, length: endRange.location - startIdx)
+        return nsJS.substring(with: sectionRange)
+    }
+
+    /// Parse plain messages from a JS section substring.
+    private func parsePlainMessages(from section: String) -> [Message] {
+        var results: [Message] = []
+        let nsSection = section as NSString
+        let plainPattern = #"\[\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*\]"#
+        guard let regex = try? NSRegularExpression(pattern: plainPattern) else { return [] }
+        let matches = regex.matches(in: section, range: NSRange(location: 0, length: nsSection.length))
+        for match in matches {
+            var row: [String] = []
+            for i in 1...5 {
+                let range = match.range(at: i)
+                row.append(range.location != NSNotFound ? nsSection.substring(with: range) : "")
+            }
+            if row.contains(where: { !$0.isEmpty }) {
+                results.append(.plain(row))
+            }
+        }
+        return results
+    }
+
     private func categorizeSections(from js: String, allMessages: [Message])
-        -> (morning: [Message], bedtime: [Message], defaults: [Message]) {
-        // Riddles only go into default set (matching web behavior).
-        // Morning/bedtime categorization uses string content matching on plain messages only.
+        -> (morning: [Message], bedtime: [Message], defaults: [Message],
+            morningReminders: [Message], morningJokes: [Message],
+            bedtimeReminders: [Message], bedtimeQuotes: [Message]) {
 
+        let morningReminders = extractSection(named: "MORNING_REMINDERS", from: js).map { parsePlainMessages(from: $0) } ?? []
+        let morningJokes = extractSection(named: "MORNING_JOKES", from: js).map { parsePlainMessages(from: $0) } ?? []
+        let bedtimeReminders = extractSection(named: "BEDTIME_REMINDERS", from: js).map { parsePlainMessages(from: $0) } ?? []
+        let bedtimeQuotes = extractSection(named: "BEDTIME_QUOTES", from: js).map { parsePlainMessages(from: $0) } ?? []
+
+        // Interleave morning reminders and jokes
         var morning: [Message] = []
+        for i in 0..<max(morningReminders.count, morningJokes.count) {
+            if i < morningReminders.count { morning.append(morningReminders[i]) }
+            if i < morningJokes.count { morning.append(morningJokes[i]) }
+        }
+
+        // Interleave bedtime reminders and quotes
         var bedtime: [Message] = []
-        var morningJoined: [String] = []
-
-        for msg in allMessages {
-            guard let joined = plainJoined(msg) else { continue }
-            if joined.contains("BRUSH YOUR TEETH") || joined.contains("BRUSH YOUR HAIR")
-                || joined.contains("PUT YOUR SOCKS ON") || joined.contains("BE NICE")
-                || joined.contains("GET READY FOR A") {
-                morning.append(msg)
-                morningJoined.append(joined)
-            }
-            // Note: "BRUSH YOUR TEETH" appears in both morning and bedtime reminders in the web version.
-            // Both sets should contain it.
-            if joined.contains("SWEET DREAMS") || joined.contains("SAY GOODNIGHT")
-                || joined.contains("PACK YOUR BACKPACK") || joined.contains("READ A BOOK")
-                || joined.contains("DRINK SOME WATER") || joined.contains("YOU DID GREAT TODAY")
-                || joined.contains("BRUSH YOUR TEETH")
-                || joined.contains("NEW ADVENTURE") || joined.contains("CHANGE YOUR CLOTHES")
-                || joined.contains("TO SLEEP PERCHANCE") || joined.contains("NO MISTAKES YET")
-                || joined.contains("BRAVER THAN") || joined.contains("MOON IS A FRIEND")
-                || joined.contains("BEST MEDITATION") || joined.contains("EVERY SUNSET")
-                || joined.contains("EVEN SUPERHEROES") || joined.contains("DARKEST JUST BEFORE")
-                || joined.contains("AND SO TO BED") {
-                bedtime.append(msg)
-            }
+        for i in 0..<max(bedtimeReminders.count, bedtimeQuotes.count) {
+            if i < bedtimeReminders.count { bedtime.append(bedtimeReminders[i]) }
+            if i < bedtimeQuotes.count { bedtime.append(bedtimeQuotes[i]) }
         }
 
-        // Morning also includes morning jokes (first 5 that match breakfast/school theme)
-        for msg in allMessages {
-            guard let joined = plainJoined(msg) else { continue }
-            if (joined.contains("MICE KRISPIES") || joined.contains("CRACK UP")
-                || joined.contains("HIGH SCHOOL") || joined.contains("ELF-ABET")
-                || joined.contains("BACON") && joined.contains("EGG CRACKED"))
-                && !morningJoined.contains(joined) {
-                morning.append(msg)
-                morningJoined.append(joined)
-                if morning.count >= 10 { break }
-            }
-        }
-
-        // Deduplicate morning and bedtime (identical arrays appear multiple times in JS source)
-        morning = deduplicateMessages(morning)
-        bedtime = deduplicateMessages(bedtime)
-
-        // Default = everything not in morning/bedtime (riddles naturally land here)
-        let morningSet = Set(morningJoined)
+        // Default = everything not in morning/bedtime
+        let morningSet = Set(morning.compactMap { plainJoined($0) })
         let bedtimeSet = Set(bedtime.compactMap { plainJoined($0) })
         let defaults = deduplicateMessages(allMessages.filter { msg in
             guard let joined = plainJoined(msg) else { return true } // riddles go to default
@@ -313,7 +365,64 @@ class ViewController: UIViewController {
 
         return (morning.isEmpty ? allMessages : morning,
                 bedtime.isEmpty ? allMessages : bedtime,
-                defaults.isEmpty ? allMessages : defaults)
+                defaults.isEmpty ? allMessages : defaults,
+                morningReminders, morningJokes,
+                bedtimeReminders, bedtimeQuotes)
+    }
+
+    // MARK: - Weather
+
+    private static let weatherCodeLabels: [Int: String] = [
+        0: "CLEAR", 1: "MOSTLY CLEAR", 2: "PARTLY CLOUDY", 3: "CLOUDY",
+        45: "FOGGY", 48: "FOGGY",
+        51: "DRIZZLE", 53: "DRIZZLE", 55: "DRIZZLE",
+        61: "RAINY", 63: "RAINY", 65: "HEAVY RAIN",
+        71: "SNOWY", 73: "SNOWY", 75: "HEAVY SNOW",
+        80: "RAIN SHOWERS", 81: "RAIN SHOWERS", 82: "HEAVY SHOWERS",
+        95: "STORMY", 96: "STORMY", 99: "STORMY",
+    ]
+
+    private func moonPhaseName() -> String {
+        let knownNewMoon = DateComponents(calendar: .current, year: 2000, month: 1, day: 6).date!
+        let daysSince = Date().timeIntervalSince(knownNewMoon) / 86400.0
+        let lunarCycle = 29.53
+        let phase = daysSince.truncatingRemainder(dividingBy: lunarCycle)
+        let normalizedPhase = phase < 0 ? phase + lunarCycle : phase
+
+        switch normalizedPhase {
+        case 0..<1.85: return "NEW MOON"
+        case 1.85..<5.53: return "WAXING CRESCENT"
+        case 5.53..<9.22: return "FIRST QUARTER"
+        case 9.22..<12.91: return "WAXING GIBBOUS"
+        case 12.91..<16.61: return "FULL MOON"
+        case 16.61..<20.30: return "WANING GIBBOUS"
+        case 20.30..<23.99: return "LAST QUARTER"
+        case 23.99..<27.68: return "WANING CRESCENT"
+        default: return "NEW MOON"
+        }
+    }
+
+    private func fetchWeather(completion: @escaping (Message?) -> Void) {
+        guard let url = URL(string: Config.weatherURL) else {
+            completion(nil)
+            return
+        }
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil,
+                  let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let current = json["current"] as? [String: Any],
+                  let temp = current["temperature_2m"] as? Double,
+                  let code = current["weather_code"] as? Int else {
+                print("[FlipOff] Weather fetch failed: \(error?.localizedDescription ?? "parse error")")
+                completion(nil)
+                return
+            }
+            let roundedTemp = Int(temp.rounded())
+            let label = Self.weatherCodeLabels[code] ?? "CLEAR"
+            let msg: Message = .plain(["", "  GOOD MORNING", "  \(roundedTemp)°F  \(label)", "", ""])
+            print("[FlipOff] Weather: \(roundedTemp)°F \(label)")
+            completion(msg)
+        }.resume()
     }
 
     // MARK: - Time-of-Day Routing
@@ -329,10 +438,10 @@ class ViewController: UIViewController {
         let previousMessages = activeMessages
 
         let slot: String
-        if hour >= 7.0 && hour < 8.0 {
+        if hour >= Config.morningStart && hour < Config.morningEnd {
             activeMessages = morningMessages
             slot = "morning"
-        } else if hour >= 19.5 && hour < 20.5 {
+        } else if hour >= Config.bedtimeStart && hour < Config.bedtimeEnd {
             activeMessages = bedtimeMessages
             slot = "bedtime"
         } else {
@@ -350,14 +459,14 @@ class ViewController: UIViewController {
 
     private func startTimeCheck() {
         timeCheckTimer?.invalidate()
-        timeCheckTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+        timeCheckTimer = Timer.scheduledTimer(withTimeInterval: Config.timeCheckInterval, repeats: true) { [weak self] _ in
             self?.updateActiveMessages()
         }
     }
 
     // MARK: - Message Display
 
-    private static let riddleDelay: TimeInterval = 6.0
+    private static let riddleDelay: TimeInterval = Config.riddleDelay
 
     private func cancelRiddleTimer() {
         riddleTimer?.cancel()
@@ -426,7 +535,7 @@ class ViewController: UIViewController {
         autoTimer?.invalidate()
         cancelRiddleTimer()
         // ~8 seconds matches MESSAGE_INTERVAL + TOTAL_TRANSITION from web
-        autoTimer = Timer.scheduledTimer(withTimeInterval: 8.0, repeats: true) { [weak self] _ in
+        autoTimer = Timer.scheduledTimer(withTimeInterval: Config.autoRotationInterval, repeats: true) { [weak self] _ in
             self?.showNext()
         }
     }
