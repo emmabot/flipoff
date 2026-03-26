@@ -74,6 +74,39 @@ for (let i = 0; i < 5; i++) {
   MORNING_MESSAGES.push(MORNING_JOKES[i]);
 }
 
+// --- BEDTIME SET (7:30-8:30pm) ---
+
+const BEDTIME_REMINDERS = [
+  ['', '', 'BRUSH YOUR TEETH', '', ''],
+  ['', '', 'CHANGE YOUR CLOTHES', '', ''],
+  ['', '', 'PACK YOUR BACKPACK', '', ''],
+  ['', '', 'READ A BOOK', '', ''],
+  ['', '', 'DRINK SOME WATER', '', ''],
+  ['', '', 'SAY GOODNIGHT', '', ''],
+  ['', '', 'SWEET DREAMS', '', ''],
+  ['', '', 'YOU DID GREAT TODAY', '', ''],
+  ['', 'TOMORROW IS A', 'NEW ADVENTURE', '', '']
+];
+
+const BEDTIME_QUOTES = [
+  ['', 'STARS CANT SHINE', 'WITHOUT DARKNESS', '- D.H. SIDEBOTTOM', ''],
+  ['', 'TOMORROW IS A NEW DAY', 'WITH NO MISTAKES YET', '- ANNE OF GREEN GABLES', ''],
+  ['', 'YOU ARE BRAVER', 'THAN YOU BELIEVE', '- WINNIE THE POOH', ''],
+  ['', 'THE MOON IS A FRIEND', 'FOR THE LONESOME', '- CARL SANDBURG', ''],
+  ['', 'WHEN SHE WAKES SHE', 'WILL MOVE MOUNTAINS', '- NAPOLEON', ''],
+  ['', 'EVERY SUNSET BRINGS', 'PROMISE OF NEW DAWN', '- R.W. EMERSON', ''],
+  ['', 'REST IS NOT', 'IDLENESS', '- JOHN LUBBOCK', ''],
+  ['', 'THE NIGHT IS DARKEST', 'JUST BEFORE THE DAWN', '- THOMAS FULLER', ''],
+  ['', 'AND SO', 'TO BED', '- SAMUEL PEPYS', '']
+];
+
+// Interleave: reminder, quote, reminder, quote, ...
+export const BEDTIME_MESSAGES = [];
+for (let i = 0; i < 9; i++) {
+  BEDTIME_MESSAGES.push(BEDTIME_REMINDERS[i]);
+  BEDTIME_MESSAGES.push(BEDTIME_QUOTES[i]);
+}
+
 // --- QUOTES (12) ---
 
 const QUOTES = [
@@ -349,5 +382,6 @@ const RIDDLES = [
 export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES];
 
 export const TIME_SLOTS = [
-  { startHour: 7, endHour: 8, messages: MORNING_MESSAGES }
+  { startHour: 7, endHour: 8, messages: MORNING_MESSAGES },
+  { startHour: 19.5, endHour: 20.5, messages: BEDTIME_MESSAGES }
 ];

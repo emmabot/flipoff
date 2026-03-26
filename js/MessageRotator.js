@@ -1,4 +1,4 @@
-import { DEFAULT_MESSAGES, MORNING_MESSAGES, TIME_SLOTS, MESSAGE_INTERVAL, TOTAL_TRANSITION, RIDDLE_DELAY, WEATHER_CONFIG } from './constants.js';
+import { DEFAULT_MESSAGES, MORNING_MESSAGES, BEDTIME_MESSAGES, TIME_SLOTS, MESSAGE_INTERVAL, TOTAL_TRANSITION, RIDDLE_DELAY, WEATHER_CONFIG } from './constants.js';
 
 export class MessageRotator {
   constructor(board) {
@@ -93,10 +93,11 @@ export class MessageRotator {
   }
 
   _loadMessages() {
-    const hour = new Date().getHours();
+    const now = new Date();
+    const currentTime = now.getHours() + now.getMinutes() / 60;
     let source = DEFAULT_MESSAGES;
     for (const slot of TIME_SLOTS) {
-      if (hour >= slot.startHour && hour < slot.endHour) {
+      if (currentTime >= slot.startHour && currentTime < slot.endHour) {
         source = slot.messages;
         break;
       }
