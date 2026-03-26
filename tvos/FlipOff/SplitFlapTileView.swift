@@ -1,6 +1,6 @@
 import UIKit
 
-/// A single split-flap character tile with a cosmetic split line and scale-Y flip animation.
+/// A single split-flap character tile with a real two-half 3D flip animation.
 class SplitFlapTileView: UIView {
 
     // MARK: - Constants
@@ -15,7 +15,18 @@ class SplitFlapTileView: UIView {
 
     // MARK: - Subviews
 
-    private let characterLabel = UILabel()
+    /// Static top half — shows top of current char, then new char once flap lifts
+    private let topHalfView = UIView()
+    /// Static bottom half — shows bottom of current char, updates mid-flip
+    private let bottomHalfView = UIView()
+    /// Animated flap — clips to top half, rotates around bottom edge
+    private let flapView = UIView()
+
+    /// Full-size labels inside each clipping view
+    private let topLabel = UILabel()
+    private let bottomLabel = UILabel()
+    private let flapLabel = UILabel()
+
     private let splitLine = UIView()
 
     private(set) var currentChar: Character = " "
@@ -33,51 +44,93 @@ class SplitFlapTileView: UIView {
         setupTile()
     }
 
+    private func configureLabel(_ label: UILabel) {
+        label.textAlignment = .center
+        label.textColor = Self.creamColor
+        label.adjustsFontSizeToFitWidth = true
+        label.baselineAdjustment = .alignCenters
+        label.numberOfLines = 1
+        label.minimumScaleFactor = 0.5
+    }
+
     private func setupTile() {
         backgroundColor = Self.tileBgColor
         layer.cornerRadius = 2
         clipsToBounds = true
 
-        // Single character label — full tile size, centered
-        characterLabel.textAlignment = .center
-        characterLabel.textColor = Self.creamColor
-        characterLabel.translatesAutoresizingMaskIntoConstraints = false
-        characterLabel.adjustsFontSizeToFitWidth = true
-        characterLabel.baselineAdjustment = .alignCenters
-        characterLabel.numberOfLines = 1
-        characterLabel.minimumScaleFactor = 0.5
-        addSubview(characterLabel)
+        // Top half — clips to upper 50%
+        topHalfView.clipsToBounds = true
+        topHalfView.backgroundColor = Self.tileBgColor
+        addSubview(topHalfView)
 
-        // Cosmetic split line overlay at vertical center
+        configureLabel(topLabel)
+        topHalfView.addSubview(topLabel)
+
+        // Bottom half — clips to lower 50%
+        bottomHalfView.clipsToBounds = true
+        bottomHalfView.backgroundColor = Self.tileBgColor
+        addSubview(bottomHalfView)
+
+        configureLabel(bottomLabel)
+        bottomHalfView.addSubview(bottomLabel)
+
+        // Flap — same size as top half, animates over it
+        flapView.clipsToBounds = true
+        flapView.backgroundColor = Self.tileBgColor
+        flapView.isHidden = true
+        addSubview(flapView)
+
+        configureLabel(flapLabel)
+        flapView.addSubview(flapLabel)
+
+        // Cosmetic split line on top of everything
         splitLine.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        splitLine.translatesAutoresizingMaskIntoConstraints = false
         addSubview(splitLine)
+    }
 
-        NSLayoutConstraint.activate([
-            characterLabel.topAnchor.constraint(equalTo: topAnchor),
-            characterLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            characterLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            characterLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+    override func layoutSubviews() {
+        super.layoutSubviews()
 
-            splitLine.centerYAnchor.constraint(equalTo: centerYAnchor),
-            splitLine.leadingAnchor.constraint(equalTo: leadingAnchor),
-            splitLine.trailingAnchor.constraint(equalTo: trailingAnchor),
-            splitLine.heightAnchor.constraint(equalToConstant: 1),
-        ])
+        let w = bounds.width
+        let h = bounds.height
+        let halfH = h / 2
+
+        topHalfView.frame = CGRect(x: 0, y: 0, width: w, height: halfH)
+        bottomHalfView.frame = CGRect(x: 0, y: halfH, width: w, height: halfH)
+        flapView.frame = CGRect(x: 0, y: 0, width: w, height: halfH)
+
+        // Labels are full tile height so correct half shows through clip
+        topLabel.frame = CGRect(x: 0, y: 0, width: w, height: h)
+        flapLabel.frame = CGRect(x: 0, y: 0, width: w, height: h)
+        // Bottom label offset up so lower half of text is visible
+        bottomLabel.frame = CGRect(x: 0, y: -halfH, width: w, height: h)
+
+        splitLine.frame = CGRect(x: 0, y: halfH - 0.5, width: w, height: 1)
+
+        // Reset flap anchor/position for correct hinge
+        flapView.layer.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        flapView.layer.position = CGPoint(x: w / 2, y: halfH)
     }
 
     func configureFont(size: CGFloat) {
         let font = UIFont(name: "Menlo-Bold", size: size)
             ?? .monospacedSystemFont(ofSize: size, weight: .bold)
-        characterLabel.font = font
+        topLabel.font = font
+        bottomLabel.font = font
+        flapLabel.font = font
     }
 
     // MARK: - Character Display
 
     func setChar(_ char: Character, color: UIColor = creamColor) {
         currentChar = char
-        characterLabel.text = char == " " ? "" : String(char)
-        characterLabel.textColor = color
+        let text = char == " " ? "" : String(char)
+        topLabel.text = text
+        topLabel.textColor = color
+        bottomLabel.text = text
+        bottomLabel.textColor = color
+        flapView.isHidden = true
+        flapView.layer.transform = CATransform3DIdentity
     }
 
     // MARK: - Flip Animation
@@ -116,7 +169,7 @@ class SplitFlapTileView: UIView {
         let randChar = Self.charset.randomElement() ?? "A"
         let color = Self.scrambleColors[step % Self.scrambleColors.count]
 
-        performFlipAnimation(to: randChar, color: color) { [weak self] in
+        performFlipAnimation(to: randChar, color: color, fast: true) { [weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
                 self?.runScramble(step: step + 1, total: total, interval: interval,
                                  target: target, completion: completion)
@@ -125,15 +178,46 @@ class SplitFlapTileView: UIView {
     }
 
     private func performFlipAnimation(to char: Character, color: UIColor = creamColor,
-                                       completion: (() -> Void)? = nil) {
-        // Scale-Y squish to simulate a flap
-        UIView.animate(withDuration: 0.08, animations: {
-            self.characterLabel.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+                                       fast: Bool = false, completion: (() -> Void)? = nil) {
+        let firstDuration: TimeInterval = fast ? 0.06 : 0.15
+        let secondDuration: TimeInterval = fast ? 0.06 : 0.12
+        let text = char == " " ? "" : String(char)
+
+        // 1. Flap shows current character (top half)
+        let currentText = currentChar == " " ? "" : String(currentChar)
+        flapLabel.text = currentText
+        flapLabel.textColor = topLabel.textColor
+        flapView.layer.transform = CATransform3DIdentity
+        flapView.isHidden = false
+
+        // 2. Behind the flap: set top half to NEW character
+        topLabel.text = text
+        topLabel.textColor = color
+
+        // 3. Perspective transform
+        var perspective = CATransform3DIdentity
+        perspective.m34 = -1.0 / 500.0
+
+        // 4. Animate flap rotating forward: 0 → -90° around X axis
+        UIView.animate(withDuration: firstDuration, delay: 0, options: .curveEaseIn, animations: {
+            self.flapView.layer.transform = CATransform3DRotate(perspective, -.pi / 2, 1, 0, 0)
         }, completion: { _ in
-            self.setChar(char, color: color)
-            UIView.animate(withDuration: 0.08, animations: {
-                self.characterLabel.transform = .identity
+            // 5. Mid-flip: update bottom half to new character
+            self.bottomLabel.text = text
+            self.bottomLabel.textColor = color
+
+            // 6. Flap now shows new char (back side), starts at +90°
+            self.flapLabel.text = text
+            self.flapLabel.textColor = color
+            self.flapView.layer.transform = CATransform3DRotate(perspective, .pi / 2, 1, 0, 0)
+
+            // 7. Animate flap settling: 90° → 0
+            UIView.animate(withDuration: secondDuration, delay: 0, options: .curveEaseOut, animations: {
+                self.flapView.layer.transform = CATransform3DIdentity
             }, completion: { _ in
+                // 8. Sync final state
+                self.flapView.isHidden = true
+                self.currentChar = char
                 completion?()
             })
         })
