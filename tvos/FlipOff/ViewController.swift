@@ -137,6 +137,7 @@ class ViewController: UIViewController {
                 self.morningMessages = sections.morning
                 self.bedtimeMessages = sections.bedtime
                 self.defaultMessages = sections.defaults
+                self.defaultMessages.shuffle()
                 self.allMessages = parsed
                 self.updateActiveMessages()
                 if !self.activeMessages.isEmpty {
@@ -342,9 +343,6 @@ class ViewController: UIViewController {
 
         // Shuffle only the default set (morning/bedtime keep their interleaved order)
         if previousMessages.count != activeMessages.count || previousMessages.isEmpty {
-            if slot == "default" {
-                activeMessages.shuffle()
-            }
             currentIndex = -1
         }
     }
@@ -365,27 +363,47 @@ class ViewController: UIViewController {
         riddleTimer = nil
     }
 
+    private func isJoke(_ lines: [String]) -> Bool {
+        // A joke is a 5-element array where rows 1, 2, and 3 all have text,
+        // but row 3 is not a quote attribution (starts with "-" or contains " - ")
+        return lines.count == 5
+            && !lines[1].isEmpty
+            && !lines[2].isEmpty
+            && !lines[3].isEmpty
+            && !lines[3].hasPrefix("-")
+            && !lines[3].contains(" - ")
+    }
+
+    private func showWithDelay(question: [String], answer: [String]) {
+        cancelRiddleTimer()
+        autoTimer?.invalidate()
+        autoTimer = nil
+        boardView.display(message: question)
+        let work = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.boardView.display(message: answer)
+            self.riddleTimer = nil
+            self.startAutoRotation()
+        }
+        riddleTimer = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.riddleDelay, execute: work)
+    }
+
     private func displayMessage(_ msg: Message) {
         cancelRiddleTimer()
 
         switch msg {
         case .plain(let lines):
-            boardView.display(message: lines)
-        case .riddle(let question, let answer):
-            // Pause auto-rotation while showing riddle question
-            autoTimer?.invalidate()
-            autoTimer = nil
-            boardView.display(message: question)
-            // Show answer after 10 seconds, then restart auto-rotation
-            let work = DispatchWorkItem { [weak self] in
-                guard let self = self else { return }
-                self.boardView.display(message: answer)
-                self.riddleTimer = nil
-                // Restart auto timer so next message comes after normal interval
-                self.startAutoRotation()
+            if isJoke(lines) {
+                // Joke: show question first, then punchline after delay
+                let question = [lines[0], lines[1], lines[2], "", lines[4]]
+                let answer = ["", "", lines[3], "", ""]
+                showWithDelay(question: question, answer: answer)
+            } else {
+                boardView.display(message: lines)
             }
-            riddleTimer = work
-            DispatchQueue.main.asyncAfter(deadline: .now() + Self.riddleDelay, execute: work)
+        case .riddle(let question, let answer):
+            showWithDelay(question: question, answer: answer)
         }
     }
 

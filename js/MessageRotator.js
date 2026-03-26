@@ -47,7 +47,11 @@ export class MessageRotator {
     const msg = this.messages[this.currentIndex];
 
     if (msg && msg.type === 'riddle') {
-      this._showRiddle(msg);
+      this._showWithDelay(msg.question, msg.answer);
+    } else if (this._isJoke(msg)) {
+      const question = [msg[0], msg[1], msg[2], '', msg[4]];
+      const answer = ['', '', msg[3], '', ''];
+      this._showWithDelay(question, answer);
     } else {
       this.board.displayMessage(msg);
       this._scheduleNext();
@@ -59,21 +63,36 @@ export class MessageRotator {
     const msg = this.messages[this.currentIndex];
 
     if (msg && msg.type === 'riddle') {
-      this._showRiddle(msg);
+      this._showWithDelay(msg.question, msg.answer);
+    } else if (this._isJoke(msg)) {
+      const question = [msg[0], msg[1], msg[2], '', msg[4]];
+      const answer = ['', '', msg[3], '', ''];
+      this._showWithDelay(question, answer);
     } else {
       this.board.displayMessage(msg);
       this._scheduleNext();
     }
   }
 
-  _showRiddle(riddle) {
-    // Show question first
-    this.board.displayMessage(riddle.question);
+  _isJoke(msg) {
+    // A joke is a plain array where rows 1, 2, and 3 all have text,
+    // but row 3 is not a quote attribution (starts with '-' or contains ' - ')
+    return Array.isArray(msg) && msg.length === 5
+      && msg[1] && msg[1].trim() !== ''
+      && msg[2] && msg[2].trim() !== ''
+      && msg[3] && msg[3].trim() !== ''
+      && !msg[3].trim().startsWith('-')
+      && !msg[3].includes(' - ');
+  }
 
-    // After 15 seconds, show the answer
+  _showWithDelay(question, answer) {
+    // Show question first
+    this.board.displayMessage(question);
+
+    // After delay, show the answer
     if (this._riddleTimer) clearTimeout(this._riddleTimer);
     this._riddleTimer = setTimeout(() => {
-      this.board.displayMessage(riddle.answer);
+      this.board.displayMessage(answer);
       this._riddleTimer = null;
       // Then schedule the next message after normal interval
       this._scheduleNext();
