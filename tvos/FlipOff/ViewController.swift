@@ -358,7 +358,7 @@ class ViewController: UIViewController {
 
     // MARK: - Message Display
 
-    private static let riddleDelay: TimeInterval = 10.0
+    private static let riddleDelay: TimeInterval = 6.0
 
     private func cancelRiddleTimer() {
         riddleTimer?.cancel()
