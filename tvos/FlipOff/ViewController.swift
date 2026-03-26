@@ -47,6 +47,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        UIApplication.shared.isIdleTimerDisabled = true
         setupBoard()
         setupStatusLabel()
         setupRemoteGestures()
