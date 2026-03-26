@@ -83,12 +83,12 @@ class SplitFlapTileView: UIView {
             // Each label is full-tile height, centered at the split line.
             // topHalf clips to show upper portion, bottomHalf clips to show lower.
             topLabel.centerXAnchor.constraint(equalTo: topHalf.centerXAnchor),
-            topLabel.centerYAnchor.constraint(equalTo: topHalf.bottomAnchor),
+            topLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             topLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -2),
             topLabel.heightAnchor.constraint(equalTo: heightAnchor),
 
             bottomLabel.centerXAnchor.constraint(equalTo: bottomHalf.centerXAnchor),
-            bottomLabel.centerYAnchor.constraint(equalTo: bottomHalf.topAnchor),
+            bottomLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             bottomLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -2),
             bottomLabel.heightAnchor.constraint(equalTo: heightAnchor),
         ])
