@@ -1,7 +1,7 @@
 /* Tile Wrapper */
 .tile {
   width: var(--tile-size);
-  height: var(--tile-size);
+  height: calc(var(--tile-size) * 1.5);
   perspective: 400px;
   background: #111;
   border-radius: 3px;

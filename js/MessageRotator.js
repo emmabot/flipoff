@@ -106,11 +106,13 @@ export class MessageRotator {
     if (source === this._sourceMessages) return;
     this._sourceMessages = source;
 
-    // Shallow copy and shuffle (Fisher-Yates)
+    // Shallow copy; only shuffle the default set (morning/bedtime keep their interleaved order)
     this.messages = [...source];
-    for (let i = this.messages.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [this.messages[i], this.messages[j]] = [this.messages[j], this.messages[i]];
+    if (source === DEFAULT_MESSAGES) {
+      for (let i = this.messages.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [this.messages[i], this.messages[j]] = [this.messages[j], this.messages[i]];
+      }
     }
 
     // If morning, try to inject weather message
