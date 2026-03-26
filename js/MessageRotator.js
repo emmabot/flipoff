@@ -142,10 +142,40 @@ export class MessageRotator {
     this.currentIndex = -1;
   }
 
+  _getMoonPhase() {
+    const now = new Date();
+    // Known new moon: January 6, 2000
+    const knownNewMoon = new Date(2000, 0, 6);
+    const daysSince = (now - knownNewMoon) / (1000 * 60 * 60 * 24);
+    const lunarCycle = 29.53;
+    const phase = ((daysSince % lunarCycle) + lunarCycle) % lunarCycle;
+
+    let phaseName;
+    if (phase < 1.85) phaseName = 'NEW MOON';
+    else if (phase < 5.53) phaseName = 'WAXING CRESCENT';
+    else if (phase < 9.22) phaseName = 'FIRST QUARTER';
+    else if (phase < 12.91) phaseName = 'WAXING GIBBOUS';
+    else if (phase < 16.61) phaseName = 'FULL MOON';
+    else if (phase < 20.30) phaseName = 'WANING GIBBOUS';
+    else if (phase < 23.99) phaseName = 'LAST QUARTER';
+    else if (phase < 27.68) phaseName = 'WANING CRESCENT';
+    else phaseName = 'NEW MOON';
+
+    return phaseName;
+  }
+
   async _fetchWeather() {
+    // Always insert moon phase, regardless of weather success
+    const moonPhase = this._getMoonPhase();
+    const moonMessage = ['', '  TONIGHTS MOON', `  ${moonPhase}`, '', ''];
+
     try {
       const res = await fetch(WEATHER_CONFIG.url);
-      if (!res.ok) return;
+      if (!res.ok) {
+        this.messages.unshift(moonMessage);
+        if (this.currentIndex >= 0) this.currentIndex++;
+        return;
+      }
       const data = await res.json();
       const temp = Math.round(data.current.temperature_2m);
       const code = data.current.weather_code;
@@ -156,8 +186,13 @@ export class MessageRotator {
       this.messages.unshift(this._weatherMessage);
       // Adjust index so we don't skip anything
       if (this.currentIndex >= 0) this.currentIndex++;
+      // Insert moon phase after weather
+      this.messages.splice(1, 0, moonMessage);
+      if (this.currentIndex >= 1) this.currentIndex++;
     } catch {
-      // Silently skip weather on error
+      // Weather failed, but still show moon phase
+      this.messages.unshift(moonMessage);
+      if (this.currentIndex >= 0) this.currentIndex++;
     }
   }
 
