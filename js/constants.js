@@ -375,9 +375,109 @@ const RIDDLES = [
   { type: 'riddle', question: ['', 'WHAT CAN RUN BUT', 'NEVER WALKS HAS A', 'MOUTH BUT NEVER TALKS?', ''], answer: ['', '', 'A RIVER!', '', ''] }
 ];
 
-// --- COMBINED DEFAULT SET (quotes + jokes + riddles) ---
+// --- KNOCK-KNOCK JOKES (15) ---
 
-export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES];
+const KNOCK_KNOCKS = [
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'LETTUCE', ''], answer: ['', 'LETTUCE WHO?', 'LETTUCE IN ITS COLD!', '', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'BOO', ''], answer: ['', 'BOO WHO?', 'DONT CRY ITS JUST ME', '', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'ORANGE', ''], answer: ['', 'ORANGE WHO?', 'ORANGE YOU GLAD', 'I DIDNT SAY BANANA?', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'NOBEL', ''], answer: ['', 'NOBEL WHO?', 'NOBEL SO I KNOCKED!', '', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'TANK', ''], answer: ['', 'TANK WHO?', 'YOURE WELCOME!', '', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'ATCH', ''], answer: ['', 'ATCH WHO?', 'BLESS YOU!', '', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'WHO', ''], answer: ['', 'WHO WHO?', 'IS THERE AN OWL', 'IN HERE?', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'COW', ''], answer: ['', 'COW WHO?', 'NO A COW SAYS MOO!', '', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'DISHES', ''], answer: ['', 'DISHES WHO?', 'DISHES THE POLICE', 'OPEN UP!', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'HARRY', ''], answer: ['', 'HARRY WHO?', 'HARRY UP ITS COLD!', '', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'WOODEN SHOE', ''], answer: ['', 'WOODEN SHOE WHO?', 'WOODEN SHOE LIKE', 'TO HEAR A JOKE?', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'ICE CREAM', ''], answer: ['', 'ICE CREAM WHO?', 'ICE CREAM EVERY', 'TIME I SEE A BUG!', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'BANANA', ''], answer: ['', 'BANANA WHO?', 'KNOCK KNOCK', 'ORANGE YOU GLAD?', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'INTERRUPTING COW', ''], answer: ['', 'INTERRUPTING C--', 'MOOOOO!', '', ''] },
+  { type: 'riddle', question: ['', 'KNOCK KNOCK', 'WHOS THERE?', 'BROCCOLI', ''], answer: ['', 'BROCCOLI WHO?', 'BROCCOLI DOESNT', 'HAVE A LAST NAME!', ''] }
+];
+
+// --- FUN FACTS (15) ---
+
+const FUN_FACTS = [
+  ['', 'DID YOU KNOW?', 'A GROUP OF FLAMINGOS', 'IS A FLAMBOYANCE', ''],
+  ['', 'DID YOU KNOW?', 'HONEY NEVER', 'GOES BAD EVER!', ''],
+  ['', 'DID YOU KNOW?', 'OCTOPUSES HAVE', 'THREE HEARTS!', ''],
+  ['', 'DID YOU KNOW?', 'BANANAS ARE', 'ACTUALLY BERRIES!', ''],
+  ['', 'DID YOU KNOW?', 'A SNAIL CAN SLEEP', 'FOR THREE YEARS!', ''],
+  ['', 'DID YOU KNOW?', 'COWS HAVE', 'BEST FRIENDS!', ''],
+  ['', 'DID YOU KNOW?', 'YOUR NOSE CAN SMELL', 'ONE TRILLION SCENTS', ''],
+  ['', 'DID YOU KNOW?', 'DOLPHINS SLEEP WITH', 'ONE EYE OPEN!', ''],
+  ['', 'DID YOU KNOW?', 'A SHRIMP HAS ITS', 'HEART IN ITS HEAD!', ''],
+  ['', 'DID YOU KNOW?', 'FROGS DRINK WATER', 'THROUGH THEIR SKIN!', ''],
+  ['', 'DID YOU KNOW?', 'BUTTERFLIES TASTE', 'WITH THEIR FEET!', ''],
+  ['', 'DID YOU KNOW?', 'SEA OTTERS HOLD', 'HANDS WHEN SLEEPING', ''],
+  ['', 'DID YOU KNOW?', 'A BOLT OF LIGHTNING', 'IS FIVE TIMES HOTTER', ''],
+  ['', 'DID YOU KNOW?', 'YOUR BONES ARE', 'STRONGER THAN STEEL', ''],
+  ['', 'DID YOU KNOW?', 'CATS SPEND 70 PERCENT', 'OF THEIR LIFE NAPPING', '']
+];
+
+// --- SPACE FACTS (15) ---
+
+const SPACE_FACTS = [
+  ['', 'SPACE FACT!', 'JUPITER HAS', '95 MOONS', ''],
+  ['', 'SPACE FACT!', 'THE SUN IS A STAR', 'NOT A PLANET', ''],
+  ['', 'SPACE FACT!', 'ONE DAY ON VENUS', 'IS 243 EARTH DAYS', ''],
+  ['', 'SPACE FACT!', 'SATURN COULD FLOAT', 'IN A GIANT BATHTUB', ''],
+  ['', 'SPACE FACT!', 'THE MOON HAS', 'NO WIND AT ALL', ''],
+  ['', 'SPACE FACT!', 'MARS IS CALLED', 'THE RED PLANET', ''],
+  ['', 'SPACE FACT!', 'SPACE IS TOTALLY', 'SILENT', ''],
+  ['', 'SPACE FACT!', 'A YEAR ON MERCURY', 'IS JUST 88 DAYS', ''],
+  ['', 'SPACE FACT!', 'NEPTUNE HAS', 'SUPERSONIC WINDS', ''],
+  ['', 'SPACE FACT!', 'YOU WEIGH LESS', 'ON THE MOON', ''],
+  ['', 'SPACE FACT!', 'THE SUN IS 93', 'MILLION MILES AWAY', ''],
+  ['', 'SPACE FACT!', 'THERE ARE MORE STARS', 'THAN GRAINS OF SAND', ''],
+  ['', 'SPACE FACT!', 'FOOTPRINTS ON THE', 'MOON LAST FOREVER', ''],
+  ['', 'SPACE FACT!', 'EARTH SPINS AT', '1000 MILES PER HOUR', ''],
+  ['', 'SPACE FACT!', 'ASTRONAUTS GROW', 'TALLER IN SPACE', '']
+];
+
+// --- VOCABULARY (15) ---
+
+const VOCABULARY = [
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'COURAGEOUS', '', ''], answer: ['', 'COURAGEOUS MEANS', 'BRAVE AND NOT', 'AFRAID', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'ENORMOUS', '', ''], answer: ['', 'ENORMOUS MEANS', 'REALLY REALLY', 'BIG', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'PECULIAR', '', ''], answer: ['', 'PECULIAR MEANS', 'STRANGE OR', 'UNUSUAL', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'BRILLIANT', '', ''], answer: ['', 'BRILLIANT MEANS', 'VERY SMART OR', 'VERY BRIGHT', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'DETERMINED', '', ''], answer: ['', 'DETERMINED MEANS', 'YOU WONT GIVE UP', 'NO MATTER WHAT', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'FAMISHED', '', ''], answer: ['', 'FAMISHED MEANS', 'SUPER DUPER', 'HUNGRY', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'FRAGILE', '', ''], answer: ['', 'FRAGILE MEANS', 'EASY TO BREAK', 'HANDLE WITH CARE', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'FURIOUS', '', ''], answer: ['', 'FURIOUS MEANS', 'REALLY REALLY', 'ANGRY', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'GENEROUS', '', ''], answer: ['', 'GENEROUS MEANS', 'HAPPY TO SHARE', 'WITH OTHERS', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'ANCIENT', '', ''], answer: ['', 'ANCIENT MEANS', 'VERY VERY OLD', 'LIKE DINOSAUR OLD', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'HAZARDOUS', '', ''], answer: ['', 'HAZARDOUS MEANS', 'DANGEROUS OR', 'NOT SAFE', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'MAGNIFICENT', '', ''], answer: ['', 'MAGNIFICENT MEANS', 'AMAZING AND', 'WONDERFUL', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'EXHAUSTED', '', ''], answer: ['', 'EXHAUSTED MEANS', 'SO TIRED YOU', 'CANT MOVE', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'ABSURD', '', ''], answer: ['', 'ABSURD MEANS', 'SO SILLY IT MAKES', 'NO SENSE AT ALL', ''] },
+  { type: 'riddle', question: ['', 'WORD OF THE DAY', 'TRIUMPHANT', '', ''], answer: ['', 'TRIUMPHANT MEANS', 'YOU WON AND YOU', 'FEEL GREAT', ''] }
+];
+
+// --- MATH PUZZLES (15) ---
+
+const MATH_PUZZLES = [
+  { type: 'riddle', question: ['', '', 'WHAT IS 7 x 8?', '', ''], answer: ['', '', '56!', '', ''] },
+  { type: 'riddle', question: ['', '', 'WHAT IS 9 x 6?', '', ''], answer: ['', '', '54!', '', ''] },
+  { type: 'riddle', question: ['', '', 'WHAT IS 8 x 8?', '', ''], answer: ['', '', '64!', '', ''] },
+  { type: 'riddle', question: ['', '', 'WHAT IS 12 x 4?', '', ''], answer: ['', '', '48!', '', ''] },
+  { type: 'riddle', question: ['', '', 'WHAT IS 25 + 37?', '', ''], answer: ['', '', '62!', '', ''] },
+  { type: 'riddle', question: ['', '', 'WHAT IS 48 + 36?', '', ''], answer: ['', '', '84!', '', ''] },
+  { type: 'riddle', question: ['', '', 'WHAT IS 99 - 47?', '', ''], answer: ['', '', '52!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COMES NEXT?', '10  20  30  ...', '', ''], answer: ['', '', '40!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COMES NEXT?', '2  4  8  16  ...', '', ''], answer: ['', '', '32!', '', ''] },
+  { type: 'riddle', question: ['', 'IF YOU HAVE 3 BAGS', 'WITH 6 APPLES EACH', 'HOW MANY APPLES?', ''], answer: ['', '', '18 APPLES!', '', ''] },
+  { type: 'riddle', question: ['', 'A PIZZA HAS 8', 'SLICES AND YOU EAT 3', 'HOW MANY ARE LEFT?', ''], answer: ['', '', '5 SLICES!', '', ''] },
+  { type: 'riddle', question: ['', '', 'WHAT IS 6 x 7?', '', ''], answer: ['', '', '42!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COMES NEXT?', '5  10  15  20  ...', '', ''], answer: ['', '', '25!', '', ''] },
+  { type: 'riddle', question: ['', 'YOU HAVE 4 BOXES', 'WITH 5 CRAYONS EACH', 'HOW MANY CRAYONS?', ''], answer: ['', '', '20 CRAYONS!', '', ''] },
+  { type: 'riddle', question: ['', '', 'WHAT IS 11 x 11?', '', ''], answer: ['', '', '121!', '', ''] }
+];
+
+// --- COMBINED DEFAULT SET (quotes + jokes + riddles + new categories) ---
+
+export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES];
 
 export const TIME_SLOTS = [
   { startHour: 7, endHour: 8, messages: MORNING_MESSAGES },
