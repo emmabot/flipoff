@@ -234,6 +234,21 @@ class ViewController: UIViewController {
         return nil
     }
 
+    /// Remove duplicate messages by content (same line text = same message).
+    private func deduplicateMessages(_ msgs: [Message]) -> [Message] {
+        var seen = Set<String>()
+        return msgs.filter { msg in
+            let key: String
+            switch msg {
+            case .plain(let lines):
+                key = "plain:" + lines.joined(separator: "|")
+            case .riddle(let q, let a):
+                key = "riddle:" + q.joined(separator: "|") + "=" + a.joined(separator: "|")
+            }
+            return seen.insert(key).inserted
+        }
+    }
+
     private func categorizeSections(from js: String, allMessages: [Message])
         -> (morning: [Message], bedtime: [Message], defaults: [Message]) {
         // Riddles only go into default set (matching web behavior).
@@ -251,9 +266,12 @@ class ViewController: UIViewController {
                 morning.append(msg)
                 morningJoined.append(joined)
             }
+            // Note: "BRUSH YOUR TEETH" appears in both morning and bedtime reminders in the web version.
+            // Both sets should contain it.
             if joined.contains("SWEET DREAMS") || joined.contains("SAY GOODNIGHT")
                 || joined.contains("PACK YOUR BACKPACK") || joined.contains("READ A BOOK")
                 || joined.contains("DRINK SOME WATER") || joined.contains("YOU DID GREAT TODAY")
+                || joined.contains("BRUSH YOUR TEETH")
                 || joined.contains("NEW ADVENTURE") || joined.contains("CHANGE YOUR CLOTHES")
                 || joined.contains("TO SLEEP PERCHANCE") || joined.contains("NO MISTAKES YET")
                 || joined.contains("BRAVER THAN") || joined.contains("MOON IS A FRIEND")
@@ -277,13 +295,17 @@ class ViewController: UIViewController {
             }
         }
 
+        // Deduplicate morning and bedtime (identical arrays appear multiple times in JS source)
+        morning = deduplicateMessages(morning)
+        bedtime = deduplicateMessages(bedtime)
+
         // Default = everything not in morning/bedtime (riddles naturally land here)
         let morningSet = Set(morningJoined)
         let bedtimeSet = Set(bedtime.compactMap { plainJoined($0) })
-        let defaults = allMessages.filter { msg in
+        let defaults = deduplicateMessages(allMessages.filter { msg in
             guard let joined = plainJoined(msg) else { return true } // riddles go to default
             return !morningSet.contains(joined) && !bedtimeSet.contains(joined)
-        }
+        })
 
         print("[FlipOff] categorizeSections: morning=\(morning.count), bedtime=\(bedtime.count), default=\(defaults.count)")
 
@@ -318,9 +340,11 @@ class ViewController: UIViewController {
 
         print("[FlipOff] updateActiveMessages: slot=\(slot), hour=\(hour), count=\(activeMessages.count)")
 
-        // Shuffle when switching sets
+        // Shuffle only the default set (morning/bedtime keep their interleaved order)
         if previousMessages.count != activeMessages.count || previousMessages.isEmpty {
-            activeMessages.shuffle()
+            if slot == "default" {
+                activeMessages.shuffle()
+            }
             currentIndex = -1
         }
     }
@@ -348,6 +372,9 @@ class ViewController: UIViewController {
         case .plain(let lines):
             boardView.display(message: lines)
         case .riddle(let question, let answer):
+            // Pause auto-rotation while showing riddle question
+            autoTimer?.invalidate()
+            autoTimer = nil
             boardView.display(message: question)
             // Show answer after 10 seconds, then restart auto-rotation
             let work = DispatchWorkItem { [weak self] in
