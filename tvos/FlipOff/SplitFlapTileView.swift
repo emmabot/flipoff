@@ -54,10 +54,10 @@ class SplitFlapTileView: UIView {
         addSubview(splitLine)
 
         NSLayoutConstraint.activate([
-            characterLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            characterLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            characterLabel.widthAnchor.constraint(equalTo: widthAnchor),
-            characterLabel.heightAnchor.constraint(equalTo: heightAnchor),
+            characterLabel.topAnchor.constraint(equalTo: topAnchor),
+            characterLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            characterLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            characterLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
 
             splitLine.centerYAnchor.constraint(equalTo: centerYAnchor),
             splitLine.leadingAnchor.constraint(equalTo: leadingAnchor),
