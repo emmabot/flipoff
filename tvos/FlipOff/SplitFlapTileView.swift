@@ -6,8 +6,8 @@ class SplitFlapTileView: UIView {
     // MARK: - Constants
 
     static let scrambleColors: [UIColor] = [
-        UIColor(hex: "#E8DCC8"), UIColor(hex: "#C4A35A"), UIColor(hex: "#8B8C5E"),
-        UIColor(hex: "#B85C38"), UIColor(hex: "#6B7F99"), UIColor(hex: "#D4CFC4")
+        UIColor(hex: "#E8A840"), UIColor(hex: "#D4735E"), UIColor(hex: "#6BA3BE"),
+        UIColor(hex: "#7BA068"), UIColor(hex: "#E8DCC8"), UIColor(hex: "#9B8EC4")
     ]
     static let creamColor = UIColor(hex: "#E8DCC8")
     static let tileBgColor = UIColor(hex: "#2A2A2A")
@@ -93,7 +93,7 @@ class SplitFlapTileView: UIView {
         }
         isAnimating = true
 
-        let scrambleCount = 3 + Int.random(in: 0..<2)
+        let scrambleCount = 5 + Int.random(in: 0..<3)
         let scrambleInterval: TimeInterval = 0.035
         let targetChar = character
 
