@@ -1,0 +1,133 @@
+import UIKit
+
+/// A 22×5 grid of split-flap tiles that displays messages with staggered flip animations.
+class SplitFlapBoardView: UIView {
+
+    // MARK: - Constants
+
+    static let gridCols = 22
+    static let gridRows = 5
+    static let staggerDelay: TimeInterval = 0.03  // 30ms per column
+
+    // MARK: - Properties
+
+    private var tiles: [[SplitFlapTileView]] = []
+    private var currentGrid: [[Character]] = []
+    private(set) var isTransitioning = false
+
+    // MARK: - Init
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupBoard()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupBoard()
+    }
+
+    private func setupBoard() {
+        backgroundColor = .black
+
+        for r in 0..<Self.gridRows {
+            var row: [SplitFlapTileView] = []
+            var charRow: [Character] = []
+            for _ in 0..<Self.gridCols {
+                let tile = SplitFlapTileView()
+                tile.translatesAutoresizingMaskIntoConstraints = false
+                tile.setChar(" ")
+                addSubview(tile)
+                row.append(tile)
+                charRow.append(" ")
+            }
+            tiles.append(row)
+            currentGrid.append(charRow)
+        }
+    }
+
+    // MARK: - Layout
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let marginH: CGFloat = 20
+        let marginV: CGFloat = 20
+        let gapH: CGFloat = 3
+        let gapV: CGFloat = 3
+
+        let availableW = bounds.width - 2 * marginH - CGFloat(Self.gridCols - 1) * gapH
+        let availableH = bounds.height - 2 * marginV - CGFloat(Self.gridRows - 1) * gapV
+
+        let tileW = availableW / CGFloat(Self.gridCols)
+        let tileH = availableH / CGFloat(Self.gridRows)
+        let fontSize = min(tileW * 0.7, tileH * 0.55)
+
+        for r in 0..<Self.gridRows {
+            for c in 0..<Self.gridCols {
+                let tile = tiles[r][c]
+                let x = marginH + CGFloat(c) * (tileW + gapH)
+                let y = marginV + CGFloat(r) * (tileH + gapV)
+                tile.frame = CGRect(x: x, y: y, width: tileW, height: tileH)
+                tile.configureFont(size: fontSize)
+            }
+        }
+    }
+
+    // MARK: - Display Message
+
+    /// Display a message as 5 rows of strings. Each string is centered in the 22-column grid.
+    func display(message: [String]) {
+        guard !isTransitioning else { return }
+        isTransitioning = true
+
+        let newGrid = formatToGrid(message)
+        var hasChanges = false
+
+        for r in 0..<Self.gridRows {
+            for c in 0..<Self.gridCols {
+                let newChar = newGrid[r][c]
+                let oldChar = currentGrid[r][c]
+                if newChar != oldChar {
+                    let delay = Double(c) * Self.staggerDelay
+                    tiles[r][c].flip(to: newChar, delay: delay)
+                    hasChanges = true
+                }
+            }
+        }
+
+        currentGrid = newGrid
+
+        // Clear transitioning flag after all animations complete
+        let totalDuration = Double(Self.gridCols) * Self.staggerDelay + 0.6
+        DispatchQueue.main.asyncAfter(deadline: .now() + totalDuration) { [weak self] in
+            self?.isTransitioning = false
+        }
+
+        if !hasChanges {
+            isTransitioning = false
+        }
+    }
+
+    // MARK: - Grid Formatting
+
+    private func formatToGrid(_ lines: [String]) -> [[Character]] {
+        var grid: [[Character]] = []
+        for r in 0..<Self.gridRows {
+            let line = r < lines.count ? lines[r].uppercased() : ""
+            let padTotal = Self.gridCols - line.count
+            let padLeft = max(0, padTotal / 2)
+            let padRight = max(0, Self.gridCols - padLeft - line.count)
+            let padded = String(repeating: " ", count: padLeft) + line + String(repeating: " ", count: padRight)
+            // Ensure exactly gridCols characters
+            let chars = Array(padded.prefix(Self.gridCols))
+            if chars.count < Self.gridCols {
+                grid.append(chars + Array(repeating: Character(" "), count: Self.gridCols - chars.count))
+            } else {
+                grid.append(chars)
+            }
+        }
+        return grid
+    }
+}
+

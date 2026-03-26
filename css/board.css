@@ -1,23 +1,25 @@
 /* Board Container */
 .board {
-  --tile-size: clamp(36px, 4.2vw, 62px);
   --tile-gap: clamp(3px, 0.3vw, 5px);
+  --tile-size: calc((100vw - 4vw - 21 * var(--tile-gap)) / 22);
 
   position: relative;
-  background: #1A1A1A;
-  border-radius: 16px;
-  padding: 28px 48px 40px;
+  background: #000;
+  border-radius: 0;
+  padding: 0 2vw;
   width: 100%;
-  box-shadow:
-    0 -4px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 /* Tile Grid */
 .tile-grid {
   display: grid;
   grid-template-columns: repeat(var(--grid-cols, 22), var(--tile-size));
-  grid-template-rows: repeat(var(--grid-rows, 5), var(--tile-size));
+  grid-template-rows: repeat(var(--grid-rows, 5), calc(var(--tile-size) * 1.5));
   gap: var(--tile-gap);
   justify-content: center;
 }
@@ -105,15 +107,7 @@
   margin-left: 16px;
 }
 
-/* Scroll indicator at bottom of board */
+/* Scroll indicator removed for edge-to-edge TV layout */
 .board::after {
-  content: '';
-  position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 4px;
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.15);
+  display: none;
 }
