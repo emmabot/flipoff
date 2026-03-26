@@ -99,11 +99,12 @@ class SplitFlapTileView: UIView {
         bottomHalfView.frame = CGRect(x: 0, y: halfH, width: w, height: halfH)
         flapView.frame = CGRect(x: 0, y: 0, width: w, height: halfH)
 
-        // Labels are full tile height so correct half shows through clip
-        topLabel.frame = CGRect(x: 0, y: 0, width: w, height: h)
-        flapLabel.frame = CGRect(x: 0, y: 0, width: w, height: h)
+        // Labels are full tile height with 2pt horizontal insets so chars don't touch edges
+        let inset: CGFloat = 2
+        topLabel.frame = CGRect(x: inset, y: 0, width: w - inset * 2, height: h)
+        flapLabel.frame = CGRect(x: inset, y: 0, width: w - inset * 2, height: h)
         // Bottom label offset up so lower half of text is visible
-        bottomLabel.frame = CGRect(x: 0, y: -halfH, width: w, height: h)
+        bottomLabel.frame = CGRect(x: inset, y: -halfH, width: w - inset * 2, height: h)
 
         splitLine.frame = CGRect(x: 0, y: halfH - 0.5, width: w, height: 1)
 
@@ -113,8 +114,8 @@ class SplitFlapTileView: UIView {
     }
 
     func configureFont(size: CGFloat) {
-        let font = UIFont(name: "Menlo-Bold", size: size)
-            ?? .monospacedSystemFont(ofSize: size, weight: .bold)
+        let font = UIFont(name: "HelveticaNeue-Bold", size: size)
+            ?? .systemFont(ofSize: size, weight: .bold)
         topLabel.font = font
         bottomLabel.font = font
         flapLabel.font = font
