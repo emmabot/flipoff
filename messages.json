@@ -4370,6 +4370,57 @@
           "",
           ""
         ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "ROCK PAPER SCISSORS",
+          "SHOOT!",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "ROCK!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "ROCK PAPER SCISSORS",
+          "SHOOT!",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "PAPER!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "ROCK PAPER SCISSORS",
+          "SHOOT!",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "SCISSORS!",
+          "",
+          ""
+        ]
       }
     ],
     "morning": [
