@@ -268,6 +268,9 @@ class ViewController: UIViewController {
                 answer.append(range.location != NSNotFound ? nsString.substring(with: range) : "")
             }
             results.append(.riddle(question: question, answer: answer))
+            if results.count <= 5 {
+                print("[FlipOff] Parsed riddle #\(results.count): Q=\(question), A=\(answer)")
+            }
         }
         return results
     }
@@ -533,7 +536,6 @@ class ViewController: UIViewController {
 
     private func startAutoRotation() {
         autoTimer?.invalidate()
-        cancelRiddleTimer()
         // ~8 seconds matches MESSAGE_INTERVAL + TOTAL_TRANSITION from web
         autoTimer = Timer.scheduledTimer(withTimeInterval: Config.autoRotationInterval, repeats: true) { [weak self] _ in
             self?.showNext()
@@ -562,17 +564,23 @@ class ViewController: UIViewController {
 
     @objc private func handleSwipeLeft() {
         showPrev()
-        startAutoRotation()
+        if riddleTimer == nil {
+            startAutoRotation()
+        }
     }
 
     @objc private func handleSwipeRight() {
         showNext()
-        startAutoRotation()
+        if riddleTimer == nil {
+            startAutoRotation()
+        }
     }
 
     @objc private func handleTap() {
         showNext()
-        startAutoRotation()
+        if riddleTimer == nil {
+            startAutoRotation()
+        }
     }
 
     @objc private func handlePlayPause() {
