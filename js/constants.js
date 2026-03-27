@@ -698,6 +698,24 @@ const HISTORY_ON_THIS_DAY = [
   { type: 'fact', lines: ['ON THIS DAY', 'FEB 4 2004', 'FACEBOOK WAS', 'LAUNCHED', ''] },
 ];
 
+const HISTORY_RIDDLES = [
+  { type: 'riddle', question: ['', 'I WAS THE TALLEST', 'STRUCTURE FOR', '3800 YEARS', ''], answer: ['', '', 'GREAT PYRAMID!', '', ''] },
+  { type: 'riddle', question: ['', 'I SANK ON MY', 'FIRST VOYAGE 1912', 'WHAT AM I?', ''], answer: ['', '', 'THE TITANIC!', '', ''] },
+  { type: 'riddle', question: ['', 'I AM A WALL THAT', 'IS OVER 13000', 'MILES LONG', ''], answer: ['', '', 'THE GREAT WALL!', '', ''] },
+  { type: 'riddle', question: ['', 'I ERUPTED AND', 'BURIED A ROMAN CITY', 'IN 79 AD', ''], answer: ['', '', 'MOUNT VESUVIUS!', '', ''] },
+  { type: 'riddle', question: ['', 'I WAS A FAMOUS QUEEN', 'OF ANCIENT EGYPT', 'WHO AM I?', ''], answer: ['', '', 'CLEOPATRA!', '', ''] },
+  { type: 'riddle', question: ['', 'I AM A STONE THAT', 'UNLOCKED ANCIENT', 'EGYPTIAN WRITING', ''], answer: ['', '', 'ROSETTA STONE!', '', ''] },
+  { type: 'riddle', question: ['', 'I WAS A SHIP THAT', 'BROUGHT PILGRIMS', 'TO AMERICA 1620', ''], answer: ['', '', 'THE MAYFLOWER!', '', ''] },
+  { type: 'riddle', question: ['', 'I AM AN ANCIENT', 'WONDER WITH A', 'SPHINX NEARBY', ''], answer: ['', '', 'THE PYRAMIDS!', '', ''] },
+  { type: 'riddle', question: ['', 'I AM A TOWER IN', 'PARIS BUILT IN 1889', 'WHAT AM I?', ''], answer: ['', '', 'EIFFEL TOWER!', '', ''] },
+  { type: 'riddle', question: ['', 'I AM A BELL THAT', 'CRACKED IN 1846', 'IN PHILADELPHIA', ''], answer: ['', '', 'THE LIBERTY BELL!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE FOUR FACES', 'CARVED IN A MOUNTAIN', 'IN SOUTH DAKOTA', ''], answer: ['', '', 'MOUNT RUSHMORE!', '', ''] },
+  { type: 'riddle', question: ['', 'I AM A CANAL THAT', 'CONNECTS TWO OCEANS', 'OPENED IN 1914', ''], answer: ['', '', 'PANAMA CANAL!', '', ''] },
+  { type: 'riddle', question: ['', 'I AM AN ARENA IN', 'ROME BUILT FOR', 'GLADIATOR FIGHTS', ''], answer: ['', '', 'THE COLOSSEUM!', '', ''] },
+  { type: 'riddle', question: ['', 'I AM A GARDEN THAT', 'WAS AN ANCIENT', 'WONDER OF THE WORLD', ''], answer: ['', '', 'HANGING GARDENS!', '', ''] },
+  { type: 'riddle', question: ['', 'I AM A DOCUMENT', 'SIGNED IN 1215 BY', 'KING JOHN', ''], answer: ['', '', 'MAGNA CARTA!', '', ''] },
+];
+
 // --- INNOVATOR MODE: TECH HISTORY FACTS (30) ---
 const INNOVATOR_TECH_HISTORY = [
   { type: 'fact', lines: ['', 'TECH HISTORY!', 'APPLE FOUNDED 1976', 'IN A GARAGE', ''] },
@@ -730,6 +748,40 @@ const INNOVATOR_TECH_HISTORY = [
   { type: 'fact', lines: ['', 'TECH HISTORY!', 'MINECRAFT CREATED', 'BY ONE PERSON', ''] },
   { type: 'fact', lines: ['', 'TECH HISTORY!', 'USB INVENTED 1996', 'BY AJAY BHATT', ''] },
   { type: 'fact', lines: ['', 'TECH HISTORY!', 'SPACEX FIRST ROCKET', 'LANDED IN 2015', ''] },
+];
+
+// --- INNOVATOR MODE: INVENTOR/FOUNDER QUOTES (30) ---
+const INNOVATOR_QUOTES = [
+  { type: 'quote', lines: ['', 'STAY HUNGRY', 'STAY FOOLISH', '- STEVE JOBS', ''] },
+  { type: 'quote', lines: ['', 'THINK DIFFERENT', '', '- STEVE JOBS', ''] },
+  { type: 'quote', lines: ['', 'INNOVATION IS WHAT', 'DISTINGUISHES A', 'LEADER - S. JOBS', ''] },
+  { type: 'quote', lines: ['', 'THE COMPUTER WAS', 'BORN TO SOLVE', 'PROBLEMS - HOPPER', ''] },
+  { type: 'quote', lines: ['', 'THE MOST DANGEROUS', 'PHRASE IS WE ALWAYS', 'DID IT - G. HOPPER', ''] },
+  { type: 'quote', lines: ['', 'THAT BRAIN OF MINE', 'IS MORE THAN MERELY', 'MORTAL - LOVELACE', ''] },
+  { type: 'quote', lines: ['', 'IMAGINATION IS MORE', 'IMPORTANT THAN', 'KNOWLEDGE -EINSTEIN', ''] },
+  { type: 'quote', lines: ['', 'LIFE IS LIKE RIDING', 'A BICYCLE KEEP', 'MOVING - EINSTEIN', ''] },
+  { type: 'quote', lines: ['', 'THE PRESENT IS', 'THEIRS THE FUTURE', 'IS MINE - N. TESLA', ''] },
+  { type: 'quote', lines: ['', 'BE ALONE THAT IS', 'WHEN IDEAS ARE BORN', '- NIKOLA TESLA', ''] },
+  { type: 'quote', lines: ['', 'NOTHING IN LIFE IS', 'TO BE FEARED ONLY', 'UNDERSTOOD - CURIE', ''] },
+  { type: 'quote', lines: ['', 'BE LESS CURIOUS', 'ABOUT PEOPLE MORE', 'ABOUT IDEAS - CURIE', ''] },
+  { type: 'quote', lines: ['', 'WHEN SOMETHING IS', 'IMPORTANT ENOUGH', 'YOU DO IT - E. MUSK', ''] },
+  { type: 'quote', lines: ['', 'FAILURE IS AN OPTION', 'IF NOT FAILING', 'NOT TRYING - E. MUSK', ''] },
+  { type: 'quote', lines: ['', 'YOUR TIME IS LIMITED', 'DONT WASTE IT', '- STEVE JOBS', ''] },
+  { type: 'quote', lines: ['', 'GENIUS IS ONE', 'PERCENT INSPIRATION', '99 WORK - EDISON', ''] },
+  { type: 'quote', lines: ['', 'I HAVE NOT FAILED', 'I FOUND 10000 WAYS', 'THAT WONT - EDISON', ''] },
+  { type: 'quote', lines: ['', 'THE BEST WAY TO', 'PREDICT THE FUTURE', 'IS INVENT IT - KAY', ''] },
+  { type: 'quote', lines: ['', 'MOVE FAST AND BREAK', 'THINGS', '- M. ZUCKERBERG', ''] },
+  { type: 'quote', lines: ['', 'SIMPLICITY IS THE', 'ULTIMATE FORM OF', 'SOPHISTICATION', ''] },
+  { type: 'quote', lines: ['', 'IDEAS ARE EASY', 'EXECUTION IS', 'EVERYTHING', ''] },
+  { type: 'quote', lines: ['', 'ANY SUFFICIENTLY', 'ADVANCED TECH', 'IS MAGIC - CLARKE', ''] },
+  { type: 'quote', lines: ['', 'THE ONLY WAY TO DO', 'GREAT WORK IS TO', 'LOVE IT - S. JOBS', ''] },
+  { type: 'quote', lines: ['', 'EVERYONE SHOULD', 'LEARN TO CODE', '- STEVE JOBS', ''] },
+  { type: 'quote', lines: ['', 'WE CAN ONLY SEE', 'A SHORT DISTANCE', 'AHEAD - A. TURING', ''] },
+  { type: 'quote', lines: ['', 'MACHINES TAKE ME', 'BY SURPRISE OFTEN', '- ALAN TURING', ''] },
+  { type: 'quote', lines: ['', 'THE SCIENCE OF', 'TODAY IS TOMORROWS', 'TECH - E. TELLER', ''] },
+  { type: 'quote', lines: ['', 'I THINK THEREFORE', 'I AM', '- DESCARTES', ''] },
+  { type: 'quote', lines: ['', 'MEASURE WHAT IS', 'MEASURABLE MAKE', 'MEASURABLE - GALILEO', ''] },
+  { type: 'quote', lines: ['', 'IF I HAVE SEEN FAR', 'IT IS BY STANDING', 'ON GIANTS - NEWTON', ''] },
 ];
 
 export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES, ...GEOGRAPHY, ...SEASONAL_FACTS, ...UNSCRAMBLE, ...COLOR_MIXING];
