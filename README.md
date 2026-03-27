@@ -1,100 +1,77 @@
 # Lil Sauce
 
-**A kid-friendly split-flap display for your family TV.** Jokes, riddles, quotes, weather, and morning/bedtime routines — all in retro flip-board style.
+**Turn your Apple TV into a beautiful split-flap display.**
 
-🔴 **Live now:** [emmabot.github.io/lilsauce](https://emmabot.github.io/lilsauce/)
+Jokes, riddles, inventor quotes, historical facts — 1,500+ curated messages displayed on a realistic mechanical flip board with authentic click sounds.
 
-![Lil Sauce Screenshot](screenshot.png)
+🔴 **Try it now:** [emmabot.github.io/lilsauce](https://emmabot.github.io/lilsauce/)
 
-## What is this?
+![Mode Picker](screenshots/mode-picker.png)
 
-Lil Sauce turns any TV or monitor into a warm, clackety split-flap display — the kind you'd see at old train stations. It's built for families: kid-friendly jokes, riddles with delayed reveals, quotes from Star Wars and Percy Jackson, and time-aware reminders for morning routines and bedtime.
+---
 
-No accounts. No frameworks. No subscriptions. Just open it and go.
+## Three Modes
 
-## What's on the board
+### 🎈 Kids Mode
+Jokes, riddles, math challenges, and word games — all kid-friendly and parent-approved. Riddle answers reveal after a pause. Includes time-aware morning routines and bedtime wind-down messages.
 
-- **207 jokes & puns** — kid-friendly, groan-worthy, parent-approved
-- **30 riddles** — answer reveals after a 10-second pause
-- **24 quotes** — Star Wars, Harry Potter, Percy Jackson, Greek & Norse mythology
-- **Morning mode** (7–8am) — routine reminders + live weather for Berkeley, CA
-- **Bedtime mode** (7:30–8:30pm) — wind-down reminders + calming quotes
-- **Retro warm palette** — amber, coral, sky blue, sage, cream, lavender
+![Kids Mode](screenshots/kids-mode.png)
 
-## Quick Start
+![Riddle](screenshots/riddle-mode.png)
 
-**Easiest:** Just open [emmabot.github.io/lilsauce](https://emmabot.github.io/lilsauce/) on your TV browser.
+### 💡 Innovator Mode
+Tech history, inventor quotes, and stories from the people who built the future — Ada Lovelace, Grace Hopper, Steve Jobs, and more.
 
-**Local:**
-```bash
-git clone https://github.com/emmabot/lilsauce.git
-cd lilsauce
-python3 -m http.server 8080
-# Open http://localhost:8080
-```
+![Innovator Mode](screenshots/innovator-mode.png)
 
-Press `F` for fullscreen. Click anywhere to enable sound.
+### 📜 History Mode
+Historical facts, quotes from world leaders, and moments that shaped civilization — from ancient Rome to the Space Age.
 
-## Keyboard Shortcuts
+![History Mode](screenshots/history-mode.png)
 
-| Key | Action |
-|-----|--------|
-| `Enter` / `Space` | Next message |
-| `←` / `→` | Previous / Next message |
-| `F` | Toggle fullscreen |
-| `M` | Toggle sound |
-| `Escape` | Exit fullscreen |
+---
 
-## Apple TV (tvOS)
+## Features
 
-There's a native tvOS app in `tvos/` that loads content from the GitHub Pages site.
+- 🔠 **Realistic split-flap animation** — each tile flips individually with staggered timing
+- 🔊 **Mechanical click sounds** — authentic flip-board audio (toggle on/off)
+- 📚 **1,500+ curated messages** — no repeats, no filler
+- 🎮 **Siri Remote navigation** — swipe to browse, click to select
+- 🎯 **Mode selection** — switch between Kids, Innovator, and History
+- 🌅 **Time-aware content** — morning routines and bedtime messages in Kids mode
+- 🔒 **No accounts, no ads, no tracking**
+- 📺 **Works on Apple TV and any web browser**
 
-1. Open `tvos/FlipOff.xcodeproj` in Xcode
-2. Build and deploy to your Apple TV
-3. The app fetches content on launch — no rebuilds needed for content updates
+## How It Works
 
-## Customization
+**Apple TV (Siri Remote):**
+- Swipe **left/right** — previous/next message
+- Press **Play/Pause** — toggle sound
+- Press **Menu** — open mode picker
 
-Everything lives in `js/constants.js`. Edit it to change:
+**Web (keyboard):**
+- `←` / `→` — previous/next message
+- `M` — toggle sound
+- `Enter` — next message
+- `F` — fullscreen
 
-- **Content** — jokes, riddles, quotes, morning/bedtime reminders
-- **Time slots** — when morning and bedtime modes activate
-- **Weather** — location for weather fetches
-- **Grid size** — `GRID_COLS` and `GRID_ROWS`
-- **Colors** — the warm retro palette
-- **Timing** — scramble speed, stagger delay, rotation interval
+## Web Version
 
-Push to `main` and GitHub Pages auto-deploys. The tvOS app picks up changes on next launch.
+Open [emmabot.github.io/lilsauce](https://emmabot.github.io/lilsauce/) on any browser — TV, tablet, phone, or desktop. No install required.
 
-## File Structure
+## Technical
 
-```
-lilsauce/
-  index.html              — Single-page app
-  css/
-    reset.css             — CSS reset
-    layout.css            — Full-screen edge-to-edge layout
-    board.css             — Board container and accent bars
-    tile.css              — Tile styling (1.5× aspect ratio)
-    responsive.css        — Media queries for all screen sizes
-  js/
-    main.js               — Entry point and UI wiring
-    Board.js              — Grid manager and transition orchestration
-    Tile.js               — Individual tile animation logic
-    SoundEngine.js        — Audio playback with Web Audio API
-    MessageRotator.js     — Content rotation and time-of-day routing
-    KeyboardController.js — Keyboard shortcut handling
-    constants.js          — All content, config, colors, time slots
-    flapAudio.js          — Embedded flip sound (base64)
-  tvos/
-    FlipOff/              — Native tvOS app source
-    FlipOff.xcodeproj     — Xcode project
-```
+- **tvOS app** — native UIKit, built in `tvos/`
+- **Web app** — vanilla HTML/CSS/JS, zero dependencies
+- **Content** — JSON pipeline (`messages.json`), modes loaded at runtime
+- **Hosting** — GitHub Pages, auto-deploys on push to `main`
 
-## Tech
+## Privacy
 
-Pure vanilla HTML/CSS/JS. No frameworks, no build tools, no npm. Works offline (except weather).
+No accounts. No ads. No tracking. No data collection of any kind.
+
+[Privacy Policy](https://emmabot.github.io/lilsauce/privacy.html)
 
 ## License
 
-MIT — do whatever you want with it.
+MIT
