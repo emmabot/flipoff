@@ -375,15 +375,16 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         group.motionEffects = [hMotion, vMotion]
         button.addMotionEffect(group)
 
-        // Icon
-        let icons = ["🎲", "💡", "🏛"]
-        let iconLabel = UILabel()
-        iconLabel.text = tag < icons.count ? icons[tag] : "●"
-        iconLabel.font = UIFont.systemFont(ofSize: 32)
-        iconLabel.textAlignment = .center
-        iconLabel.translatesAutoresizingMaskIntoConstraints = false
-        iconLabel.isUserInteractionEnabled = false
-        button.addSubview(iconLabel)
+        // Icon — SF Symbol
+        let sfNames = ["dice.fill", "lightbulb.fill", "building.columns.fill"]
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 36, weight: .medium)
+        let sfName = tag < sfNames.count ? sfNames[tag] : "circle.fill"
+        let iconImageView = UIImageView(image: UIImage(systemName: sfName, withConfiguration: symbolConfig))
+        iconImageView.tintColor = mode.color
+        iconImageView.contentMode = .scaleAspectFit
+        iconImageView.translatesAutoresizingMaskIntoConstraints = false
+        iconImageView.isUserInteractionEnabled = false
+        button.addSubview(iconImageView)
 
         // Title
         let label = UILabel()
@@ -422,11 +423,13 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         button.accessibilityLabel = "\(mode.title) mode\(activeText)"
 
         NSLayoutConstraint.activate([
-            iconLabel.centerXAnchor.constraint(equalTo: button.centerXAnchor),
-            iconLabel.centerYAnchor.constraint(equalTo: button.centerYAnchor, constant: isActive ? -40 : -24),
+            iconImageView.centerXAnchor.constraint(equalTo: button.centerXAnchor),
+            iconImageView.centerYAnchor.constraint(equalTo: button.centerYAnchor, constant: isActive ? -40 : -24),
+            iconImageView.widthAnchor.constraint(equalToConstant: 40),
+            iconImageView.heightAnchor.constraint(equalToConstant: 40),
 
             label.centerXAnchor.constraint(equalTo: button.centerXAnchor),
-            label.topAnchor.constraint(equalTo: iconLabel.bottomAnchor, constant: 8),
+            label.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 8),
         ])
 
         return button

@@ -10,8 +10,8 @@ class ModePickerViewController: UIViewController {
     private let modes = ModeDefinition.all
     private var modeButtons: [UIButton] = []
 
-    // Card icon labels for styling during focus
-    private var iconLabels: [UILabel] = []
+    // Card icon image views for styling during focus
+    private var iconImageViews: [UIImageView] = []
     // Accent stripe layers per card
     private var accentStripes: [CALayer] = []
 
@@ -77,7 +77,7 @@ class ModePickerViewController: UIViewController {
         view.addSubview(stackView)
 
         modeButtons = []
-        iconLabels = []
+        iconImageViews = []
         accentStripes = []
         for (i, mode) in modes.enumerated() {
             let button = createModeButton(mode: mode, tag: i)
@@ -135,16 +135,17 @@ class ModePickerViewController: UIViewController {
         button.layer.addSublayer(stripe)
         accentStripes.append(stripe)
 
-        // Icon — large emoji/symbol for visual identity
-        let iconLabel = UILabel()
-        let icons = ["🎲", "💡", "🏛"]
-        iconLabel.text = tag < icons.count ? icons[tag] : "●"
-        iconLabel.font = UIFont.systemFont(ofSize: 48)
-        iconLabel.textAlignment = .center
-        iconLabel.translatesAutoresizingMaskIntoConstraints = false
-        iconLabel.isUserInteractionEnabled = false
-        button.addSubview(iconLabel)
-        iconLabels.append(iconLabel)
+        // Icon — SF Symbol for visual identity
+        let sfNames = ["dice.fill", "lightbulb.fill", "building.columns.fill"]
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 44, weight: .medium)
+        let sfName = tag < sfNames.count ? sfNames[tag] : "circle.fill"
+        let iconImageView = UIImageView(image: UIImage(systemName: sfName, withConfiguration: symbolConfig))
+        iconImageView.tintColor = mode.color
+        iconImageView.contentMode = .scaleAspectFit
+        iconImageView.translatesAutoresizingMaskIntoConstraints = false
+        iconImageView.isUserInteractionEnabled = false
+        button.addSubview(iconImageView)
+        iconImageViews.append(iconImageView)
 
         // Title — mode name
         let titleLabel = UILabel()
@@ -171,11 +172,13 @@ class ModePickerViewController: UIViewController {
         button.accessibilityLabel = "\(mode.title) mode. \(mode.description.replacingOccurrences(of: "\n", with: ", "))"
 
         NSLayoutConstraint.activate([
-            iconLabel.centerXAnchor.constraint(equalTo: button.centerXAnchor),
-            iconLabel.topAnchor.constraint(equalTo: button.topAnchor, constant: 48),
+            iconImageView.centerXAnchor.constraint(equalTo: button.centerXAnchor),
+            iconImageView.topAnchor.constraint(equalTo: button.topAnchor, constant: 48),
+            iconImageView.widthAnchor.constraint(equalToConstant: 48),
+            iconImageView.heightAnchor.constraint(equalToConstant: 48),
 
             titleLabel.centerXAnchor.constraint(equalTo: button.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: iconLabel.bottomAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 16),
 
             descLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
             descLabel.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: 24),
