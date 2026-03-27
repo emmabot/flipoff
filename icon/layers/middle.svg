@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <!-- Middle layer: split lines across tiles (transparent background) -->
+
+  <!-- Row 1 split lines -->
+  <line x1="110" y1="78" x2="165" y2="78" stroke="#111111" stroke-width="1.5" opacity="0.7"/>
+  <line x1="173" y1="78" x2="228" y2="78" stroke="#111111" stroke-width="1.5" opacity="0.7"/>
+  <line x1="236" y1="78" x2="291" y2="78" stroke="#111111" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Row 2 split lines -->
+  <line x1="47" y1="163" x2="102" y2="163" stroke="#111111" stroke-width="1.5" opacity="0.7"/>
+  <line x1="110" y1="163" x2="165" y2="163" stroke="#111111" stroke-width="1.5" opacity="0.7"/>
+  <line x1="173" y1="163" x2="228" y2="163" stroke="#111111" stroke-width="1.5" opacity="0.7"/>
+  <line x1="236" y1="163" x2="291" y2="163" stroke="#111111" stroke-width="1.5" opacity="0.7"/>
+  <line x1="299" y1="163" x2="354" y2="163" stroke="#111111" stroke-width="1.5" opacity="0.7"/>
+</svg>

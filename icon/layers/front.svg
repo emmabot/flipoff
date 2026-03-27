@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <!-- Front layer: letters only (transparent background) -->
+  <!-- Apple says: keep text in the foreground layer -->
+
+  <!-- Row 1: L I L -->
+  <text x="137.5" y="91" text-anchor="middle" font-family="Menlo, monospace" font-weight="bold" font-size="38" fill="#F0E6D0">L</text>
+  <text x="200.5" y="91" text-anchor="middle" font-family="Menlo, monospace" font-weight="bold" font-size="38" fill="#F0E6D0">I</text>
+  <text x="263.5" y="91" text-anchor="middle" font-family="Menlo, monospace" font-weight="bold" font-size="38" fill="#F0E6D0">L</text>
+
+  <!-- Row 2: S A U C E -->
+  <text x="74.5" y="176" text-anchor="middle" font-family="Menlo, monospace" font-weight="bold" font-size="38" fill="#F0E6D0">S</text>
+  <text x="137.5" y="176" text-anchor="middle" font-family="Menlo, monospace" font-weight="bold" font-size="38" fill="#F0E6D0">A</text>
+  <text x="200.5" y="176" text-anchor="middle" font-family="Menlo, monospace" font-weight="bold" font-size="38" fill="#F0E6D0">U</text>
+  <text x="263.5" y="176" text-anchor="middle" font-family="Menlo, monospace" font-weight="bold" font-size="38" fill="#F0E6D0">C</text>
+  <text x="326.5" y="176" text-anchor="middle" font-family="Menlo, monospace" font-weight="bold" font-size="38" fill="#F0E6D0">E</text>
+</svg>
