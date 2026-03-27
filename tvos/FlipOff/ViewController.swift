@@ -342,48 +342,74 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
     private func createSettingsModeButton(mode: ModeDefinition, tag: Int, isActive: Bool) -> UIButton {
         let button = UIButton(type: .custom)
         button.tag = tag
-        button.backgroundColor = UIColor(hex: "#2A2A2A")
-        // Des-M2: unified corner radius 16pt for cards
-        button.layer.cornerRadius = 16
-        // Des-C3: clipsToBounds false for shadow glow visibility
-        button.clipsToBounds = false
+        button.backgroundColor = UIColor(hex: "#1A1A1A")
+        button.layer.cornerRadius = 20
+        button.clipsToBounds = true
+        button.layer.masksToBounds = false
         button.addTarget(self, action: #selector(settingsModeSelected(_:)), for: .primaryActionTriggered)
 
-        // Des-C3: Shadow glow with mode color (replaces accent bar)
-        button.layer.shadowColor = mode.color.cgColor
-        button.layer.shadowRadius = 20
-        button.layer.shadowOpacity = 0.3
-        button.layer.shadowOffset = .zero
+        // Glass edge
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor(white: 1, alpha: 0.06).cgColor
 
-        // Des-C3: Add parallax motion effect for tvOS focus
-        let horizontalMotion = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
-        horizontalMotion.minimumRelativeValue = -5
-        horizontalMotion.maximumRelativeValue = 5
-        let verticalMotion = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
-        verticalMotion.minimumRelativeValue = -5
-        verticalMotion.maximumRelativeValue = 5
+        // Depth shadow
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowRadius = 12
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+
+        // Top accent stripe
+        let stripe = CALayer()
+        stripe.backgroundColor = mode.color.cgColor
+        stripe.frame = CGRect(x: 0, y: 0, width: 400, height: 3)
+        button.layer.addSublayer(stripe)
+
+        // Parallax motion
+        let hMotion = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+        hMotion.minimumRelativeValue = -5
+        hMotion.maximumRelativeValue = 5
+        let vMotion = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+        vMotion.minimumRelativeValue = -5
+        vMotion.maximumRelativeValue = 5
         let group = UIMotionEffectGroup()
-        group.motionEffects = [horizontalMotion, verticalMotion]
+        group.motionEffects = [hMotion, vMotion]
         button.addMotionEffect(group)
 
+        // Icon
+        let icons = ["🎲", "💡", "🏛"]
+        let iconLabel = UILabel()
+        iconLabel.text = tag < icons.count ? icons[tag] : "●"
+        iconLabel.font = UIFont.systemFont(ofSize: 32)
+        iconLabel.textAlignment = .center
+        iconLabel.translatesAutoresizingMaskIntoConstraints = false
+        iconLabel.isUserInteractionEnabled = false
+        button.addSubview(iconLabel)
+
+        // Title
         let label = UILabel()
         label.text = mode.title
-        label.font = UIFont.monospacedSystemFont(ofSize: 36, weight: .bold)
+        label.font = UIFont.monospacedSystemFont(ofSize: 32, weight: .bold)
         label.textColor = UIColor(hex: "#F0E6D0")
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.isUserInteractionEnabled = false
         button.addSubview(label)
 
+        // Active indicator
         if isActive {
             let activeLabel = UILabel()
-            activeLabel.text = "CURRENT"
-            activeLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+            activeLabel.text = "● CURRENT"
+            activeLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
             activeLabel.textColor = mode.color
             activeLabel.textAlignment = .center
             activeLabel.translatesAutoresizingMaskIntoConstraints = false
             activeLabel.isUserInteractionEnabled = false
             button.addSubview(activeLabel)
+
+            // Active glow
+            button.layer.shadowColor = mode.color.cgColor
+            button.layer.shadowRadius = 16
+            button.layer.shadowOpacity = 0.3
 
             NSLayoutConstraint.activate([
                 activeLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 12),
@@ -391,9 +417,16 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
             ])
         }
 
+        // Accessibility
+        let activeText = isActive ? ". Currently selected" : ""
+        button.accessibilityLabel = "\(mode.title) mode\(activeText)"
+
         NSLayoutConstraint.activate([
+            iconLabel.centerXAnchor.constraint(equalTo: button.centerXAnchor),
+            iconLabel.centerYAnchor.constraint(equalTo: button.centerYAnchor, constant: isActive ? -40 : -24),
+
             label.centerXAnchor.constraint(equalTo: button.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: button.centerYAnchor, constant: isActive ? -12 : 0),
+            label.topAnchor.constraint(equalTo: iconLabel.bottomAnchor, constant: 8),
         ])
 
         return button
@@ -440,24 +473,33 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         })
     }
 
-    // Focus handling for settings overlay (Des-C3: stronger focus with glow)
+    // Focus handling for settings overlay
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         coordinator.addCoordinatedAnimations({
-            // Settings mode buttons
+            // Settings mode buttons — unfocus
             if let prev = context.previouslyFocusedView as? UIButton,
                self.settingsButtons.contains(prev) {
-                prev.backgroundColor = UIColor(hex: "#2A2A2A")
+                prev.backgroundColor = UIColor(hex: "#1A1A1A")
                 prev.transform = .identity
-                prev.layer.shadowRadius = 20
-                prev.layer.shadowOpacity = 0.3
+                prev.layer.borderColor = UIColor(white: 1, alpha: 0.06).cgColor
+                prev.layer.shadowColor = UIColor.black.cgColor
+                prev.layer.shadowRadius = 12
+                prev.layer.shadowOpacity = 0.5
+                prev.layer.shadowOffset = CGSize(width: 0, height: 4)
             }
+            // Settings mode buttons — focus
             if let next = context.nextFocusedView as? UIButton,
                self.settingsButtons.contains(next) {
-                // Des-M1 style: scale, y-lift, stronger glow
-                next.backgroundColor = UIColor(hex: "#3A3A3A")
-                next.transform = CGAffineTransform(translationX: 0, y: -6).scaledBy(x: 1.08, y: 1.08)
-                next.layer.shadowRadius = 25
-                next.layer.shadowOpacity = 0.5
+                next.backgroundColor = UIColor(hex: "#222222")
+                next.transform = CGAffineTransform(translationX: 0, y: -8).scaledBy(x: 1.05, y: 1.05)
+                next.layer.borderColor = UIColor(white: 1, alpha: 0.12).cgColor
+                let tag = next.tag
+                if tag < self.modes.count {
+                    next.layer.shadowColor = self.modes[tag].color.cgColor
+                    next.layer.shadowRadius = 20
+                    next.layer.shadowOpacity = 0.4
+                    next.layer.shadowOffset = CGSize(width: 0, height: 6)
+                }
             }
             // Sound button
             if let prev = context.previouslyFocusedView as? UIButton,
