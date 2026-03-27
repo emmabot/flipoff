@@ -547,9 +547,23 @@ export const ROCK_PAPER_SCISSORS = [
   { type: 'riddle', question: ['', 'ROCK PAPER SCISSORS', 'SHOOT!', '', ''], answer: ['', '', 'SCISSORS!', '', ''] },
 ];
 
+// --- COLOR MIXING (10) ---
+const COLOR_MIXING = [
+  { type: 'riddle', question: ['', 'WHAT COLOR DO YOU GET', 'RED + YELLOW = ?', '', ''], answer: ['', '', 'ORANGE!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COLOR DO YOU GET', 'RED + BLUE = ?', '', ''], answer: ['', '', 'PURPLE!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COLOR DO YOU GET', 'BLUE + YELLOW = ?', '', ''], answer: ['', '', 'GREEN!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COLOR DO YOU GET', 'RED + WHITE = ?', '', ''], answer: ['', '', 'PINK!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COLOR DO YOU GET', 'BLACK + WHITE = ?', '', ''], answer: ['', '', 'GRAY!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COLOR DO YOU GET', 'RED + GREEN = ?', '', ''], answer: ['', '', 'BROWN!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COLOR DO YOU GET', 'BLUE + WHITE = ?', '', ''], answer: ['', '', 'LIGHT BLUE!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COLOR DO YOU GET', 'YELLOW + WHITE = ?', '', ''], answer: ['', '', 'CREAM!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COLOR DO YOU GET', 'RED + BLACK = ?', '', ''], answer: ['', '', 'MAROON!', '', ''] },
+  { type: 'riddle', question: ['', 'WHAT COLOR DO YOU GET', 'BLUE + GREEN = ?', '', ''], answer: ['', '', 'TEAL!', '', ''] },
+];
+
 // --- COMBINED DEFAULT SET (quotes + jokes + riddles + new categories) ---
 
-export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES, ...GEOGRAPHY, ...SEASONAL_FACTS, ...UNSCRAMBLE];
+export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES, ...GEOGRAPHY, ...SEASONAL_FACTS, ...UNSCRAMBLE, ...COLOR_MIXING];
 
 export const TIME_SLOTS = [
   { startHour: 7, endHour: 8, messages: MORNING_MESSAGES },
