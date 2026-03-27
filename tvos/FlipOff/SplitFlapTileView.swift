@@ -68,19 +68,19 @@ class SplitFlapTileView: UIView {
     }
 
     private func setupTile() {
-        backgroundColor = .clear
-        layer.cornerRadius = 3                                 // Des-M2: unified 3pt for tiles
-        clipsToBounds = false                                   // Des-D5: allow shadow to render
+        backgroundColor = UIColor(hex: "#0A0A0A")               // Housing channel bg (matches web)
+        layer.cornerRadius = 3
+        clipsToBounds = false                                   // Allow shadow to render outside
 
-        // Outer bezel border
-        layer.borderWidth = 1
-        layer.borderColor = UIColor(white: 0, alpha: 0.5).cgColor
+        // Subtle top-edge highlight on housing (glass light catch)
+        layer.borderWidth = 0.5
+        layer.borderColor = UIColor(white: 1, alpha: 0.04).cgColor
 
-        // Des-D5: Tile shadow for physical depth
+        // Outer shadow — tile sits proud of the board
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowRadius = 2
         layer.shadowOffset = CGSize(width: 0, height: 1)
-        layer.shadowOpacity = 0.5
+        layer.shadowOpacity = 0.6
 
         // --- Layer ordering (back → front) ---
 
@@ -159,11 +159,12 @@ class SplitFlapTileView: UIView {
         splitLine.frame = CGRect(x: 0, y: bounds.height / 2 - 0.5, width: bounds.width, height: 1)
         lightLine.frame = CGRect(x: 0, y: bounds.height / 2 + 0.5, width: bounds.width, height: 1)
 
-        // Resize CALayers
-        bgGradient.frame = bounds
-        scrambleColorLayer.frame = bounds
-        shadowOverlay.frame = bounds
-        highlightLayer.frame = bounds
+        // Resize CALayers — gradient inset 1pt so housing bg peeks through (like web's 1px inset)
+        let layerInset = bounds.insetBy(dx: 1, dy: 1)
+        bgGradient.frame = layerInset
+        scrambleColorLayer.frame = layerInset
+        shadowOverlay.frame = layerInset
+        highlightLayer.frame = layerInset
 
         // Des-D5: shadow path for performance
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 3).cgPath
