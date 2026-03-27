@@ -71,12 +71,13 @@
 }
 
 .accent-segment {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   transition: background-color 0.8s ease, box-shadow 0.8s ease;
-  box-shadow: 0 0 4px currentColor;
-  opacity: 0.7;
+  box-shadow:
+    0 0 6px currentColor,
+    0 0 12px currentColor;
 }
 
 /* Keyboard Shortcut Indicator — frosted glass circle */

@@ -16,8 +16,8 @@ export const SCRAMBLE_COLORS = [
 ];
 
 export const ACCENT_COLORS = [
-  '#C89640', '#B86B56', '#5E92A8',
-  '#6E8E5E', '#8A7EB0'
+  '#D4A04A', '#C47060', '#6BA3BE',
+  '#7BA068', '#9B8EC4'
 ];
 
 // Weather API config for Berkeley, CA (Open-Meteo, no key needed)
