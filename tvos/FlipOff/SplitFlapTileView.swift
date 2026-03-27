@@ -240,7 +240,6 @@ class SplitFlapTileView: UIView {
     private func startScramble(target: Character, completion: (() -> Void)?) {
         var scrambleCount = 0
         let maxScrambles = Self.scrambleBaseCount + Int.random(in: Self.scrambleRandomRange)
-        let palette = activeScrambleColors()
 
         // Show metallic highlight during scramble
         highlightLayer.opacity = 1
@@ -256,13 +255,11 @@ class SplitFlapTileView: UIView {
             } while randChar == self.lastScrambleChar && Self.charset.count > 1
             self.lastScrambleChar = randChar
 
-            let color = palette[scrambleCount % palette.count]
             self.characterLabel.text = randChar == " " ? "" : String(randChar)
 
-            // Des-M5: Use scrambleColorLayer (preserves depth gradients)
-            self.scrambleColorLayer.backgroundColor = color.cgColor
-            self.scrambleColorLayer.isHidden = false
-            self.characterLabel.textColor = .white
+            // Keep scramble color layer hidden — tiles stay dark during flips
+            self.scrambleColorLayer.isHidden = true
+            self.characterLabel.textColor = Self.creamColor
 
             scrambleCount += 1
 
@@ -287,9 +284,7 @@ class SplitFlapTileView: UIView {
         // Create top flap layer (upper half, looks like the scramble state)
         let topFlap = CALayer()
         topFlap.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height / 2)
-        topFlap.backgroundColor = scrambleColorLayer.isHidden
-            ? UIColor(hex: "#2A2A2A").cgColor
-            : scrambleColorLayer.backgroundColor
+        topFlap.backgroundColor = UIColor(hex: "#2A2A2A").cgColor
         topFlap.cornerRadius = 4
         topFlap.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         topFlap.masksToBounds = true
