@@ -286,10 +286,8 @@ class SplitFlapBoardView: UIView {
             for r in 0..<Self.gridRows {
                 for c in 0..<Self.gridCols {
                     let randChar = SplitFlapTileView.charset.randomElement() ?? "A"
-                    let color = SplitFlapTileView.scrambleColors[(r * Self.gridCols + c + Int.random(in: 0..<6)) % SplitFlapTileView.scrambleColors.count]
                     let tile = self.tiles[r][c]
-                    tile.setChar(randChar, color: .white)
-                    tile.backgroundColor = color
+                    tile.setChar(randChar, color: SplitFlapTileView.creamColor)
                 }
             }
         }
