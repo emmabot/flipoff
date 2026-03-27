@@ -4370,6 +4370,176 @@
           "",
           ""
         ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COLOR DO YOU GET",
+          "RED + YELLOW = ?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "ORANGE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COLOR DO YOU GET",
+          "RED + BLUE = ?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "PURPLE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COLOR DO YOU GET",
+          "BLUE + YELLOW = ?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "GREEN!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COLOR DO YOU GET",
+          "RED + WHITE = ?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "PINK!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COLOR DO YOU GET",
+          "BLACK + WHITE = ?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "GRAY!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COLOR DO YOU GET",
+          "RED + GREEN = ?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "BROWN!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COLOR DO YOU GET",
+          "BLUE + WHITE = ?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "LIGHT BLUE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COLOR DO YOU GET",
+          "YELLOW + WHITE = ?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "CREAM!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COLOR DO YOU GET",
+          "RED + BLACK = ?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "MAROON!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COLOR DO YOU GET",
+          "BLUE + GREEN = ?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "TEAL!",
+          "",
+          ""
+        ]
       }
     ],
     "morning": [
