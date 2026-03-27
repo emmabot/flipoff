@@ -1,7 +1,7 @@
 import { Tile } from './Tile.js';
 import {
   GRID_COLS, GRID_ROWS, STAGGER_DELAY, SCRAMBLE_DURATION,
-  TOTAL_TRANSITION, ACCENT_COLORS
+  TOTAL_TRANSITION, ACCENT_COLORS, CHARSET, SCRAMBLE_COLORS
 } from './constants.js';
 
 export class Board {
@@ -127,6 +127,11 @@ export class Board {
   }
 
   displayMessage(lines) {
+    // Stop loading scramble on first real message
+    if (this._loadingActive) {
+      this.stopLoadingScramble();
+    }
+
     if (this.isTransitioning) {
       this._pendingMessage = lines;
       return;
@@ -182,6 +187,90 @@ export class Board {
       this.isTransitioning = false;
       if (this._pendingMessage) {
         this.displayMessage(this._pendingMessage);
+      }
+    }
+  }
+
+  /**
+   * Loading scramble — staggered cascade of random chars + colors
+   * across all tiles. Runs continuously until stopLoadingScramble() or
+   * the first displayMessage() call takes over.
+   */
+  startLoadingScramble() {
+    this._loadingActive = true;
+    this._loadingTimers = [];
+
+    const totalTiles = this.rows * this.cols;
+
+    // Stagger each tile's start by row+col position (diagonal wave)
+    for (let r = 0; r < this.rows; r++) {
+      for (let c = 0; c < this.cols; c++) {
+        const tile = this.tiles[r][c];
+        // Diagonal cascade delay: fast wave across the board
+        const diag = r + c;
+        const startDelay = diag * 18 + Math.random() * 30;
+
+        const timerId = setTimeout(() => {
+          if (!this._loadingActive) return;
+          this._startTileLoading(tile);
+        }, startDelay);
+
+        this._loadingTimers.push(timerId);
+      }
+    }
+  }
+
+  /** Animate a single tile with continuous random chars + color cycling */
+  _startTileLoading(tile) {
+    if (!this._loadingActive) return;
+
+    // Override gradient so colors show
+    tile.frontEl.style.backgroundImage = 'none';
+
+    let count = 0;
+    const interval = 60 + Math.random() * 30; // Fast cycling
+
+    tile._loadingTimer = setInterval(() => {
+      if (!this._loadingActive) {
+        clearInterval(tile._loadingTimer);
+        tile._loadingTimer = null;
+        return;
+      }
+
+      const randChar = CHARSET[Math.floor(Math.random() * CHARSET.length)];
+      tile.frontSpan.textContent = randChar === ' ' ? '' : randChar;
+
+      const color = SCRAMBLE_COLORS[count % SCRAMBLE_COLORS.length];
+      tile.frontEl.style.backgroundColor = color;
+      tile.frontSpan.style.color = '';
+      count++;
+    }, interval);
+  }
+
+  /** Stop the loading scramble and clean up all tiles */
+  stopLoadingScramble() {
+    this._loadingActive = false;
+
+    // Clear start delays
+    if (this._loadingTimers) {
+      this._loadingTimers.forEach(id => clearTimeout(id));
+      this._loadingTimers = null;
+    }
+
+    // Clear per-tile intervals and reset styles
+    for (let r = 0; r < this.rows; r++) {
+      for (let c = 0; c < this.cols; c++) {
+        const tile = this.tiles[r][c];
+        if (tile._loadingTimer) {
+          clearInterval(tile._loadingTimer);
+          tile._loadingTimer = null;
+        }
+        // Reset to blank — displayMessage will set the real chars
+        tile.frontEl.style.backgroundColor = '';
+        tile.frontEl.style.backgroundImage = '';
+        tile.frontSpan.style.color = '';
+        tile.frontSpan.textContent = '';
+        tile.currentChar = ' ';
       }
     }
   }

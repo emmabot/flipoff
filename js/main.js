@@ -23,8 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', initAudio);
   document.addEventListener('keydown', initAudio);
 
-  // Start message rotation
-  rotator.start();
+  // Start loading scramble immediately — tiles cascade with random chars + colors
+  board.startLoadingScramble();
+
+  // Let the loading scramble fill the board and breathe for ~2s
+  // before the first real message takes over
+  setTimeout(() => {
+    rotator.start();
+  }, 2000);
 
   // Volume toggle button
   const volumeBtn = document.getElementById('volume-btn');
