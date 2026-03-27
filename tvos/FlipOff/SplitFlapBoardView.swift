@@ -7,7 +7,7 @@ class SplitFlapBoardView: UIView {
 
     static let gridCols = 22
     static let gridRows = 5
-    static let staggerDelay: TimeInterval = 0.02  // 20ms per column
+    static let staggerDelay: TimeInterval = 0.03  // 30ms per column, matching web wave effect
 
     // MARK: - Properties
 
@@ -116,7 +116,7 @@ class SplitFlapBoardView: UIView {
         currentGrid = newGrid
 
         // Clear transitioning flag after all animations complete
-        let totalDuration = Double(Self.gridCols) * Self.staggerDelay + 0.6
+        let totalDuration = Double(Self.gridCols) * Self.staggerDelay + 1.0  // stagger + scramble + settle
         DispatchQueue.main.asyncAfter(deadline: .now() + totalDuration) { [weak self] in
             guard let self = self else { return }
             self.isTransitioning = false
