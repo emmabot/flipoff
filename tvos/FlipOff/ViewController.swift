@@ -71,9 +71,11 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
     func modePicker(_ picker: ModePickerViewController, didSelect mode: String) {
         UserDefaults.standard.set(mode, forKey: modeKey)
 
-        // Des-C2: Animated transition — zoom up selected card + cross-dissolve to board
-        // Set up board behind the picker
+        // Des-C2: Animated transition — zoom up + cross-dissolve to board (~0.8s total)
+        // Set up the board behind the picker view
         startBoard(mode: mode)
+        // Move picker view to front so it animates over the board
+        view.bringSubviewToFront(picker.view)
 
         // Animate the picker view out with zoom + fade
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
@@ -221,13 +223,18 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         }
     }
 
-    // MARK: - Settings Overlay
+    // MARK: - Settings Overlay (Des-C3: tvOS-native with blur, focus, parallax)
 
     private func showSettings() {
-        let overlay = UIView(frame: view.bounds)
-        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.85)
-        view.addSubview(overlay)
-        settingsOverlay = overlay
+        // Des-C3: Use UIVisualEffectView with dark blur for background
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurView = UIVisualEffectView(effect: nil) // Start with no effect for animation
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurView)
+        settingsOverlay = blurView
+
+        let contentView = blurView.contentView
 
         // Title
         let titleLabel = UILabel()
@@ -236,7 +243,7 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         titleLabel.textColor = UIColor(hex: "#F0E6D0")
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        overlay.addSubview(titleLabel)
+        contentView.addSubview(titleLabel)
 
         // Mode card buttons
         let stackView = UIStackView()
@@ -244,8 +251,9 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         stackView.spacing = 30
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
+        stackView.clipsToBounds = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        overlay.addSubview(stackView)
+        contentView.addSubview(stackView)
 
         settingsButtons = []
         for (i, mode) in modes.enumerated() {
@@ -262,7 +270,7 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         sndButton.setTitleColor(UIColor(hex: "#888888"), for: .normal)
         sndButton.addTarget(self, action: #selector(settingsSoundToggled), for: .primaryActionTriggered)
         sndButton.translatesAutoresizingMaskIntoConstraints = false
-        overlay.addSubview(sndButton)
+        contentView.addSubview(sndButton)
         soundButton = sndButton
 
         // Hint
@@ -272,36 +280,55 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         hintLabel.textColor = UIColor(hex: "#555555")
         hintLabel.textAlignment = .center
         hintLabel.translatesAutoresizingMaskIntoConstraints = false
-        overlay.addSubview(hintLabel)
+        contentView.addSubview(hintLabel)
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: overlay.safeAreaLayoutGuide.topAnchor, constant: 80),
-            titleLabel.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
-            stackView.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: overlay.centerYAnchor, constant: -20),
+            titleLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 80),
+            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -20),
             stackView.widthAnchor.constraint(equalToConstant: 900),
             stackView.heightAnchor.constraint(equalToConstant: 280),
             sndButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 40),
-            sndButton.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
-            hintLabel.bottomAnchor.constraint(equalTo: overlay.safeAreaLayoutGuide.bottomAnchor, constant: -40),
-            hintLabel.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
+            sndButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            hintLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -40),
+            hintLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
+
+        // Des-M4: 0.3s fade animation on show
+        contentView.alpha = 0
+        UIView.animate(withDuration: 0.3) {
+            blurView.effect = blurEffect
+            contentView.alpha = 1
+        }
     }
 
-    private func createSettingsModeButton(mode: (id: String, title: String, color: UIColor), tag: Int, isActive: Bool) -> UIButton {
+    private func createSettingsModeButton(mode: ModeDefinition, tag: Int, isActive: Bool) -> UIButton {
         let button = UIButton(type: .custom)
         button.tag = tag
         button.backgroundColor = UIColor(hex: "#2A2A2A")
-        button.layer.cornerRadius = 12
-        button.clipsToBounds = true
+        // Des-M2: unified corner radius 16pt for cards
+        button.layer.cornerRadius = 16
+        // Des-C3: clipsToBounds false for shadow glow visibility
+        button.clipsToBounds = false
         button.addTarget(self, action: #selector(settingsModeSelected(_:)), for: .primaryActionTriggered)
 
-        // Color accent bar at top
-        let accentBar = UIView()
-        accentBar.backgroundColor = mode.color
-        accentBar.translatesAutoresizingMaskIntoConstraints = false
-        accentBar.isUserInteractionEnabled = false
-        button.addSubview(accentBar)
+        // Des-C3: Shadow glow with mode color (replaces accent bar)
+        button.layer.shadowColor = mode.color.cgColor
+        button.layer.shadowRadius = 20
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = .zero
+
+        // Des-C3: Add parallax motion effect for tvOS focus
+        let horizontalMotion = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+        horizontalMotion.minimumRelativeValue = -5
+        horizontalMotion.maximumRelativeValue = 5
+        let verticalMotion = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+        verticalMotion.minimumRelativeValue = -5
+        verticalMotion.maximumRelativeValue = 5
+        let group = UIMotionEffectGroup()
+        group.motionEffects = [horizontalMotion, verticalMotion]
+        button.addMotionEffect(group)
 
         let label = UILabel()
         label.text = mode.title
@@ -316,7 +343,7 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
             let activeLabel = UILabel()
             activeLabel.text = "CURRENT"
             activeLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-            activeLabel.textColor = UIColor(hex: "#E8A840")
+            activeLabel.textColor = mode.color
             activeLabel.textAlignment = .center
             activeLabel.translatesAutoresizingMaskIntoConstraints = false
             activeLabel.isUserInteractionEnabled = false
@@ -329,10 +356,6 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         }
 
         NSLayoutConstraint.activate([
-            accentBar.topAnchor.constraint(equalTo: button.topAnchor),
-            accentBar.leadingAnchor.constraint(equalTo: button.leadingAnchor),
-            accentBar.trailingAnchor.constraint(equalTo: button.trailingAnchor),
-            accentBar.heightAnchor.constraint(equalToConstant: 5),
             label.centerXAnchor.constraint(equalTo: button.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: button.centerYAnchor, constant: isActive ? -12 : 0),
         ])
@@ -344,8 +367,9 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         let mode = modes[sender.tag]
         if mode.id != currentMode {
             UserDefaults.standard.set(mode.id, forKey: modeKey)
-            dismissSettings()
-            startBoard(mode: mode.id)
+            dismissSettings {
+                self.startBoard(mode: mode.id)
+            }
         } else {
             dismissSettings()
         }
@@ -358,14 +382,29 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         print("[FlipOff] Sound \(muted ? "OFF" : "ON")")
     }
 
-    private func dismissSettings() {
-        settingsOverlay?.removeFromSuperview()
-        settingsOverlay = nil
-        settingsButtons = []
-        soundButton = nil
+    // Des-M4: 0.3s fade animation on dismiss
+    private func dismissSettings(completion: (() -> Void)? = nil) {
+        guard let overlay = settingsOverlay as? UIVisualEffectView else {
+            settingsOverlay?.removeFromSuperview()
+            settingsOverlay = nil
+            settingsButtons = []
+            soundButton = nil
+            completion?()
+            return
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+            overlay.effect = nil
+            overlay.contentView.alpha = 0
+        }, completion: { _ in
+            overlay.removeFromSuperview()
+            self.settingsOverlay = nil
+            self.settingsButtons = []
+            self.soundButton = nil
+            completion?()
+        })
     }
 
-    // Focus handling for settings overlay
+    // Focus handling for settings overlay (Des-C3: stronger focus with glow)
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         coordinator.addCoordinatedAnimations({
             // Settings mode buttons
@@ -373,11 +412,16 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
                self.settingsButtons.contains(prev) {
                 prev.backgroundColor = UIColor(hex: "#2A2A2A")
                 prev.transform = .identity
+                prev.layer.shadowRadius = 20
+                prev.layer.shadowOpacity = 0.3
             }
             if let next = context.nextFocusedView as? UIButton,
                self.settingsButtons.contains(next) {
-                next.backgroundColor = UIColor(hex: "#333333")
-                next.transform = CGAffineTransform(scaleX: 1.06, y: 1.06)
+                // Des-M1 style: scale, y-lift, stronger glow
+                next.backgroundColor = UIColor(hex: "#3A3A3A")
+                next.transform = CGAffineTransform(translationX: 0, y: -6).scaledBy(x: 1.08, y: 1.08)
+                next.layer.shadowRadius = 25
+                next.layer.shadowOpacity = 0.5
             }
             // Sound button
             if let prev = context.previouslyFocusedView as? UIButton,
