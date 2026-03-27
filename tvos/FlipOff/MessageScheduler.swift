@@ -52,6 +52,9 @@ class MessageScheduler {
         timeCheckTimer = nil
         riddleTimer?.cancel()
         riddleTimer = nil
+        activeMessages = []
+        currentIndex = -1
+        currentSlot = ""
         if let observer = becomeActiveObserver {
             NotificationCenter.default.removeObserver(observer)
             becomeActiveObserver = nil
