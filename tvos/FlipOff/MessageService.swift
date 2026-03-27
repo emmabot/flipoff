@@ -56,7 +56,7 @@ enum Message {
 class MessageService {
     static let shared = MessageService()
 
-    private let jsonURL = "https://emmabot.github.io/flipoff/messages.json"
+    private let jsonURL = "https://emmabot.github.io/lilsauce/messages.json"
 
     var config: MessageConfig?
     var defaultMessages: [Message] = []

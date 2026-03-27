@@ -1,14 +1,14 @@
-# FlipOff.
+# Lil Sauce
 
 **A kid-friendly split-flap display for your family TV.** Jokes, riddles, quotes, weather, and morning/bedtime routines — all in retro flip-board style.
 
-🔴 **Live now:** [emmabot.github.io/flipoff](https://emmabot.github.io/flipoff/)
+🔴 **Live now:** [emmabot.github.io/lilsauce](https://emmabot.github.io/lilsauce/)
 
-![FlipOff Screenshot](screenshot.png)
+![Lil Sauce Screenshot](screenshot.png)
 
 ## What is this?
 
-FlipOff turns any TV or monitor into a warm, clackety split-flap display — the kind you'd see at old train stations. It's built for families: kid-friendly jokes, riddles with delayed reveals, quotes from Star Wars and Percy Jackson, and time-aware reminders for morning routines and bedtime.
+Lil Sauce turns any TV or monitor into a warm, clackety split-flap display — the kind you'd see at old train stations. It's built for families: kid-friendly jokes, riddles with delayed reveals, quotes from Star Wars and Percy Jackson, and time-aware reminders for morning routines and bedtime.
 
 No accounts. No frameworks. No subscriptions. Just open it and go.
 
@@ -23,12 +23,12 @@ No accounts. No frameworks. No subscriptions. Just open it and go.
 
 ## Quick Start
 
-**Easiest:** Just open [emmabot.github.io/flipoff](https://emmabot.github.io/flipoff/) on your TV browser.
+**Easiest:** Just open [emmabot.github.io/lilsauce](https://emmabot.github.io/lilsauce/) on your TV browser.
 
 **Local:**
 ```bash
-git clone https://github.com/emmabot/flipoff.git
-cd flipoff
+git clone https://github.com/emmabot/lilsauce.git
+cd lilsauce
 python3 -m http.server 8080
 # Open http://localhost:8080
 ```
@@ -69,7 +69,7 @@ Push to `main` and GitHub Pages auto-deploys. The tvOS app picks up changes on n
 ## File Structure
 
 ```
-flipoff/
+lilsauce/
   index.html              — Single-page app
   css/
     reset.css             — CSS reset
