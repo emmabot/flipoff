@@ -1,10 +1,14 @@
-/* Tile Wrapper */
+/* Tile Wrapper — machined channel housing */
 .tile {
   width: var(--tile-size);
   height: calc(var(--tile-size) * 1.5);
   perspective: 400px;
-  background: #111;
+  background: #0a0a0a;
   border-radius: 3px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.6),
+    0 0 0 0.5px rgba(255, 255, 255, 0.03);
 }
 
 /* Inner Container (transform target) */
@@ -15,20 +19,27 @@
   transform-style: preserve-3d;
 }
 
-/* Tile Faces */
+/* Tile Faces — flap with depth and edge catch */
 .tile-front,
 .tile-back {
   position: absolute;
   inset: 1px;
   backface-visibility: hidden;
-  background: #222;
+  background: linear-gradient(
+    180deg,
+    #262626 0%,
+    #1e1e1e 48%,
+    #1a1a1a 52%,
+    #1c1c1c 100%
+  );
   border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow:
-    inset 0 1px 3px rgba(0, 0, 0, 0.5),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.02);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02);
   overflow: hidden;
 }
 
@@ -47,7 +58,7 @@
   transform: rotateX(180deg);
 }
 
-/* Horizontal Split Line — subtle mechanical seam */
+/* Horizontal Split Line — mechanical seam between flap halves */
 .tile-front::after,
 .tile-back::after {
   content: '';
@@ -56,7 +67,10 @@
   right: 0;
   top: 50%;
   height: 1px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03),
+    0 -1px 0 rgba(0, 0, 0, 0.2);
   pointer-events: none;
 }
 
