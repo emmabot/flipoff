@@ -13,6 +13,9 @@
 		A10000010000000000000004 /* SplitFlapTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000006 /* SplitFlapTileView.swift */; };
 		A10000010000000000000005 /* SplitFlapBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000007 /* SplitFlapBoardView.swift */; };
 		A10000010000000000000006 /* FlipSoundEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000008 /* FlipSoundEngine.swift */; };
+		A10000010000000000000007 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000009 /* MessageService.swift */; };
+		A10000010000000000000008 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002000000000000000A /* WeatherService.swift */; };
+		A10000010000000000000009 /* MessageScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002000000000000000B /* MessageScheduler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		A10000020000000000000006 /* SplitFlapTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitFlapTileView.swift; sourceTree = "<group>"; };
 		A10000020000000000000007 /* SplitFlapBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitFlapBoardView.swift; sourceTree = "<group>"; };
 		A10000020000000000000008 /* FlipSoundEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipSoundEngine.swift; sourceTree = "<group>"; };
+		A10000020000000000000009 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		A1000002000000000000000A /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		A1000002000000000000000B /* MessageScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageScheduler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,9 @@
 				A10000020000000000000006 /* SplitFlapTileView.swift */,
 				A10000020000000000000007 /* SplitFlapBoardView.swift */,
 				A10000020000000000000008 /* FlipSoundEngine.swift */,
+				A10000020000000000000009 /* MessageService.swift */,
+				A1000002000000000000000A /* WeatherService.swift */,
+				A1000002000000000000000B /* MessageScheduler.swift */,
 				A10000020000000000000002 /* ViewController.swift */,
 				A10000020000000000000003 /* Assets.xcassets */,
 				A10000020000000000000004 /* Info.plist */,
@@ -136,6 +145,9 @@
 				A10000010000000000000005 /* SplitFlapBoardView.swift in Sources */,
 				A10000010000000000000002 /* ViewController.swift in Sources */,
 				A10000010000000000000006 /* FlipSoundEngine.swift in Sources */,
+				A10000010000000000000007 /* MessageService.swift in Sources */,
+				A10000010000000000000008 /* WeatherService.swift in Sources */,
+				A10000010000000000000009 /* MessageScheduler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
