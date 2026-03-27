@@ -70,21 +70,6 @@ class MessageScheduler {
     func showPrev() {
         guard !activeMessages.isEmpty else { return }
 
-        messagesSinceRPS += 1
-
-        if messagesSinceRPS >= rpsInterval, let rps = MessageService.shared.rpsMessages.randomElement() {
-            messagesSinceRPS = 0
-            rpsInterval = Int.random(in: 3...5)
-
-            if case .riddle(let question, let answer) = rps {
-                cancelRiddleTimer()
-                autoTimer?.invalidate()
-                autoTimer = nil
-                delegate?.scheduler(self, showDelayed: question, answer: answer, delay: riddleDelay)
-                return
-            }
-        }
-
         currentIndex = (currentIndex - 1 + activeMessages.count) % activeMessages.count
         displayCurrent()
     }
@@ -109,7 +94,7 @@ class MessageScheduler {
             autoTimer?.invalidate()
             autoTimer = nil
             let question = [lines[0], lines[1], lines[2], "", lines[4]]
-            let answer = lines
+            let answer = ["", "", lines[3], "", ""]
             delegate?.scheduler(self, showDelayed: question, answer: answer, delay: riddleDelay)
 
         case .plain, .fact:
@@ -146,9 +131,11 @@ class MessageScheduler {
                         guard let self = self else { return }
                         if let weather = weatherMsg {
                             self.activeMessages.insert(weather, at: 0)
+                            if self.currentIndex >= 0 { self.currentIndex += 1 }
                         }
                         let moon = WeatherService.shared.moonMessage()
                         self.activeMessages.insert(moon, at: min(1, self.activeMessages.count))
+                        if self.currentIndex >= 1 { self.currentIndex += 1 }
                     }
                 }
             }

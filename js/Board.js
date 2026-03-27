@@ -96,7 +96,11 @@ export class Board {
   }
 
   displayMessage(lines) {
-    if (this.isTransitioning) return;
+    if (this.isTransitioning) {
+      this._pendingMessage = lines;
+      return;
+    }
+    this._pendingMessage = null;
     this.isTransitioning = true;
 
     // Format lines into grid
@@ -133,6 +137,9 @@ export class Board {
     // Clear transitioning flag after animation completes
     setTimeout(() => {
       this.isTransitioning = false;
+      if (this._pendingMessage) {
+        this.displayMessage(this._pendingMessage);
+      }
     }, TOTAL_TRANSITION + 200);
   }
 

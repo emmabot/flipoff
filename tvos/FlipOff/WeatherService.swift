@@ -3,13 +3,19 @@ import Foundation
 class WeatherService {
     static let shared = WeatherService()
 
+    private let session: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 10
+        return URLSession(configuration: config)
+    }()
+
     func fetchWeather(config: WeatherConfig, completion: @escaping (Message?) -> Void) {
         guard let url = URL(string: config.url) else {
             completion(nil)
             return
         }
 
-        URLSession.shared.dataTask(with: url) { data, _, error in
+        session.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil,
                   let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                   let current = json["current"] as? [String: Any],
@@ -29,7 +35,9 @@ class WeatherService {
     }
 
     func moonPhaseName() -> String {
-        let knownNewMoon = DateComponents(calendar: .current, year: 2000, month: 1, day: 6).date!
+        guard let knownNewMoon = DateComponents(calendar: .current, year: 2000, month: 1, day: 6).date else {
+            return "FULL MOON"
+        }
         let daysSince = Date().timeIntervalSince(knownNewMoon) / 86400.0
         let lunarCycle = 29.53
         let phase = daysSince.truncatingRemainder(dividingBy: lunarCycle)

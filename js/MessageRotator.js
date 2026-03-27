@@ -60,16 +60,6 @@ export class MessageRotator {
   }
 
   prev() {
-    this._messagesSinceRPS++;
-
-    if (this._messagesSinceRPS >= this._rpsInterval) {
-      this._messagesSinceRPS = 0;
-      this._rpsInterval = 3 + Math.floor(Math.random() * 3);
-      const rps = ROCK_PAPER_SCISSORS[Math.floor(Math.random() * ROCK_PAPER_SCISSORS.length)];
-      this._showWithDelay(rps.question, rps.answer);
-      return;
-    }
-
     this.currentIndex = (this.currentIndex - 1 + this.messages.length) % this.messages.length;
     this._displayCurrent();
   }

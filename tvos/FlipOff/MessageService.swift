@@ -64,13 +64,24 @@ class MessageService {
     var bedtimeMessages: [Message] = []
     var rpsMessages: [Message] = []
 
+    private let session: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 10
+        return URLSession(configuration: config)
+    }()
+
     func fetch(mode: String = "kids", completion: @escaping (Bool) -> Void) {
+        defaultMessages = []
+        morningMessages = []
+        bedtimeMessages = []
+        rpsMessages = []
+
         guard let url = URL(string: jsonURL) else {
             completion(false)
             return
         }
 
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+        session.dataTask(with: url) { [weak self] data, _, error in
             guard let self = self, let data = data, error == nil else {
                 print("[FlipOff] JSON fetch failed: \(error?.localizedDescription ?? "unknown")")
                 completion(false)
