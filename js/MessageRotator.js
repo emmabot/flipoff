@@ -1,4 +1,4 @@
-import { DEFAULT_MESSAGES, MORNING_MESSAGES, BEDTIME_MESSAGES, TIME_SLOTS, MESSAGE_INTERVAL, TOTAL_TRANSITION, RIDDLE_DELAY, WEATHER_CONFIG } from './constants.js';
+import { DEFAULT_MESSAGES, MORNING_MESSAGES, BEDTIME_MESSAGES, TIME_SLOTS, MESSAGE_INTERVAL, TOTAL_TRANSITION, RIDDLE_DELAY, WEATHER_CONFIG, ROCK_PAPER_SCISSORS } from './constants.js';
 
 export class MessageRotator {
   constructor(board) {
@@ -11,6 +11,8 @@ export class MessageRotator {
     this._riddleTimer = null;
     this._paused = false;
     this._weatherMessage = null;
+    this._messagesSinceRPS = 0;
+    this._rpsInterval = 3 + Math.floor(Math.random() * 3); // 3-5 messages
     this._loadMessages();
   }
 
@@ -43,11 +45,31 @@ export class MessageRotator {
   }
 
   next() {
+    this._messagesSinceRPS++;
+
+    if (this._messagesSinceRPS >= this._rpsInterval) {
+      this._messagesSinceRPS = 0;
+      this._rpsInterval = 3 + Math.floor(Math.random() * 3); // Reset to random 3-5
+      const rps = ROCK_PAPER_SCISSORS[Math.floor(Math.random() * ROCK_PAPER_SCISSORS.length)];
+      this._showWithDelay(rps.question, rps.answer);
+      return;
+    }
+
     this.currentIndex = (this.currentIndex + 1) % this.messages.length;
     this._displayCurrent();
   }
 
   prev() {
+    this._messagesSinceRPS++;
+
+    if (this._messagesSinceRPS >= this._rpsInterval) {
+      this._messagesSinceRPS = 0;
+      this._rpsInterval = 3 + Math.floor(Math.random() * 3);
+      const rps = ROCK_PAPER_SCISSORS[Math.floor(Math.random() * ROCK_PAPER_SCISSORS.length)];
+      this._showWithDelay(rps.question, rps.answer);
+      return;
+    }
+
     this.currentIndex = (this.currentIndex - 1 + this.messages.length) % this.messages.length;
     this._displayCurrent();
   }

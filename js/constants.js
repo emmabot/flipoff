@@ -541,7 +541,7 @@ const UNSCRAMBLE = [
 ];
 
 // --- ROCK PAPER SCISSORS (3) ---
-const ROCK_PAPER_SCISSORS = [
+export const ROCK_PAPER_SCISSORS = [
   { type: 'riddle', question: ['', 'ROCK PAPER SCISSORS', 'SHOOT!', '', ''], answer: ['', '', 'ROCK!', '', ''] },
   { type: 'riddle', question: ['', 'ROCK PAPER SCISSORS', 'SHOOT!', '', ''], answer: ['', '', 'PAPER!', '', ''] },
   { type: 'riddle', question: ['', 'ROCK PAPER SCISSORS', 'SHOOT!', '', ''], answer: ['', '', 'SCISSORS!', '', ''] },
@@ -549,7 +549,7 @@ const ROCK_PAPER_SCISSORS = [
 
 // --- COMBINED DEFAULT SET (quotes + jokes + riddles + new categories) ---
 
-export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES, ...GEOGRAPHY, ...SEASONAL_FACTS, ...UNSCRAMBLE, ...ROCK_PAPER_SCISSORS];
+export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES, ...GEOGRAPHY, ...SEASONAL_FACTS, ...UNSCRAMBLE];
 
 export const TIME_SLOTS = [
   { startHour: 7, endHour: 8, messages: MORNING_MESSAGES },

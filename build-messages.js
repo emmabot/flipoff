@@ -6,7 +6,7 @@
 import {
   DEFAULT_MESSAGES, MORNING_MESSAGES, BEDTIME_MESSAGES,
   GRID_COLS, GRID_ROWS, RIDDLE_DELAY, MESSAGE_INTERVAL,
-  SCRAMBLE_COLORS, WEATHER_CONFIG
+  SCRAMBLE_COLORS, WEATHER_CONFIG, ROCK_PAPER_SCISSORS
 } from './js/constants.js';
 
 import { writeFileSync } from 'fs';
@@ -40,7 +40,8 @@ const output = {
   messages: {
     default: DEFAULT_MESSAGES.map(normalizeMessage),
     morning: MORNING_MESSAGES.map(normalizeMessage),
-    bedtime: BEDTIME_MESSAGES.map(normalizeMessage)
+    bedtime: BEDTIME_MESSAGES.map(normalizeMessage),
+    rps: ROCK_PAPER_SCISSORS.map(normalizeMessage)
   }
 };
 
