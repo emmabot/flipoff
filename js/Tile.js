@@ -56,6 +56,9 @@ export class Tile {
       const maxScrambles = 10 + Math.floor(Math.random() * 4);
       const scrambleInterval = 70;
 
+      // Override the CSS gradient so backgroundColor is visible during scramble
+      this.frontEl.style.backgroundImage = 'none';
+
       this._scrambleTimer = setInterval(() => {
         // Random character
         const randChar = CHARSET[Math.floor(Math.random() * CHARSET.length)];
@@ -78,8 +81,9 @@ export class Tile {
           clearInterval(this._scrambleTimer);
           this._scrambleTimer = null;
 
-          // Reset colors
+          // Reset colors — restore CSS gradient
           this.frontEl.style.backgroundColor = '';
+          this.frontEl.style.backgroundImage = '';
           this.frontSpan.style.color = '';
 
           // Set the final character directly (skip 3D flip for reliability)
