@@ -1056,7 +1056,6 @@ const HISTORY_RIDDLES = [
   { type: 'riddle', question: ['', 'I AM A FAMOUS', 'LIGHTHOUSE THAT WAS', 'AN ANCIENT WONDER', ''], answer: ['', '', 'PHAROS!', '', ''] },
   { type: 'riddle', question: ['', 'I AM A GIANT', 'CARVED INTO ROCK', 'WITH A LIONS BODY', ''], answer: ['', '', 'THE SPHINX!', '', ''] },
   { type: 'riddle', question: ['', 'I AM A TRAIL THAT', 'CONNECTED CHINA', 'TO ROME FOR TRADE', ''], answer: ['', '', 'THE SILK ROAD!', '', ''] },
-  { type: 'riddle', question: ['', 'I AM A PLACE WHERE', 'GLADIATORS FOUGHT', 'IN ANCIENT ROME', ''], answer: ['', '', 'THE COLOSSEUM!', '', ''] },
   { type: 'riddle', question: ['', 'I AM A WALL THAT', 'DIVIDED BERLIN', 'FOR 28 YEARS', ''], answer: ['', '', 'THE BERLIN WALL!', '', ''] },
   { type: 'riddle', question: ['', 'I AM A SHIP THAT', 'DARWIN SAILED ON', 'TO STUDY NATURE', ''], answer: ['', '', 'HMS BEAGLE!', '', ''] },
   { type: 'riddle', question: ['', 'I AM A TREATY THAT', 'ENDED WORLD WAR 1', 'SIGNED IN FRANCE', ''], answer: ['', '', 'VERSAILLES!', '', ''] },

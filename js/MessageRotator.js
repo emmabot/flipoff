@@ -9,7 +9,6 @@ export class MessageRotator {
     this._timer = null;
     this._timeCheckTimer = null;
     this._riddleTimer = null;
-    this._paused = false;
     this._weatherMessage = null;
     this._messagesSinceRPS = 0;
     this._rpsInterval = 3 + Math.floor(Math.random() * 3); // 3-5 messages
@@ -101,7 +100,7 @@ export class MessageRotator {
   _scheduleNext() {
     if (this._timer) clearTimeout(this._timer);
     this._timer = setTimeout(() => {
-      if (!this._paused && !this.board.isTransitioning) {
+      if (!this.board.isTransitioning) {
         this.next();
       } else {
         // Retry shortly if transitioning

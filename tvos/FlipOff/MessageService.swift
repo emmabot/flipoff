@@ -56,13 +56,21 @@ enum Message {
 class MessageService {
     static let shared = MessageService()
 
-    private let jsonURL = "https://emmabot.github.io/lilsauce/messages.json"
+    // MARK: - Configuration
 
-    var config: MessageConfig?
-    var defaultMessages: [Message] = []
-    var morningMessages: [Message] = []
-    var bedtimeMessages: [Message] = []
-    var rpsMessages: [Message] = []
+    /// Remote URL for messages JSON (configurable constant)
+    static let remoteJSONURL = "https://emmabot.github.io/lilsauce/messages.json"
+
+    /// UserDefaults key for disk-cached JSON
+    private static let cachedJSONKey = "cachedMessagesJSON"
+
+    // MARK: - Properties
+
+    private(set) var config: MessageConfig?
+    private(set) var defaultMessages: [Message] = []
+    private(set) var morningMessages: [Message] = []
+    private(set) var bedtimeMessages: [Message] = []
+    private(set) var rpsMessages: [Message] = []
 
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
@@ -70,43 +78,83 @@ class MessageService {
         return URLSession(configuration: config)
     }()
 
+    // MARK: - Fetch
+
     func fetch(mode: String = "kids", completion: @escaping (Bool) -> Void) {
         defaultMessages = []
         morningMessages = []
         bedtimeMessages = []
         rpsMessages = []
 
-        guard let url = URL(string: jsonURL) else {
-            completion(false)
+        guard let url = URL(string: Self.remoteJSONURL) else {
+            loadFallback(mode: mode, completion: completion)
             return
         }
 
         session.dataTask(with: url) { [weak self] data, _, error in
             guard let self = self, let data = data, error == nil else {
-                print("[FlipOff] JSON fetch failed: \(error?.localizedDescription ?? "unknown")")
-                completion(false)
+                print("[FlipOff] JSON fetch failed: \(error?.localizedDescription ?? "unknown"), trying fallback")
+                self?.loadFallback(mode: mode, completion: completion)
                 return
             }
 
-            do {
-                let decoded = try JSONDecoder().decode(MessageData.self, from: data)
-                self.config = decoded.config
-                guard let modeData = decoded.modes[mode] else {
-                    print("[FlipOff] Mode '\(mode)' not found in JSON")
-                    completion(false)
-                    return
-                }
-                self.defaultMessages = modeData.default.map(self.convert).shuffled()
-                self.morningMessages = (modeData.morning ?? []).map(self.convert)
-                self.bedtimeMessages = (modeData.bedtime ?? []).map(self.convert)
-                self.rpsMessages = (modeData.rps ?? []).map(self.convert)
-                print("[FlipOff] Loaded mode '\(mode)': \(self.defaultMessages.count) default, \(self.morningMessages.count) morning, \(self.bedtimeMessages.count) bedtime, \(self.rpsMessages.count) rps messages")
+            if self.parse(data: data, mode: mode) {
+                // Cache successful network response to disk
+                UserDefaults.standard.set(data, forKey: Self.cachedJSONKey)
+                print("[FlipOff] Cached messages.json to disk")
                 completion(true)
-            } catch {
-                print("[FlipOff] JSON parse error: \(error)")
-                completion(false)
+            } else {
+                self.loadFallback(mode: mode, completion: completion)
             }
         }.resume()
+    }
+
+    // MARK: - Fallback & Cache
+
+    /// Try disk cache first, then bundled fallback
+    private func loadFallback(mode: String, completion: @escaping (Bool) -> Void) {
+        // 1. Try disk-cached version
+        if let cachedData = UserDefaults.standard.data(forKey: Self.cachedJSONKey) {
+            if parse(data: cachedData, mode: mode) {
+                print("[FlipOff] Loaded messages from disk cache")
+                completion(true)
+                return
+            }
+        }
+
+        // 2. Try bundled fallback
+        if let bundlePath = Bundle.main.path(forResource: "messages", ofType: "json"),
+           let bundleData = try? Data(contentsOf: URL(fileURLWithPath: bundlePath)) {
+            if parse(data: bundleData, mode: mode) {
+                print("[FlipOff] Loaded messages from app bundle fallback")
+                completion(true)
+                return
+            }
+        }
+
+        print("[FlipOff] All message sources failed")
+        completion(false)
+    }
+
+    /// Parse JSON data and populate message arrays. Returns true on success.
+    private func parse(data: Data, mode: String) -> Bool {
+        do {
+            let decoded = try JSONDecoder().decode(MessageData.self, from: data)
+            self.config = decoded.config
+            guard let modeData = decoded.modes[mode] else {
+                print("[FlipOff] Mode '\(mode)' not found in JSON")
+                return false
+            }
+            self.defaultMessages = modeData.default.map(self.convert).shuffled()
+            self.morningMessages = (modeData.morning ?? []).map(self.convert)
+            self.bedtimeMessages = (modeData.bedtime ?? []).map(self.convert)
+            self.rpsMessages = (modeData.rps ?? []).map(self.convert)
+            print("[FlipOff] Loaded mode '\(mode)': \(self.defaultMessages.count) default, \(self.morningMessages.count) morning, \(self.bedtimeMessages.count) bedtime, \(self.rpsMessages.count) rps messages")
+            return true
+        } catch {
+            print("[FlipOff] JSON parse error: \(error)")
+            return false
+        }
     }
 
     private func convert(_ json: MessageJSON) -> Message {

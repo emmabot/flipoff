@@ -28,7 +28,7 @@ class WeatherService {
 
             let label = config.codes[String(code)] ?? "CLEAR"
             let tempStr = "\(Int(temp.rounded()))°F  \(label)"
-            let message = Message.plain(["", "  GOOD MORNING", "  \(tempStr)", "", ""])
+            let message = Message.plain(["", "GOOD MORNING", tempStr, "", ""])
             print("[FlipOff] Weather: \(tempStr)")
             completion(message)
         }.resume()
@@ -57,7 +57,7 @@ class WeatherService {
     }
 
     func moonMessage() -> Message {
-        return .plain(["", "  TONIGHTS MOON", "  \(moonPhaseName())", "", ""])
+        return .plain(["", "TONIGHTS MOON", moonPhaseName(), "", ""])
     }
 }
 

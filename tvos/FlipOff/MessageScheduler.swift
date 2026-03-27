@@ -22,7 +22,9 @@ class MessageScheduler {
     private let autoInterval: TimeInterval
     private let riddleDelay: TimeInterval
 
-    init(autoInterval: TimeInterval = 8.0, riddleDelay: TimeInterval = 6.0) {
+    private var becomeActiveObserver: NSObjectProtocol?
+
+    init(autoInterval: TimeInterval = 12.0, riddleDelay: TimeInterval = 6.0) {
         self.autoInterval = autoInterval
         self.riddleDelay = riddleDelay
     }
@@ -34,6 +36,13 @@ class MessageScheduler {
         timeCheckTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
             self?.updateActiveMessages()
         }
+
+        // Re-check time slot when app returns from background
+        becomeActiveObserver = NotificationCenter.default.addObserver(
+            forName: .appDidBecomeActive, object: nil, queue: .main
+        ) { [weak self] _ in
+            self?.checkTimeSlotOnResume()
+        }
     }
 
     func stop() {
@@ -43,6 +52,19 @@ class MessageScheduler {
         timeCheckTimer = nil
         riddleTimer?.cancel()
         riddleTimer = nil
+        if let observer = becomeActiveObserver {
+            NotificationCenter.default.removeObserver(observer)
+            becomeActiveObserver = nil
+        }
+    }
+
+    /// Called when app becomes active — force re-check the time slot
+    private func checkTimeSlotOnResume() {
+        let slot = currentTimeSlot()
+        if slot != currentSlot {
+            print("[FlipOff] Time slot changed on resume: \(currentSlot) → \(slot)")
+            updateActiveMessages()
+        }
     }
 
     func showNext() {
@@ -81,6 +103,10 @@ class MessageScheduler {
     // MARK: - Private
 
     private func displayCurrent() {
+        guard activeMessages.indices.contains(currentIndex) else {
+            print("[FlipOff] displayCurrent: currentIndex \(currentIndex) out of bounds (count: \(activeMessages.count))")
+            return
+        }
         let msg = activeMessages[currentIndex]
         cancelRiddleTimer()
 
