@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Innovator Mode</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1920px; height: 1080px; background: #1A1A1A; display: flex; align-items: center; justify-content: center; overflow: hidden; font-family: 'SF Mono', 'Menlo', 'Courier New', monospace; }
+.board { display: grid; grid-template-columns: repeat(22, 1fr); grid-template-rows: repeat(5, 1fr); gap: 5px; width: 1800px; height: 900px; padding: 40px 60px; }
+.tile {
+    background: linear-gradient(to bottom, #2E2E2E, #262626);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.5);
+    aspect-ratio: 1/1.5;
+}
+.tile::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: rgba(0,0,0,0.5);
+    transform: translateY(-50%);
+}
+.tile .char {
+    font-size: 42px;
+    font-weight: bold;
+    color: #F0E6D0;
+    z-index: 1;
+}
+.mode-badge {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    background: #6BA3BE;
+    color: #1A1A1A;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-family: -apple-system, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.app-name {
+    position: absolute;
+    bottom: 25px;
+    left: 40px;
+    color: #555;
+    font-family: -apple-system, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="mode-badge">INNOVATOR MODE</div>
+<div class="app-name">Lil Sauce</div>
+<div class="board" id="board"></div>
+<script>
+const message = [
+    '                      ',
+    '  STAY HUNGRY         ',
+    '  STAY FOOLISH        ',
+    '  - STEVE JOBS        ',
+    '                      '
+];
+const board = document.getElementById('board');
+for (let r = 0; r < 5; r++) {
+    for (let c = 0; c < 22; c++) {
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        const char = document.createElement('span');
+        char.className = 'char';
+        const ch = message[r][c] || ' ';
+        char.textContent = ch === ' ' ? '' : ch;
+        tile.appendChild(char);
+        board.appendChild(tile);
+    }
+}
+</script>
+</body>
+</html>
+
