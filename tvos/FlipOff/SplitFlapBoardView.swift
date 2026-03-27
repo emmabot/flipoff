@@ -7,7 +7,11 @@ class SplitFlapBoardView: UIView {
 
     static let gridCols = 22
     static let gridRows = 5
-    static let staggerDelay: TimeInterval = 0.03  // 30ms per column, matching web wave effect
+    static let staggerDelay: TimeInterval = 0.022  // 22ms per tile position, diagonal sweep
+    static let accentColors: [UIColor] = [
+        UIColor(hex: "#E8A840"), UIColor(hex: "#D4735E"), UIColor(hex: "#6BA3BE"),
+        UIColor(hex: "#7BA068"), UIColor(hex: "#9B8EC4")
+    ]
 
     // MARK: - Properties
 
@@ -16,6 +20,11 @@ class SplitFlapBoardView: UIView {
     private(set) var isTransitioning = false
     private var pendingMessage: [String]?
     private var pendingAnimations = 0
+    private var accentIndex = 0
+    private var leftTopIndicator: UIView?
+    private var leftBottomIndicator: UIView?
+    private var rightTopIndicator: UIView?
+    private var rightBottomIndicator: UIView?
 
     // MARK: - Init
 
@@ -30,9 +39,26 @@ class SplitFlapBoardView: UIView {
     }
 
     private var hasDisplayedFirstMessage = false
+    private var loadingScrambleTimer: Timer?
 
     private func setupBoard() {
-        backgroundColor = .black
+        backgroundColor = UIColor(red: 0x11/255.0, green: 0x11/255.0, blue: 0x11/255.0, alpha: 1)
+
+        // Accent indicator bars — two small squares in each top corner
+        func makeIndicator() -> UIView {
+            let v = UIView()
+            v.layer.cornerRadius = 3
+            v.clipsToBounds = true
+            return v
+        }
+        leftTopIndicator = makeIndicator()
+        leftBottomIndicator = makeIndicator()
+        rightTopIndicator = makeIndicator()
+        rightBottomIndicator = makeIndicator()
+        for v in [leftTopIndicator!, leftBottomIndicator!, rightTopIndicator!, rightBottomIndicator!] {
+            addSubview(v)
+        }
+        updateAccentColors()
 
         for r in 0..<Self.gridRows {
             var row: [SplitFlapTileView] = []
@@ -74,7 +100,16 @@ class SplitFlapBoardView: UIView {
         let offsetY = (bounds.height - totalGridH) / 2
         let offsetX = marginH
 
-        let fontSize = tileH * 0.55  // Adjusted for shorter tiles
+        let fontSize = tileH * 0.50  // Des-H3: reduced from 0.55
+
+        // Position accent indicator squares (14×14pt, 18pt from edges)
+        let indicatorSize: CGFloat = 14
+        let indicatorInset: CGFloat = 18
+        let indicatorGap: CGFloat = 4
+        leftTopIndicator?.frame = CGRect(x: indicatorInset, y: indicatorInset, width: indicatorSize, height: indicatorSize)
+        leftBottomIndicator?.frame = CGRect(x: indicatorInset, y: indicatorInset + indicatorSize + indicatorGap, width: indicatorSize, height: indicatorSize)
+        rightTopIndicator?.frame = CGRect(x: bounds.width - indicatorInset - indicatorSize, y: indicatorInset, width: indicatorSize, height: indicatorSize)
+        rightBottomIndicator?.frame = CGRect(x: bounds.width - indicatorInset - indicatorSize, y: indicatorInset + indicatorSize + indicatorGap, width: indicatorSize, height: indicatorSize)
 
         for r in 0..<Self.gridRows {
             for c in 0..<Self.gridCols {
@@ -132,8 +167,12 @@ class SplitFlapBoardView: UIView {
         isTransitioning = true
         pendingAnimations = changingTiles.count
 
+        // Cycle accent indicator colors on each message change
+        accentIndex += 1
+        updateAccentColors()
+
         for tile in changingTiles {
-            let delay = Double(tile.col) * Self.staggerDelay
+            let delay = Double(tile.row * Self.gridCols + tile.col) * Self.staggerDelay
             tiles[tile.row][tile.col].flip(to: tile.char, delay: delay) { [weak self] in
                 self?.tileAnimationCompleted()
             }
@@ -163,6 +202,50 @@ class SplitFlapBoardView: UIView {
         }
         currentGrid = grid
         isTransitioning = false
+    }
+
+    // MARK: - Loading Scramble
+
+    /// Start a continuous random character scramble on all tiles (used as loading state).
+    func startLoadingScramble() {
+        loadingScrambleTimer?.invalidate()
+        loadingScrambleTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            for r in 0..<Self.gridRows {
+                for c in 0..<Self.gridCols {
+                    let randChar = SplitFlapTileView.charset.randomElement() ?? "A"
+                    let color = SplitFlapTileView.scrambleColors[(r * Self.gridCols + c + Int.random(in: 0..<6)) % SplitFlapTileView.scrambleColors.count]
+                    let tile = self.tiles[r][c]
+                    tile.setChar(randChar, color: .white)
+                    tile.backgroundColor = color
+                }
+            }
+        }
+    }
+
+    /// Stop the loading scramble and transition into the first real message.
+    func stopLoadingScramble() {
+        loadingScrambleTimer?.invalidate()
+        loadingScrambleTimer = nil
+        // Reset tiles to blank so the first message display works cleanly
+        for r in 0..<Self.gridRows {
+            for c in 0..<Self.gridCols {
+                tiles[r][c].setChar(" ")
+            }
+        }
+    }
+
+    var isLoadingScrambleActive: Bool {
+        return loadingScrambleTimer != nil
+    }
+
+    // MARK: - Accent Indicators
+
+    private func updateAccentColors() {
+        let color = Self.accentColors[accentIndex % Self.accentColors.count]
+        for v in [leftTopIndicator, leftBottomIndicator, rightTopIndicator, rightBottomIndicator] {
+            v?.backgroundColor = color
+        }
     }
 
     // MARK: - Grid Formatting
