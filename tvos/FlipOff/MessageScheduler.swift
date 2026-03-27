@@ -16,6 +16,9 @@ class MessageScheduler {
     private var currentIndex = -1
     private var currentSlot: String = ""
 
+    private var messagesSinceRPS = 0
+    private var rpsInterval = Int.random(in: 3...5)
+
     private let autoInterval: TimeInterval
     private let riddleDelay: TimeInterval
 
@@ -44,12 +47,44 @@ class MessageScheduler {
 
     func showNext() {
         guard !activeMessages.isEmpty else { return }
+
+        messagesSinceRPS += 1
+
+        if messagesSinceRPS >= rpsInterval, let rps = MessageService.shared.rpsMessages.randomElement() {
+            messagesSinceRPS = 0
+            rpsInterval = Int.random(in: 3...5)
+
+            if case .riddle(let question, let answer) = rps {
+                cancelRiddleTimer()
+                autoTimer?.invalidate()
+                autoTimer = nil
+                delegate?.scheduler(self, showDelayed: question, answer: answer, delay: riddleDelay)
+                return
+            }
+        }
+
         currentIndex = (currentIndex + 1) % activeMessages.count
         displayCurrent()
     }
 
     func showPrev() {
         guard !activeMessages.isEmpty else { return }
+
+        messagesSinceRPS += 1
+
+        if messagesSinceRPS >= rpsInterval, let rps = MessageService.shared.rpsMessages.randomElement() {
+            messagesSinceRPS = 0
+            rpsInterval = Int.random(in: 3...5)
+
+            if case .riddle(let question, let answer) = rps {
+                cancelRiddleTimer()
+                autoTimer?.invalidate()
+                autoTimer = nil
+                delegate?.scheduler(self, showDelayed: question, answer: answer, delay: riddleDelay)
+                return
+            }
+        }
+
         currentIndex = (currentIndex - 1 + activeMessages.count) % activeMessages.count
         displayCurrent()
     }

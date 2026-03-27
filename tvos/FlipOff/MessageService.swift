@@ -25,6 +25,7 @@ struct MessageGroups: Decodable {
     let `default`: [MessageJSON]
     let morning: [MessageJSON]
     let bedtime: [MessageJSON]
+    let rps: [MessageJSON]?
 }
 
 struct MessageJSON: Decodable {
@@ -61,6 +62,7 @@ class MessageService {
     var defaultMessages: [Message] = []
     var morningMessages: [Message] = []
     var bedtimeMessages: [Message] = []
+    var rpsMessages: [Message] = []
 
     func fetch(completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: jsonURL) else {
@@ -81,7 +83,8 @@ class MessageService {
                 self.defaultMessages = decoded.messages.default.map(self.convert).shuffled()
                 self.morningMessages = decoded.messages.morning.map(self.convert)
                 self.bedtimeMessages = decoded.messages.bedtime.map(self.convert)
-                print("[FlipOff] Loaded \(self.defaultMessages.count) default, \(self.morningMessages.count) morning, \(self.bedtimeMessages.count) bedtime messages")
+                self.rpsMessages = (decoded.messages.rps ?? []).map(self.convert)
+                print("[FlipOff] Loaded \(self.defaultMessages.count) default, \(self.morningMessages.count) morning, \(self.bedtimeMessages.count) bedtime, \(self.rpsMessages.count) rps messages")
                 completion(true)
             } catch {
                 print("[FlipOff] JSON parse error: \(error)")
