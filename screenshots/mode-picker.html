@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mode Picker — Lil Sauce</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; }
+body {
+    background: #111111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.title {
+    font-size: 64px;
+    font-weight: 800;
+    color: #F0E6D0;
+    letter-spacing: 12px;
+    margin-bottom: 12px;
+}
+.subtitle {
+    font-size: 22px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 4px;
+    margin-bottom: 80px;
+    text-transform: lowercase;
+}
+.cards {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+}
+.card {
+    width: 380px;
+    height: 480px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: radial-gradient(ellipse 80% 70% at 50% 45%, #0d0d0d 0%, #060606 50%, #000000 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.3s;
+}
+.card.focused {
+    width: 420px;
+    height: 520px;
+    border: 1.5px solid rgba(255,255,255,0.12);
+}
+.card-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: 22px;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: -1;
+}
+.card.focused .card-glow {
+    opacity: 0.7;
+}
+/* Mini split-flap tiles inside each card */
+.mini-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 28px);
+    grid-template-rows: repeat(3, 42px);
+    gap: 3px;
+    margin-bottom: 36px;
+}
+.mini-tile {
+    background: #0a0a0a;
+    border-radius: 2px;
+    position: relative;
+}
+.mini-face {
+    position: absolute; inset: 1px;
+    background: linear-gradient(180deg, #2a2a2a 0%, #222222 48%, #1d1d1d 52%, #202020 100%);
+    border-radius: 1px;
+    display: flex; align-items: center; justify-content: center;
+}
+.mini-face::after {
+    content: '';
+    position: absolute; left: 0; right: 0; top: 50%; height: 1px;
+    background: rgba(0,0,0,0.55);
+    pointer-events: none;
+}
+.mini-face span {
+    font-size: 16px; font-weight: 700; color: #F0E6D0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.card-label {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    margin-bottom: 8px;
+}
+.card-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+<div class="title">LIL SAUCE</div>
+<div class="subtitle">pick your flavor</div>
+<div class="cards">
+    <div class="card" id="card-kids">
+        <div class="card-glow" style="box-shadow: 0 0 40px rgba(232,168,64,0.4);"></div>
+        <div class="mini-grid" id="mini-kids"></div>
+        <div class="card-label" style="color: #E8A840;">KIDS</div>
+        <div class="card-desc">jokes · riddles · facts</div>
+    </div>
+    <div class="card focused" id="card-innovator">
+        <div class="card-glow" style="box-shadow: 0 0 60px rgba(107,163,190,0.5);"></div>
+        <div class="mini-grid" id="mini-innovator"></div>
+        <div class="card-label" style="color: #6BA3BE;">INNOVATOR</div>
+        <div class="card-desc">quotes · tech · wisdom</div>
+    </div>
+    <div class="card" id="card-history">
+        <div class="card-glow" style="box-shadow: 0 0 40px rgba(155,142,196,0.4);"></div>
+        <div class="mini-grid" id="mini-history"></div>
+        <div class="card-label" style="color: #9B8EC4;">HISTORY</div>
+        <div class="card-desc">events · firsts · legends</div>
+    </div>
+</div>
+<script>
+const miniMessages = {
+    kids:      ['  KNOCK ', ' KNOCK! ', '  WHO?  '],
+    innovator: [' STAY   ', ' HUNGRY ', ' !!!!!! '],
+    history:   [' ONE    ', ' SMALL  ', ' STEP   ']
+};
+Object.keys(miniMessages).forEach(mode => {
+    const grid = document.getElementById('mini-' + mode);
+    const rows = miniMessages[mode];
+    rows.forEach(row => {
+        for (let c = 0; c < 8; c++) {
+            const tile = document.createElement('div');
+            tile.className = 'mini-tile';
+            const face = document.createElement('div');
+            face.className = 'mini-face';
+            const span = document.createElement('span');
+            const ch = row[c] || ' ';
+            span.textContent = ch === ' ' ? '' : ch;
+            face.appendChild(span);
+            tile.appendChild(face);
+            grid.appendChild(tile);
+        }
+    });
+});
+</script>
+</body>
+</html>
+

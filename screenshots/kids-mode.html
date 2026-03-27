@@ -2,65 +2,130 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Kids Mode</title>
+<title>Kids Mode — Lil Sauce</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { width: 1920px; height: 1080px; background: #1A1A1A; display: flex; align-items: center; justify-content: center; overflow: hidden; font-family: 'SF Mono', 'Menlo', 'Courier New', monospace; }
-.board { display: grid; grid-template-columns: repeat(22, 1fr); grid-template-rows: repeat(5, 1fr); gap: 5px; width: 1800px; height: 900px; padding: 40px 60px; }
-.tile {
-    background: linear-gradient(to bottom, #2E2E2E, #262626);
-    border-radius: 4px;
+html, body { width: 1920px; height: 1080px; overflow: hidden; }
+body {
+    background: #111111;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    border: 1px solid rgba(0,0,0,0.5);
-    aspect-ratio: 1/1.5;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-.tile::after {
+.board {
+    position: relative;
+    background: radial-gradient(ellipse 80% 70% at 50% 45%, #0d0d0d 0%, #060606 50%, #000000 100%);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        inset 0 -1px 0 rgba(255,255,255,0.01),
+        inset 1px 0 0 rgba(255,255,255,0.02),
+        inset -1px 0 0 rgba(255,255,255,0.02),
+        0 0 80px rgba(0,0,0,0.8);
+}
+.board::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1.5px;
-    background: rgba(0,0,0,0.5);
-    transform: translateY(-50%);
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(ellipse 85% 80% at 50% 50%, transparent 60%, rgba(0,0,0,0.4) 100%);
+    pointer-events: none;
+    z-index: 2;
 }
-.tile .char {
-    font-size: 42px;
-    font-weight: bold;
+.board::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 30%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.06) 70%, transparent 100%);
+    pointer-events: none;
+    z-index: 3;
+}
+.tile-grid {
+    display: grid;
+    grid-template-columns: repeat(22, 68px);
+    grid-template-rows: repeat(5, 102px);
+    gap: 4px;
+}
+.tile {
+    width: 68px;
+    height: 102px;
+    background: #0a0a0a;
+    border-radius: 3px;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 1px 2px rgba(0,0,0,0.6),
+        0 0 0 0.5px rgba(255,255,255,0.03);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tile-face {
+    position: absolute;
+    inset: 1px;
+    background: linear-gradient(180deg, #2a2a2a 0%, #222222 48%, #1d1d1d 52%, #202020 100%);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.06),
+        inset 0 2px 4px rgba(0,0,0,0.4),
+        inset 0 -1px 0 rgba(255,255,255,0.02);
+    overflow: hidden;
+}
+.tile-face::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    height: 1px;
+    background: rgba(0,0,0,0.55);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.03), 0 -1px 0 rgba(0,0,0,0.2);
+    pointer-events: none;
+}
+.tile-face span {
+    font-size: 36px;
+    font-weight: 700;
     color: #F0E6D0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     z-index: 1;
 }
 .mode-badge {
     position: absolute;
-    top: 30px;
-    right: 40px;
+    top: 24px; right: 32px;
     background: #E8A840;
-    color: #1A1A1A;
-    padding: 8px 20px;
-    border-radius: 8px;
-    font-family: -apple-system, sans-serif;
-    font-size: 20px;
+    color: #111;
+    padding: 8px 22px;
+    border-radius: 20px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(232,168,64,0.3);
 }
 .app-name {
     position: absolute;
-    bottom: 25px;
-    left: 40px;
-    color: #555;
-    font-family: -apple-system, sans-serif;
-    font-size: 18px;
+    bottom: 20px; left: 32px;
+    color: rgba(255,255,255,0.25);
+    font-size: 15px;
     font-weight: 500;
+    letter-spacing: 2px;
+    z-index: 10;
 }
 </style>
 </head>
 <body>
-<div class="mode-badge">KIDS MODE</div>
-<div class="app-name">Lil Sauce</div>
-<div class="board" id="board"></div>
+<div class="board">
+    <div class="mode-badge">KIDS MODE</div>
+    <div class="app-name">LIL SAUCE</div>
+    <div class="tile-grid" id="grid"></div>
+</div>
 <script>
 const message = [
     '  WHAT DO YOU CALL A  ',
@@ -69,17 +134,20 @@ const message = [
     '    A DINO-SNORE!     ',
     '                      '
 ];
-const board = document.getElementById('board');
+const grid = document.getElementById('grid');
 for (let r = 0; r < 5; r++) {
     for (let c = 0; c < 22; c++) {
         const tile = document.createElement('div');
         tile.className = 'tile';
-        const char = document.createElement('span');
-        char.className = 'char';
+        const face = document.createElement('div');
+        face.className = 'tile-face';
+        const span = document.createElement('span');
         const ch = message[r][c] || ' ';
-        char.textContent = ch === ' ' ? '' : ch;
-        tile.appendChild(char);
-        board.appendChild(tile);
+        span.textContent = ch === ' ' ? '\u00A0' : ch;
+        if (ch === ' ') span.style.opacity = '0';
+        face.appendChild(span);
+        tile.appendChild(face);
+        grid.appendChild(tile);
     }
 }
 </script>
