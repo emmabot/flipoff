@@ -1,7 +1,7 @@
 import UIKit
 
-/// A single split-flap character tile matching the web animation:
-/// rapid character scramble with cycling background colors, then a subtle perspective tilt to settle.
+/// A single split-flap character tile with real 3D flap rotation,
+/// time-slot-aware scramble colors, idle breathing, and physical depth.
 class SplitFlapTileView: UIView {
 
     // MARK: - Constants
@@ -10,22 +10,39 @@ class SplitFlapTileView: UIView {
         UIColor(hex: "#E8A840"), UIColor(hex: "#D4735E"), UIColor(hex: "#6BA3BE"),
         UIColor(hex: "#7BA068"), UIColor(hex: "#E8DCC8"), UIColor(hex: "#9B8EC4")
     ]
-    static let creamColor = UIColor(hex: "#F0E6D0")          // P1: matched web cream
+
+    // Des-D4: Time-slot-aware scramble palettes
+    static let morningScrambleColors: [UIColor] = [
+        UIColor(hex: "#E8A840"), UIColor(hex: "#F5C34B"), UIColor(hex: "#E8915A"),
+        UIColor(hex: "#F2D98E"), UIColor(hex: "#D4735E"), UIColor(hex: "#FFD6A0")
+    ]
+    static let bedtimeScrambleColors: [UIColor] = [
+        UIColor(hex: "#3B5998"), UIColor(hex: "#6B5B95"), UIColor(hex: "#4A6FA5"),
+        UIColor(hex: "#7B68AE"), UIColor(hex: "#5C6BC0"), UIColor(hex: "#9B8EC4")
+    ]
+
+    static let creamColor = UIColor(hex: "#F0E6D0")
     static let tileBgColor = UIColor(hex: "#2A2A2A")
     static let charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,-!?'/: "
 
+    /// Current time slot for scramble palette selection (set by MessageScheduler)
+    static var currentTimeSlot: String = "default"
+
     // MARK: - Layers & Subviews
 
-    private let bgGradient = CAGradientLayer()                // P2: subtle tile gradient
+    private let bgGradient = CAGradientLayer()
+    private let scrambleColorLayer = CALayer()                 // Des-M5: color sublayer
     private let characterLabel = UILabel()
     private let splitLine = UIView()
-    private let lightLine = UIView()                          // P2: light catch below split
-    private let shadowOverlay = CAGradientLayer()             // P1: inner shadow for depth
-    private let highlightLayer = CAGradientLayer()            // P2: metallic highlight
+    private let lightLine = UIView()
+    private let shadowOverlay = CAGradientLayer()
+    private let highlightLayer = CAGradientLayer()
 
     private(set) var currentChar: Character = " "
     private var isAnimating = false
     private var scrambleTimer: Timer?
+    private var lastScrambleChar: Character = " "              // Des-D3: avoid repeats
+    private var breathingAnimation: CABasicAnimation?          // Des-D1: idle breathing
 
     // MARK: - Init
 
@@ -67,12 +84,12 @@ class SplitFlapTileView: UIView {
         characterLabel.minimumScaleFactor = 0.5
         addSubview(characterLabel)
 
-        // 3. Split line (P2: thicker)
-        splitLine.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        // 3. Split line (Des-M3: refined to 1px at rgba(0,0,0,0.35))
+        splitLine.backgroundColor = UIColor.black.withAlphaComponent(0.35)
         addSubview(splitLine)
 
-        // 4. Light catch below split (P2)
-        lightLine.backgroundColor = UIColor(white: 1, alpha: 0.03)
+        // 4. Light catch below split (Des-M3: rgba(255,255,255,0.05))
+        lightLine.backgroundColor = UIColor(white: 1, alpha: 0.05)
         addSubview(lightLine)
 
         // 5. Inner shadow overlay (P1: depth)
@@ -105,9 +122,9 @@ class SplitFlapTileView: UIView {
         let inset: CGFloat = 2
         characterLabel.frame = CGRect(x: inset, y: 0, width: bounds.width - inset * 2, height: bounds.height)
 
-        // P2: thicker split line
-        splitLine.frame = CGRect(x: 0, y: bounds.height / 2 - 0.75, width: bounds.width, height: 1.5)
-        lightLine.frame = CGRect(x: 0, y: bounds.height / 2 + 0.75, width: bounds.width, height: 1)
+        // Des-M3: 1px split line
+        splitLine.frame = CGRect(x: 0, y: bounds.height / 2 - 0.5, width: bounds.width, height: 1)
+        lightLine.frame = CGRect(x: 0, y: bounds.height / 2 + 0.5, width: bounds.width, height: 1)
 
         // Resize CALayers
         bgGradient.frame = bounds
@@ -150,6 +167,9 @@ class SplitFlapTileView: UIView {
     }
 
     private func startScramble(target: Character, completion: (() -> Void)?) {
+        // Eng-M9: play click at scramble start rather than animation completion
+        FlipSoundEngine.shared.playClick()
+
         var scrambleCount = 0
         let maxScrambles = 10 + Int.random(in: 0..<4)
         let scrambleInterval: TimeInterval = 0.07
@@ -206,7 +226,6 @@ class SplitFlapTileView: UIView {
                     }, completion: { _ in
                         self.currentChar = target
                         self.isAnimating = false
-                        FlipSoundEngine.shared.playClick()
                         completion?()
                     })
                 })
