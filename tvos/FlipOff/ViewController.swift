@@ -536,9 +536,15 @@ class ViewController: UIViewController {
 
     private func startAutoRotation() {
         autoTimer?.invalidate()
+        // One-shot timer avoids race conditions with riddle timers.
         // ~8 seconds matches MESSAGE_INTERVAL + TOTAL_TRANSITION from web
-        autoTimer = Timer.scheduledTimer(withTimeInterval: Config.autoRotationInterval, repeats: true) { [weak self] _ in
-            self?.showNext()
+        autoTimer = Timer.scheduledTimer(withTimeInterval: Config.autoRotationInterval, repeats: false) { [weak self] _ in
+            guard let self = self else { return }
+            self.showNext()
+            // Only restart if no riddle is pending (riddle flow restarts auto-rotation itself)
+            if self.riddleTimer == nil {
+                self.startAutoRotation()
+            }
         }
     }
 
