@@ -27,10 +27,10 @@
   backface-visibility: hidden;
   background: linear-gradient(
     180deg,
-    #282420 0%,
-    #201e1a 48%,
-    #1c1a17 52%,
-    #1e1c19 100%
+    #2a2a2a 0%,
+    #222222 48%,
+    #1d1d1d 52%,
+    #202020 100%
   );
   border-radius: 2px;
   display: flex;

@@ -46,13 +46,16 @@ class SplitFlapBoardView: UIView {
     private var loadingScrambleTimer: Timer?
 
     private func setupBoard() {
-        backgroundColor = UIColor(red: 0x11/255.0, green: 0x11/255.0, blue: 0x11/255.0, alpha: 1)
+        backgroundColor = UIColor(red: 0x08/255.0, green: 0x08/255.0, blue: 0x08/255.0, alpha: 1)
 
-        // Accent indicator bars — two small squares in each top corner
+        // Accent indicator bars — LED-style dots in each top corner
         func makeIndicator() -> UIView {
             let v = UIView()
-            v.layer.cornerRadius = 3
-            v.clipsToBounds = true
+            v.layer.cornerRadius = 5  // Half of 10pt size = perfect circle
+            v.clipsToBounds = false
+            v.layer.shadowRadius = 6
+            v.layer.shadowOpacity = 0.8
+            v.layer.shadowOffset = .zero
             return v
         }
         leftTopIndicator = makeIndicator()
@@ -166,10 +169,10 @@ class SplitFlapBoardView: UIView {
 
         let fontSize = tileH * 0.50  // Des-H3: reduced from 0.55
 
-        // Position accent indicator squares (14×14pt, 18pt from edges)
-        let indicatorSize: CGFloat = 14
-        let indicatorInset: CGFloat = 18
-        let indicatorGap: CGFloat = 4
+        // Position accent indicator dots (10×10pt LED circles, 24pt from edges)
+        let indicatorSize: CGFloat = 10
+        let indicatorInset: CGFloat = 24
+        let indicatorGap: CGFloat = 8
         leftTopIndicator?.frame = CGRect(x: indicatorInset, y: indicatorInset, width: indicatorSize, height: indicatorSize)
         leftBottomIndicator?.frame = CGRect(x: indicatorInset, y: indicatorInset + indicatorSize + indicatorGap, width: indicatorSize, height: indicatorSize)
         rightTopIndicator?.frame = CGRect(x: bounds.width - indicatorInset - indicatorSize, y: indicatorInset, width: indicatorSize, height: indicatorSize)
@@ -311,8 +314,11 @@ class SplitFlapBoardView: UIView {
 
     private func updateAccentColors() {
         let color = Self.accentColors[accentIndex % Self.accentColors.count]
-        for v in [leftTopIndicator, leftBottomIndicator, rightTopIndicator, rightBottomIndicator] {
-            v?.backgroundColor = color
+        UIView.animate(withDuration: 0.8) {
+            for v in [self.leftTopIndicator, self.leftBottomIndicator, self.rightTopIndicator, self.rightBottomIndicator] {
+                v?.backgroundColor = color
+                v?.layer.shadowColor = color.cgColor
+            }
         }
     }
 
