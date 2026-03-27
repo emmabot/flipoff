@@ -16,7 +16,7 @@ export const SCRAMBLE_COLORS = [
 ];
 
 export const ACCENT_COLORS = [
-  '#D4A04A', '#C47060', '#6BA3BE',
+  '#E8A840', '#D4735E', '#6BA3BE',
   '#7BA068', '#9B8EC4'
 ];
 
@@ -1731,25 +1731,7 @@ const INNOVATOR_WOMEN_IN_STEM = [
   { type: 'fact', lines: ['', 'WOMEN IN STEM!', 'KATIE BOUMAN IMAGED', 'FIRST BLACK HOLE', ''] },
 ];
 
-// --- ANIMAL SOUNDS (15) ---
 
-export const ANIMAL_SOUNDS = [
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'MOOOOO?', '', ''], answer: ['', '', 'A COW!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'RIBBIT RIBBIT?', '', ''], answer: ['', '', 'A FROG!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'OINK OINK?', '', ''], answer: ['', '', 'A PIG!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'BAAAA BAAAA?', '', ''], answer: ['', '', 'A SHEEP!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'QUACK QUACK?', '', ''], answer: ['', '', 'A DUCK!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'NEIGH NEIGH?', '', ''], answer: ['', '', 'A HORSE!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'COCK-A-DOODLE-DOO?', '', ''], answer: ['', '', 'A ROOSTER!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'HISS HISS?', '', ''], answer: ['', '', 'A SNAKE!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'BUZZ BUZZ?', '', ''], answer: ['', '', 'A BEE!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'MEOW MEOW?', '', ''], answer: ['', '', 'A CAT!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'WOOF WOOF?', '', ''], answer: ['', '', 'A DOG!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'HOO HOO?', '', ''], answer: ['', '', 'AN OWL!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'ROAR?', '', ''], answer: ['', '', 'A LION!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'GOBBLE GOBBLE?', '', ''], answer: ['', '', 'A TURKEY!', '', ''] },
-  { type: 'riddle', question: ['', 'WHAT ANIMAL SAYS', 'CHIRP CHIRP?', '', ''], answer: ['', '', 'A BIRD!', '', ''] },
-];
 
 // --- HOW MANY LEGS (10) ---
 
@@ -1766,7 +1748,7 @@ export const HOW_MANY_LEGS = [
   { type: 'riddle', question: ['', 'HOW MANY LEGS DOES', 'A CRAB HAVE?', '', ''], answer: ['', '', '10!', '', ''] },
 ];
 
-export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES, ...GEOGRAPHY, ...SEASONAL_FACTS, ...UNSCRAMBLE, ...COLOR_MIXING, ...ANIMAL_SOUNDS, ...HOW_MANY_LEGS];
+export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES, ...GEOGRAPHY, ...SEASONAL_FACTS, ...UNSCRAMBLE, ...COLOR_MIXING, ...HOW_MANY_LEGS];
 
 // Innovator mode — combined from all innovator content arrays
 export const INNOVATOR_MESSAGES = [...INNOVATOR_TECH_HISTORY, ...INNOVATOR_QUOTES, ...INNOVATOR_SCIENCE, ...INNOVATOR_WISDOM, ...INNOVATOR_ON_THIS_DAY, ...INNOVATOR_RIDDLES, ...INNOVATOR_MOTIVATIONAL, ...INNOVATOR_WOMEN_IN_STEM];
