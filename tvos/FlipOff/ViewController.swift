@@ -15,6 +15,7 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
 
     private let modeKey = "selectedMode"
     private let soundMuteKey = "soundMuted"
+    private let hasLaunchedKey = "hasLaunchedBefore"  // Des-D2: first-launch tracking
 
     private var boardView: SplitFlapBoardView!
     private let statusLabel = UILabel()
@@ -52,8 +53,43 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
 
         if let savedMode = UserDefaults.standard.string(forKey: modeKey) {
             startBoard(mode: savedMode)
+        } else if !UserDefaults.standard.bool(forKey: hasLaunchedKey) {
+            // Des-D2: First-launch title animation
+            UserDefaults.standard.set(true, forKey: hasLaunchedKey)
+            showFirstLaunchAnimation()
         } else {
             showModePicker()
+        }
+    }
+
+    // MARK: - Des-D2: First-Launch Title Animation
+
+    /// On the very first launch, show a black screen, flip in "LIL SAUCE", pause, then dissolve to mode picker.
+    private func showFirstLaunchAnimation() {
+        // Create a temporary board for the title animation
+        let titleBoard = SplitFlapBoardView()
+        titleBoard.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(titleBoard)
+        NSLayoutConstraint.activate([
+            titleBoard.topAnchor.constraint(equalTo: view.topAnchor),
+            titleBoard.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            titleBoard.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            titleBoard.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+
+        // Wait a beat for layout, then flip in the title
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            titleBoard.display(message: ["", "", "LIL SAUCE", "", ""])
+
+            // Pause 3s (scramble ~2s + 0.5s extra viewing), then dissolve to mode picker
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) { [weak self] in
+                UIView.animate(withDuration: 0.6, animations: {
+                    titleBoard.alpha = 0
+                }, completion: { _ in
+                    titleBoard.removeFromSuperview()
+                    self?.showModePicker()
+                })
+            }
         }
     }
 

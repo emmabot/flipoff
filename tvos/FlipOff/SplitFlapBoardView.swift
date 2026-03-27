@@ -26,6 +26,10 @@ class SplitFlapBoardView: UIView {
     private var rightTopIndicator: UIView?
     private var rightBottomIndicator: UIView?
 
+    // Des-A2: Ambient light reflection
+    private let ambientGradient = CAGradientLayer()
+    private let cornerVignette = CAGradientLayer()
+
     // MARK: - Init
 
     override init(frame: CGRect) {
@@ -69,6 +73,9 @@ class SplitFlapBoardView: UIView {
                 // Tag first tile for debug logging
                 if r == 0 && c == 0 { tile.tag = 1 }
                 tile.setChar(" ")
+                // Des-A3: Set column info for spatial audio panning
+                tile.columnIndex = c
+                tile.totalColumns = Self.gridCols
                 addSubview(tile)
                 row.append(tile)
                 charRow.append(" ")
@@ -76,12 +83,69 @@ class SplitFlapBoardView: UIView {
             tiles.append(row)
             currentGrid.append(charRow)
         }
+
+        // Des-A2: Ambient light reflection — subtle diagonal gradient that shifts slowly
+        ambientGradient.colors = [
+            UIColor(white: 1, alpha: 0.02).cgColor,
+            UIColor.clear.cgColor,
+            UIColor.clear.cgColor
+        ]
+        ambientGradient.startPoint = CGPoint(x: 0, y: 0)
+        ambientGradient.endPoint = CGPoint(x: 1, y: 1)
+        ambientGradient.frame = bounds
+        layer.addSublayer(ambientGradient)
+        startAmbientAnimation()
+
+        // Des-A2: Corner vignette — slight darkening at edges
+        cornerVignette.type = .radial
+        cornerVignette.colors = [
+            UIColor.clear.cgColor,
+            UIColor(white: 0, alpha: 0.05).cgColor
+        ]
+        cornerVignette.startPoint = CGPoint(x: 0.5, y: 0.5)
+        cornerVignette.endPoint = CGPoint(x: 1, y: 1)
+        cornerVignette.frame = bounds
+        layer.addSublayer(cornerVignette)
+    }
+
+    /// Des-A2: Animate the ambient light gradient position slowly over 60 seconds
+    private func startAmbientAnimation() {
+        let anim = CABasicAnimation(keyPath: "startPoint")
+        anim.fromValue = CGPoint(x: 0, y: 0)
+        anim.toValue = CGPoint(x: 1, y: 0.3)
+        anim.duration = 60
+        anim.autoreverses = true
+        anim.repeatCount = .infinity
+        anim.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        ambientGradient.add(anim, forKey: "ambientShift")
+
+        let anim2 = CABasicAnimation(keyPath: "endPoint")
+        anim2.fromValue = CGPoint(x: 1, y: 1)
+        anim2.toValue = CGPoint(x: 0.3, y: 1)
+        anim2.duration = 60
+        anim2.autoreverses = true
+        anim2.repeatCount = .infinity
+        anim2.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        ambientGradient.add(anim2, forKey: "ambientShift2")
+    }
+
+    /// Start idle breathing animation on all tiles
+    func startTileBreathing() {
+        for row in tiles {
+            for tile in row {
+                tile.startBreathing()
+            }
+        }
     }
 
     // MARK: - Layout
 
     override func layoutSubviews() {
         super.layoutSubviews()
+
+        // Des-A2: Resize ambient layers
+        ambientGradient.frame = bounds
+        cornerVignette.frame = bounds
 
         let marginH: CGFloat = 60   // P1: increased from 20
         let marginV: CGFloat = 40   // P1: increased from 20
@@ -171,6 +235,9 @@ class SplitFlapBoardView: UIView {
         accentIndex += 1
         updateAccentColors()
 
+        // Des-H2: Play single transition audio clip synced with first tile scramble
+        FlipSoundEngine.shared.playTransition()
+
         for tile in changingTiles {
             let delay = Double(tile.row * Self.gridCols + tile.col) * Self.staggerDelay
             tiles[tile.row][tile.col].flip(to: tile.char, delay: delay) { [weak self] in
@@ -202,6 +269,7 @@ class SplitFlapBoardView: UIView {
         }
         currentGrid = grid
         isTransitioning = false
+        startTileBreathing() // Des-D1: begin breathing after first display
     }
 
     // MARK: - Loading Scramble

@@ -147,6 +147,9 @@ class MessageScheduler {
         guard slot != currentSlot else { return }
         currentSlot = slot
 
+        // Des-D4: Update tile scramble palette based on time slot
+        SplitFlapTileView.currentTimeSlot = slot
+
         let service = MessageService.shared
         switch slot {
         case "morning":

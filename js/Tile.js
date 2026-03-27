@@ -37,8 +37,11 @@ export class Tile {
     this.frontEl.style.backgroundColor = '';
   }
 
-  scrambleTo(targetChar, delay) {
-    if (targetChar === this.currentChar) return;
+  scrambleTo(targetChar, delay, onComplete) {
+    if (targetChar === this.currentChar) {
+      if (onComplete) onComplete();
+      return;
+    }
 
     // Cancel any in-progress animation
     if (this._scrambleTimer) {
@@ -94,6 +97,7 @@ export class Tile {
               this.el.classList.remove('scrambling');
               this.currentChar = targetChar;
               this.isAnimating = false;
+              if (onComplete) onComplete();
             }, FLIP_DURATION);
           }, FLIP_DURATION / 2);
         }

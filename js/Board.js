@@ -108,6 +108,17 @@ export class Board {
 
     // Determine which tiles need to change
     let hasChanges = false;
+    let pendingAnimations = 0;
+
+    const onTileComplete = () => {
+      pendingAnimations--;
+      if (pendingAnimations <= 0) {
+        this.isTransitioning = false;
+        if (this._pendingMessage) {
+          this.displayMessage(this._pendingMessage);
+        }
+      }
+    };
 
     for (let r = 0; r < this.rows; r++) {
       for (let c = 0; c < this.cols; c++) {
@@ -116,7 +127,8 @@ export class Board {
 
         if (newChar !== oldChar) {
           const delay = (r * this.cols + c) * STAGGER_DELAY;
-          this.tiles[r][c].scrambleTo(newChar, delay);
+          pendingAnimations++;
+          this.tiles[r][c].scrambleTo(newChar, delay, onTileComplete);
           hasChanges = true;
         }
       }
@@ -128,19 +140,18 @@ export class Board {
     }
 
     // Update accent bar colors
-    this.accentIndex++;
+    this.accentIndex = (this.accentIndex + 1) % ACCENT_COLORS.length;
     this._updateAccentColors();
 
     // Update grid state
     this.currentGrid = newGrid;
 
-    // Clear transitioning flag after animation completes
-    setTimeout(() => {
+    if (!hasChanges) {
       this.isTransitioning = false;
       if (this._pendingMessage) {
         this.displayMessage(this._pendingMessage);
       }
-    }, TOTAL_TRANSITION + 200);
+    }
   }
 
   _formatToGrid(lines) {

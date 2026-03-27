@@ -25,6 +25,13 @@ class SplitFlapTileView: UIView {
     static let tileBgColor = UIColor(hex: "#2A2A2A")
     static let charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,-!?'/: "
 
+    // Animation constants
+    private static let scrambleBaseCount = 10
+    private static let scrambleRandomRange = 0..<4
+    private static let scrambleStepInterval: TimeInterval = 0.07
+    private static let tiltPerspective: CGFloat = -1.0 / 400.0
+    private static let highlightFadeDuration: TimeInterval = 0.15
+
     /// Current time slot for scramble palette selection (set by MessageScheduler)
     static var currentTimeSlot: String = "default"
 
@@ -44,6 +51,10 @@ class SplitFlapTileView: UIView {
     private var lastScrambleChar: Character = " "              // Des-D3: avoid repeats
     private var breathingAnimation: CABasicAnimation?          // Des-D1: idle breathing
 
+    /// Des-A3: Column index for spatial audio panning (set by board view)
+    var columnIndex: Int = 0
+    var totalColumns: Int = 22
+
     // MARK: - Init
 
     override init(frame: CGRect) {
@@ -57,23 +68,38 @@ class SplitFlapTileView: UIView {
     }
 
     private func setupTile() {
-        backgroundColor = .clear                               // P2: gradient replaces flat bg
-        layer.cornerRadius = 4                                 // P1: increased from 2
-        clipsToBounds = true                                   // Clip gradient to rounded corners
+        backgroundColor = .clear
+        layer.cornerRadius = 3                                 // Des-M2: unified 3pt for tiles
+        clipsToBounds = false                                   // Des-D5: allow shadow to render
 
-        // P1: outer bezel border
+        // Outer bezel border
         layer.borderWidth = 1
         layer.borderColor = UIColor(white: 0, alpha: 0.5).cgColor
 
+        // Des-D5: Tile shadow for physical depth
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowRadius = 2
+        layer.shadowOffset = CGSize(width: 0, height: 1)
+        layer.shadowOpacity = 0.5
+
         // --- Layer ordering (back → front) ---
 
-        // 1. Background gradient (P2)
+        // 1. Background gradient
         bgGradient.colors = [
             UIColor(hex: "#2E2E2E").cgColor,
             UIColor(hex: "#262626").cgColor
         ]
+        bgGradient.cornerRadius = 3
+        bgGradient.masksToBounds = true
         bgGradient.frame = bounds
         layer.insertSublayer(bgGradient, at: 0)
+
+        // Des-M5: Color sublayer for scramble (between gradient and shadow overlay)
+        scrambleColorLayer.frame = bounds
+        scrambleColorLayer.cornerRadius = 3
+        scrambleColorLayer.masksToBounds = true
+        scrambleColorLayer.isHidden = true
+        layer.insertSublayer(scrambleColorLayer, above: bgGradient)
 
         // 2. Character label (subview)
         characterLabel.textAlignment = .center
@@ -84,7 +110,7 @@ class SplitFlapTileView: UIView {
         characterLabel.minimumScaleFactor = 0.5
         addSubview(characterLabel)
 
-        // 3. Split line (Des-M3: refined to 1px at rgba(0,0,0,0.35))
+        // 3. Split line (Des-M3: 1px at rgba(0,0,0,0.35))
         splitLine.backgroundColor = UIColor.black.withAlphaComponent(0.35)
         addSubview(splitLine)
 
@@ -92,7 +118,7 @@ class SplitFlapTileView: UIView {
         lightLine.backgroundColor = UIColor(white: 1, alpha: 0.05)
         addSubview(lightLine)
 
-        // 5. Inner shadow overlay (P1: depth)
+        // 5. Inner shadow overlay (depth)
         shadowOverlay.colors = [
             UIColor(white: 0, alpha: 0.3).cgColor,
             UIColor(white: 0, alpha: 0.0).cgColor,
@@ -100,10 +126,12 @@ class SplitFlapTileView: UIView {
             UIColor(white: 1, alpha: 0.02).cgColor
         ]
         shadowOverlay.locations = [0, 0.08, 0.92, 1.0]
+        shadowOverlay.cornerRadius = 3
+        shadowOverlay.masksToBounds = true
         shadowOverlay.frame = bounds
         layer.addSublayer(shadowOverlay)
 
-        // 6. Metallic highlight (P2: visible during scramble only)
+        // 6. Metallic highlight (visible during scramble only)
         highlightLayer.colors = [
             UIColor.clear.cgColor,
             UIColor(white: 1, alpha: 0.08).cgColor,
@@ -112,6 +140,8 @@ class SplitFlapTileView: UIView {
             UIColor.clear.cgColor
         ]
         highlightLayer.locations = [0, 0.45, 0.5, 0.55, 1.0]
+        highlightLayer.cornerRadius = 3
+        highlightLayer.masksToBounds = true
         highlightLayer.frame = bounds
         highlightLayer.opacity = 0
         layer.addSublayer(highlightLayer)
@@ -128,12 +158,39 @@ class SplitFlapTileView: UIView {
 
         // Resize CALayers
         bgGradient.frame = bounds
+        scrambleColorLayer.frame = bounds
         shadowOverlay.frame = bounds
         highlightLayer.frame = bounds
+
+        // Des-D5: shadow path for performance
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 3).cgPath
     }
 
     func configureFont(size: CGFloat) {
-        characterLabel.font = UIFont.monospacedSystemFont(ofSize: size, weight: .bold)
+        // Des-M7: SF Pro Bold — more authentic split-flap feel; grid handles alignment
+        characterLabel.font = UIFont.systemFont(ofSize: size, weight: .bold)
+    }
+
+    // MARK: - Des-D1: Idle Breathing Animation
+
+    /// Start a very subtle idle breathing animation on the shadow overlay.
+    func startBreathing() {
+        guard breathingAnimation == nil else { return }
+        let anim = CABasicAnimation(keyPath: "opacity")
+        anim.fromValue = 0.28
+        anim.toValue = 0.32
+        anim.duration = Double.random(in: 20...30) // Vary per tile for organic feel
+        anim.autoreverses = true
+        anim.repeatCount = .infinity
+        anim.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        shadowOverlay.add(anim, forKey: "breathing")
+        breathingAnimation = anim
+    }
+
+    /// Stop the idle breathing animation.
+    func stopBreathing() {
+        shadowOverlay.removeAnimation(forKey: "breathing")
+        breathingAnimation = nil
     }
 
     // MARK: - Character Display
@@ -142,13 +199,13 @@ class SplitFlapTileView: UIView {
         currentChar = char
         characterLabel.text = char == " " ? "" : String(char)
         characterLabel.textColor = color
-        // Restore gradient bg
+        // Restore gradient bg, hide scramble color
         bgGradient.isHidden = false
-        backgroundColor = .clear
+        scrambleColorLayer.isHidden = true
         layer.transform = CATransform3DIdentity
     }
 
-    // MARK: - Flip Animation (matches web's scrambleTo)
+    // MARK: - Flip Animation
 
     func flip(to character: Character, delay: TimeInterval = 0, completion: (() -> Void)? = nil) {
         guard character != currentChar else {
@@ -160,35 +217,47 @@ class SplitFlapTileView: UIView {
             return
         }
         isAnimating = true
+        stopBreathing()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
             self?.startScramble(target: character, completion: completion)
         }
     }
 
+    /// Returns the active scramble palette based on time slot (Des-D4)
+    private func activeScrambleColors() -> [UIColor] {
+        switch Self.currentTimeSlot {
+        case "morning": return Self.morningScrambleColors
+        case "bedtime": return Self.bedtimeScrambleColors
+        default: return Self.scrambleColors
+        }
+    }
+
     private func startScramble(target: Character, completion: (() -> Void)?) {
-        // Eng-M9: play click at scramble start rather than animation completion
-        FlipSoundEngine.shared.playClick()
-
         var scrambleCount = 0
-        let maxScrambles = 10 + Int.random(in: 0..<4)
-        let scrambleInterval: TimeInterval = 0.07
+        let maxScrambles = Self.scrambleBaseCount + Int.random(in: Self.scrambleRandomRange)
+        let palette = activeScrambleColors()
 
-        // P2: show metallic highlight during scramble
+        // Show metallic highlight during scramble
         highlightLayer.opacity = 1
 
         scrambleTimer?.invalidate()
-        scrambleTimer = Timer.scheduledTimer(withTimeInterval: scrambleInterval, repeats: true) { [weak self] timer in
+        scrambleTimer = Timer.scheduledTimer(withTimeInterval: Self.scrambleStepInterval, repeats: true) { [weak self] timer in
             guard let self = self else { timer.invalidate(); return }
 
-            let randChar = Self.charset.randomElement() ?? "A"
-            let color = Self.scrambleColors[scrambleCount % Self.scrambleColors.count]
+            // Des-D3: Pick random char that differs from the previous one
+            var randChar: Character
+            repeat {
+                randChar = Self.charset.randomElement() ?? "A"
+            } while randChar == self.lastScrambleChar && Self.charset.count > 1
+            self.lastScrambleChar = randChar
 
+            let color = palette[scrambleCount % palette.count]
             self.characterLabel.text = randChar == " " ? "" : String(randChar)
 
-            // P0: color the BACKGROUND, not the text
-            self.bgGradient.isHidden = true
-            self.backgroundColor = color
+            // Des-M5: Use scrambleColorLayer (preserves depth gradients)
+            self.scrambleColorLayer.backgroundColor = color.cgColor
+            self.scrambleColorLayer.isHidden = false
             self.characterLabel.textColor = .white
 
             scrambleCount += 1
@@ -196,41 +265,78 @@ class SplitFlapTileView: UIView {
             if scrambleCount >= maxScrambles {
                 timer.invalidate()
                 self.scrambleTimer = nil
-
-                // Set final character — reset colors
-                let text = target == " " ? "" : String(target)
-                self.characterLabel.text = text
-                self.characterLabel.textColor = Self.creamColor
-                self.bgGradient.isHidden = false
-                self.backgroundColor = .clear
-
-                // P2: fade out metallic highlight
-                let fadeOut = CABasicAnimation(keyPath: "opacity")
-                fadeOut.fromValue = 1
-                fadeOut.toValue = 0
-                fadeOut.duration = 0.15
-                self.highlightLayer.add(fadeOut, forKey: "fadeOut")
-                self.highlightLayer.opacity = 0
-
-                // Subtle perspective tilt to settle
-                let flipDuration: TimeInterval = 0.15
-                var perspective = CATransform3DIdentity
-                perspective.m34 = -1.0 / 400.0
-                let tilt = CATransform3DRotate(perspective, -.pi / 22.5, 1, 0, 0)
-
-                UIView.animate(withDuration: flipDuration / 2, delay: 0, options: .curveEaseIn, animations: {
-                    self.layer.transform = tilt
-                }, completion: { _ in
-                    UIView.animate(withDuration: flipDuration / 2, delay: 0, options: .curveEaseOut, animations: {
-                        self.layer.transform = CATransform3DIdentity
-                    }, completion: { _ in
-                        self.currentChar = target
-                        self.isAnimating = false
-                        completion?()
-                    })
-                })
+                self.perform3DFlap(to: target, completion: completion)
             }
         }
+    }
+
+    // MARK: - Des-A1: Real 3D Flap Rotation
+
+    /// Performs a real 3D flap rotation: top half rotates forward to reveal the new character.
+    private func perform3DFlap(to target: Character, completion: (() -> Void)?) {
+        let flapDuration: TimeInterval = 0.15 // 150ms per flap
+
+        // Set up perspective
+        var perspective = CATransform3DIdentity
+        perspective.m34 = Self.tiltPerspective
+
+        // Create top flap layer (upper half, looks like the scramble state)
+        let topFlap = CALayer()
+        topFlap.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height / 2)
+        topFlap.backgroundColor = scrambleColorLayer.isHidden
+            ? UIColor(hex: "#2E2E2E").cgColor
+            : scrambleColorLayer.backgroundColor
+        topFlap.cornerRadius = 4
+        topFlap.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        topFlap.masksToBounds = true
+        topFlap.anchorPoint = CGPoint(x: 0.5, y: 1.0) // Rotate around bottom edge
+        topFlap.position = CGPoint(x: bounds.midX, y: bounds.midY)
+        layer.addSublayer(topFlap)
+
+        // Set the final character underneath before flap animates
+        let text = target == " " ? "" : String(target)
+        characterLabel.text = text
+        characterLabel.textColor = Self.creamColor
+        scrambleColorLayer.isHidden = true
+        bgGradient.isHidden = false
+
+        // Animate top flap rotating forward (0° to -90°)
+        let rotation = CABasicAnimation(keyPath: "transform")
+        rotation.fromValue = NSValue(caTransform3D: perspective)
+        let rotated = CATransform3DRotate(perspective, -.pi / 2, 1, 0, 0)
+        rotation.toValue = NSValue(caTransform3D: rotated)
+        rotation.duration = flapDuration
+        rotation.timingFunction = CAMediaTimingFunction(name: .easeIn)
+        rotation.fillMode = .forwards
+        rotation.isRemovedOnCompletion = false
+
+        CATransaction.begin()
+        CATransaction.setCompletionBlock { [weak self] in
+            guard let self = self else { return }
+            topFlap.removeFromSuperlayer()
+
+            // Des-A1: Click sound at the moment the flap lands
+            // Des-A3: Pan based on column position (-1.0 left to 1.0 right)
+            let pan = self.totalColumns > 1
+                ? Float(self.columnIndex) / Float(self.totalColumns - 1) * 2.0 - 1.0
+                : 0
+            FlipSoundEngine.shared.playClick(panPosition: pan)
+
+            // Fade out metallic highlight
+            let fadeOut = CABasicAnimation(keyPath: "opacity")
+            fadeOut.fromValue = 1
+            fadeOut.toValue = 0
+            fadeOut.duration = Self.highlightFadeDuration
+            self.highlightLayer.add(fadeOut, forKey: "fadeOut")
+            self.highlightLayer.opacity = 0
+
+            self.currentChar = target
+            self.isAnimating = false
+            self.startBreathing()
+            completion?()
+        }
+        topFlap.add(rotation, forKey: "flapRotation")
+        CATransaction.commit()
     }
 }
 
