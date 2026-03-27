@@ -15,6 +15,7 @@ class SplitFlapBoardView: UIView {
     private var currentGrid: [[Character]] = []
     private(set) var isTransitioning = false
     private var pendingMessage: [String]?
+    private var pendingAnimations = 0
 
     // MARK: - Init
 
@@ -88,7 +89,6 @@ class SplitFlapBoardView: UIView {
             pendingMessage = message
             return
         }
-        isTransitioning = true
 
         let newGrid = formatToGrid(message)
 
@@ -99,34 +99,45 @@ class SplitFlapBoardView: UIView {
             return
         }
 
-        var hasChanges = false
+        // Collect tiles that actually need to change
+        var changingTiles: [(row: Int, col: Int, char: Character)] = []
 
         for r in 0..<Self.gridRows {
             for c in 0..<Self.gridCols {
                 let newChar = newGrid[r][c]
                 let oldChar = currentGrid[r][c]
                 if newChar != oldChar {
-                    let delay = Double(c) * Self.staggerDelay
-                    tiles[r][c].flip(to: newChar, delay: delay)
-                    hasChanges = true
+                    changingTiles.append((r, c, newChar))
                 }
             }
         }
 
         currentGrid = newGrid
 
-        // Clear transitioning flag after all animations complete
-        let totalDuration = Double(Self.gridCols) * Self.staggerDelay + 1.0  // stagger + scramble + settle
-        DispatchQueue.main.asyncAfter(deadline: .now() + totalDuration) { [weak self] in
-            guard let self = self else { return }
-            self.isTransitioning = false
-            if let pending = self.pendingMessage {
-                self.pendingMessage = nil
-                self.display(message: pending)
+        if changingTiles.isEmpty {
+            // No changes needed — check for pending
+            if let pending = pendingMessage {
+                pendingMessage = nil
+                display(message: pending)
             }
+            return
         }
 
-        if !hasChanges {
+        isTransitioning = true
+        pendingAnimations = changingTiles.count
+
+        for tile in changingTiles {
+            let delay = Double(tile.col) * Self.staggerDelay
+            tiles[tile.row][tile.col].flip(to: tile.char, delay: delay) { [weak self] in
+                self?.tileAnimationCompleted()
+            }
+        }
+    }
+
+    private func tileAnimationCompleted() {
+        pendingAnimations -= 1
+        if pendingAnimations <= 0 {
+            pendingAnimations = 0
             isTransitioning = false
             if let pending = pendingMessage {
                 pendingMessage = nil
