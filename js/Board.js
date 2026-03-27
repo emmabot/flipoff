@@ -17,16 +17,20 @@ export class Board {
     // Build board DOM
     this.boardEl = document.createElement('div');
     this.boardEl.className = 'board';
+    this.boardEl.setAttribute('role', 'region');
+    this.boardEl.setAttribute('aria-label', 'Split-flap display');
     this.boardEl.style.setProperty('--grid-cols', this.cols);
     this.boardEl.style.setProperty('--grid-rows', this.rows);
 
-    // Left accent squares (2 small stacked blocks)
+    // Left accent indicators
     this.leftBar = this._createAccentBar('accent-bar-left');
     this.boardEl.appendChild(this.leftBar);
 
-    // Tile grid
+    // Tile grid — presentational, screen readers use the live region instead
     this.gridEl = document.createElement('div');
     this.gridEl.className = 'tile-grid';
+    this.gridEl.setAttribute('role', 'img');
+    this.gridEl.setAttribute('aria-hidden', 'true');
 
     for (let r = 0; r < this.rows; r++) {
       const row = [];
@@ -44,32 +48,58 @@ export class Board {
 
     this.boardEl.appendChild(this.gridEl);
 
-    // Right accent squares
+    // Right accent indicators
     this.rightBar = this._createAccentBar('accent-bar-right');
     this.boardEl.appendChild(this.rightBar);
 
-    // Keyboard hint icon (bottom-left)
-    const hint = document.createElement('div');
+    // Keyboard hint — proper <button> with aria
+    const hint = document.createElement('button');
     hint.className = 'keyboard-hint';
-    hint.textContent = 'N';
-    hint.title = 'Keyboard shortcuts';
+    hint.textContent = '?';
+    hint.setAttribute('aria-label', 'Show keyboard shortcuts');
+    hint.setAttribute('aria-expanded', 'false');
+    hint.setAttribute('aria-controls', 'shortcuts-panel');
     hint.addEventListener('click', (e) => {
       e.stopPropagation();
-      const overlay = this.boardEl.querySelector('.shortcuts-overlay');
-      if (overlay) overlay.classList.toggle('visible');
+      const panel = this.boardEl.querySelector('.shortcuts-overlay');
+      if (panel) {
+        const isVisible = panel.classList.toggle('visible');
+        hint.setAttribute('aria-expanded', String(isVisible));
+        if (isVisible) {
+          panel.focus();
+        }
+      }
     });
     this.boardEl.appendChild(hint);
 
-    // Shortcuts overlay
+    // Shortcuts overlay — proper dialog semantics
     const overlay = document.createElement('div');
     overlay.className = 'shortcuts-overlay';
+    overlay.id = 'shortcuts-panel';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-label', 'Keyboard shortcuts');
+    overlay.setAttribute('tabindex', '-1');
     overlay.innerHTML = `
-      <div><span>Next message</span><kbd>Enter</kbd></div>
-      <div><span>Previous</span><kbd>\u2190</kbd></div>
-      <div><span>Fullscreen</span><kbd>F</kbd></div>
-      <div><span>Mute</span><kbd>M</kbd></div>
+      <dl class="shortcuts-list">
+        <div><dt>Next message</dt><dd><kbd>Enter</kbd></dd></div>
+        <div><dt>Previous</dt><dd><kbd>←</kbd></dd></div>
+        <div><dt>Fullscreen</dt><dd><kbd>F</kbd></dd></div>
+        <div><dt>Mute</dt><dd><kbd>M</kbd></dd></div>
+      </dl>
     `;
+    // Close on Escape from within the overlay
+    overlay.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        overlay.classList.remove('visible');
+        hint.setAttribute('aria-expanded', 'false');
+        hint.focus();
+      }
+    });
     this.boardEl.appendChild(overlay);
+
+    // Reference to the live announcement region
+    this._announceEl = document.getElementById('sr-announce');
 
     containerEl.appendChild(this.boardEl);
     this._updateAccentColors();
@@ -144,8 +174,9 @@ export class Board {
     this.accentIndex = (this.accentIndex + 1) % ACCENT_COLORS.length;
     this._updateAccentColors();
 
-    // Update grid state
+    // Update grid state and announce to screen readers
     this.currentGrid = newGrid;
+    this._announceMessage(lines);
 
     if (!hasChanges) {
       this.isTransitioning = false;
@@ -165,5 +196,14 @@ export class Board {
       grid.push(padded.split(''));
     }
     return grid;
+  }
+
+  /** Announce the current message text to screen readers via aria-live region */
+  _announceMessage(lines) {
+    if (!this._announceEl) return;
+    const text = lines.filter(l => l && l.trim()).join(' — ');
+    if (text) {
+      this._announceEl.textContent = text;
+    }
   }
 }

@@ -26,13 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Start message rotation
   rotator.start();
 
-  // Volume toggle button in header
+  // Volume toggle button
   const volumeBtn = document.getElementById('volume-btn');
   if (volumeBtn) {
     volumeBtn.addEventListener('click', async () => {
       await initAudio();
       const muted = soundEngine.toggleMute();
       volumeBtn.classList.toggle('muted', muted);
+      volumeBtn.setAttribute('aria-pressed', String(muted));
+      volumeBtn.setAttribute('aria-label', muted ? 'Sound off' : 'Sound on');
     });
   }
 
