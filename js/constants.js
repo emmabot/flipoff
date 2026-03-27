@@ -751,7 +751,7 @@ const HISTORY_EVENTS = [
   { type: 'fact', lines: ['HISTORY FACT!', 'THE EU WAS FORMED', 'IN 1993 TO UNITE', 'EUROPE', ''] },
   { type: 'fact', lines: ['HISTORY FACT!', 'THE KOREAN WAR', 'LASTED FROM', '1950 TO 1953', ''] },
   { type: 'fact', lines: ['HISTORY FACT!', 'THE VIETNAM WAR', 'ENDED IN 1975', '', ''] },
-  { type: 'fact', lines: ['HISTORY FACT!', 'THE RWANDAN', 'GENOCIDE WAS IN', '1994', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'THE RWANDAN', 'TRAGEDY WAS IN', '1994', ''] },
 ];
 
 const HISTORY_QUOTES = [
