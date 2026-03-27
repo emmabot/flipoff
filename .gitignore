@@ -4,3 +4,6 @@
 *.xcuserstate
 xcuserdata/
 tvos/FlipOff.xcodeproj/project.xcworkspace/
+
+# Xcode build artifacts
+tvos/build/
