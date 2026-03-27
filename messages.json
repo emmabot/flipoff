@@ -4370,57 +4370,6 @@
           "",
           ""
         ]
-      },
-      {
-        "type": "riddle",
-        "question": [
-          "",
-          "ROCK PAPER SCISSORS",
-          "SHOOT!",
-          "",
-          ""
-        ],
-        "answer": [
-          "",
-          "",
-          "ROCK!",
-          "",
-          ""
-        ]
-      },
-      {
-        "type": "riddle",
-        "question": [
-          "",
-          "ROCK PAPER SCISSORS",
-          "SHOOT!",
-          "",
-          ""
-        ],
-        "answer": [
-          "",
-          "",
-          "PAPER!",
-          "",
-          ""
-        ]
-      },
-      {
-        "type": "riddle",
-        "question": [
-          "",
-          "ROCK PAPER SCISSORS",
-          "SHOOT!",
-          "",
-          ""
-        ],
-        "answer": [
-          "",
-          "",
-          "SCISSORS!",
-          "",
-          ""
-        ]
       }
     ],
     "morning": [
@@ -4703,6 +4652,59 @@
           "AND SO TO BED",
           "",
           "- SAMUEL PEPYS",
+          ""
+        ]
+      }
+    ],
+    "rps": [
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "ROCK PAPER SCISSORS",
+          "SHOOT!",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "ROCK!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "ROCK PAPER SCISSORS",
+          "SHOOT!",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "PAPER!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "ROCK PAPER SCISSORS",
+          "SHOOT!",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "SCISSORS!",
+          "",
           ""
         ]
       }
