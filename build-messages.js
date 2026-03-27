@@ -4,9 +4,10 @@
 // Run: node build-messages.js
 
 import {
-  DEFAULT_MESSAGES, MORNING_MESSAGES, BEDTIME_MESSAGES,
+  DEFAULT_MESSAGES, MORNING_MESSAGES, BEDTIME_MESSAGES, ROCK_PAPER_SCISSORS,
+  INNOVATOR_MESSAGES, HISTORY_MESSAGES,
   GRID_COLS, GRID_ROWS, RIDDLE_DELAY, MESSAGE_INTERVAL,
-  SCRAMBLE_COLORS, WEATHER_CONFIG, ROCK_PAPER_SCISSORS
+  SCRAMBLE_COLORS, WEATHER_CONFIG
 } from './js/constants.js';
 
 import { writeFileSync } from 'fs';
@@ -37,14 +38,23 @@ const output = {
       codes: WEATHER_CONFIG.weatherCodes
     }
   },
-  messages: {
-    default: DEFAULT_MESSAGES.map(normalizeMessage),
-    morning: MORNING_MESSAGES.map(normalizeMessage),
-    bedtime: BEDTIME_MESSAGES.map(normalizeMessage),
-    rps: ROCK_PAPER_SCISSORS.map(normalizeMessage)
+  modes: {
+    kids: {
+      default: DEFAULT_MESSAGES.map(normalizeMessage),
+      morning: MORNING_MESSAGES.map(normalizeMessage),
+      bedtime: BEDTIME_MESSAGES.map(normalizeMessage),
+      rps: ROCK_PAPER_SCISSORS.map(normalizeMessage)
+    },
+    innovator: {
+      default: INNOVATOR_MESSAGES.map(normalizeMessage)
+    },
+    history: {
+      default: HISTORY_MESSAGES.map(normalizeMessage)
+    }
   }
 };
 
 writeFileSync('messages.json', JSON.stringify(output, null, 2));
-console.log(`Generated messages.json with ${output.messages.default.length} default, ${output.messages.morning.length} morning, ${output.messages.bedtime.length} bedtime messages`);
+const kids = output.modes.kids;
+console.log(`Generated messages.json with modes: kids (${kids.default.length} default, ${kids.morning.length} morning, ${kids.bedtime.length} bedtime, ${kids.rps.length} rps), innovator (${output.modes.innovator.default.length}), history (${output.modes.history.default.length})`);
 

@@ -4,7 +4,7 @@ import Foundation
 
 struct MessageData: Decodable {
     let config: MessageConfig
-    let messages: MessageGroups
+    let modes: [String: MessageMode]
 }
 
 struct MessageConfig: Decodable {
@@ -21,10 +21,10 @@ struct WeatherConfig: Decodable {
     let codes: [String: String]
 }
 
-struct MessageGroups: Decodable {
+struct MessageMode: Decodable {
     let `default`: [MessageJSON]
-    let morning: [MessageJSON]
-    let bedtime: [MessageJSON]
+    let morning: [MessageJSON]?
+    let bedtime: [MessageJSON]?
     let rps: [MessageJSON]?
 }
 
@@ -64,7 +64,7 @@ class MessageService {
     var bedtimeMessages: [Message] = []
     var rpsMessages: [Message] = []
 
-    func fetch(completion: @escaping (Bool) -> Void) {
+    func fetch(mode: String = "kids", completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: jsonURL) else {
             completion(false)
             return
@@ -80,11 +80,16 @@ class MessageService {
             do {
                 let decoded = try JSONDecoder().decode(MessageData.self, from: data)
                 self.config = decoded.config
-                self.defaultMessages = decoded.messages.default.map(self.convert).shuffled()
-                self.morningMessages = decoded.messages.morning.map(self.convert)
-                self.bedtimeMessages = decoded.messages.bedtime.map(self.convert)
-                self.rpsMessages = (decoded.messages.rps ?? []).map(self.convert)
-                print("[FlipOff] Loaded \(self.defaultMessages.count) default, \(self.morningMessages.count) morning, \(self.bedtimeMessages.count) bedtime, \(self.rpsMessages.count) rps messages")
+                guard let modeData = decoded.modes[mode] else {
+                    print("[FlipOff] Mode '\(mode)' not found in JSON")
+                    completion(false)
+                    return
+                }
+                self.defaultMessages = modeData.default.map(self.convert).shuffled()
+                self.morningMessages = (modeData.morning ?? []).map(self.convert)
+                self.bedtimeMessages = (modeData.bedtime ?? []).map(self.convert)
+                self.rpsMessages = (modeData.rps ?? []).map(self.convert)
+                print("[FlipOff] Loaded mode '\(mode)': \(self.defaultMessages.count) default, \(self.morningMessages.count) morning, \(self.bedtimeMessages.count) bedtime, \(self.rpsMessages.count) rps messages")
                 completion(true)
             } catch {
                 print("[FlipOff] JSON parse error: \(error)")
