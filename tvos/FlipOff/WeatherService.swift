@@ -21,7 +21,7 @@ class WeatherService {
                   let current = json["current"] as? [String: Any],
                   let temp = current["temperature_2m"] as? Double,
                   let code = current["weather_code"] as? Int else {
-                print("[FlipOff] Weather fetch failed: \(error?.localizedDescription ?? "parse error")")
+                print("[LilSauce] Weather fetch failed: \(error?.localizedDescription ?? "parse error")")
                 completion(nil)
                 return
             }
@@ -29,7 +29,7 @@ class WeatherService {
             let label = config.codes[String(code)] ?? "CLEAR"
             let tempStr = "\(Int(temp.rounded()))°F  \(label)"
             let message = Message.plain(["", "GOOD MORNING", tempStr, "", ""])
-            print("[FlipOff] Weather: \(tempStr)")
+            print("[LilSauce] Weather: \(tempStr)")
             completion(message)
         }.resume()
     }

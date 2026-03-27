@@ -65,7 +65,7 @@ class MessageScheduler {
     private func checkTimeSlotOnResume() {
         let slot = currentTimeSlot()
         if slot != currentSlot {
-            print("[FlipOff] Time slot changed on resume: \(currentSlot) → \(slot)")
+            print("[LilSauce] Time slot changed on resume: \(currentSlot) → \(slot)")
             updateActiveMessages()
         }
     }
@@ -107,7 +107,7 @@ class MessageScheduler {
 
     private func displayCurrent() {
         guard activeMessages.indices.contains(currentIndex) else {
-            print("[FlipOff] displayCurrent: currentIndex \(currentIndex) out of bounds (count: \(activeMessages.count))")
+            print("[LilSauce] displayCurrent: currentIndex \(currentIndex) out of bounds (count: \(activeMessages.count))")
             return
         }
         let msg = activeMessages[currentIndex]
@@ -156,7 +156,7 @@ class MessageScheduler {
         let service = MessageService.shared
         switch slot {
         case "morning":
-            activeMessages = service.morningMessages
+            activeMessages = service.morningMessages.isEmpty ? service.defaultMessages.shuffled() : service.morningMessages
             if let config = service.config {
                 WeatherService.shared.fetchWeather(config: config.weather) { [weak self] weatherMsg in
                     DispatchQueue.main.async {
@@ -172,12 +172,12 @@ class MessageScheduler {
                 }
             }
         case "bedtime":
-            activeMessages = service.bedtimeMessages
+            activeMessages = service.bedtimeMessages.isEmpty ? service.defaultMessages.shuffled() : service.bedtimeMessages
         default:
             activeMessages = service.defaultMessages
         }
 
-        print("[FlipOff] Active slot: \(slot), messages: \(activeMessages.count)")
+        print("[LilSauce] Active slot: \(slot), messages: \(activeMessages.count)")
         currentIndex = -1
         showNext()
     }

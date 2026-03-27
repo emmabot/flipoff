@@ -93,7 +93,7 @@ class MessageService {
 
         session.dataTask(with: url) { [weak self] data, _, error in
             guard let self = self, let data = data, error == nil else {
-                print("[FlipOff] JSON fetch failed: \(error?.localizedDescription ?? "unknown"), trying fallback")
+                print("[LilSauce] JSON fetch failed: \(error?.localizedDescription ?? "unknown"), trying fallback")
                 self?.loadFallback(mode: mode, completion: completion)
                 return
             }
@@ -101,7 +101,7 @@ class MessageService {
             if self.parse(data: data, mode: mode) {
                 // Cache successful network response to disk
                 UserDefaults.standard.set(data, forKey: Self.cachedJSONKey)
-                print("[FlipOff] Cached messages.json to disk")
+                print("[LilSauce] Cached messages.json to disk")
                 completion(true)
             } else {
                 self.loadFallback(mode: mode, completion: completion)
@@ -116,7 +116,7 @@ class MessageService {
         // 1. Try disk-cached version
         if let cachedData = UserDefaults.standard.data(forKey: Self.cachedJSONKey) {
             if parse(data: cachedData, mode: mode) {
-                print("[FlipOff] Loaded messages from disk cache")
+                print("[LilSauce] Loaded messages from disk cache")
                 completion(true)
                 return
             }
@@ -126,13 +126,13 @@ class MessageService {
         if let bundlePath = Bundle.main.path(forResource: "messages", ofType: "json"),
            let bundleData = try? Data(contentsOf: URL(fileURLWithPath: bundlePath)) {
             if parse(data: bundleData, mode: mode) {
-                print("[FlipOff] Loaded messages from app bundle fallback")
+                print("[LilSauce] Loaded messages from app bundle fallback")
                 completion(true)
                 return
             }
         }
 
-        print("[FlipOff] All message sources failed")
+        print("[LilSauce] All message sources failed")
         completion(false)
     }
 
@@ -142,17 +142,17 @@ class MessageService {
             let decoded = try JSONDecoder().decode(MessageData.self, from: data)
             self.config = decoded.config
             guard let modeData = decoded.modes[mode] else {
-                print("[FlipOff] Mode '\(mode)' not found in JSON")
+                print("[LilSauce] Mode '\(mode)' not found in JSON")
                 return false
             }
             self.defaultMessages = modeData.default.map(self.convert).shuffled()
             self.morningMessages = (modeData.morning ?? []).map(self.convert)
             self.bedtimeMessages = (modeData.bedtime ?? []).map(self.convert)
             self.rpsMessages = (modeData.rps ?? []).map(self.convert)
-            print("[FlipOff] Loaded mode '\(mode)': \(self.defaultMessages.count) default, \(self.morningMessages.count) morning, \(self.bedtimeMessages.count) bedtime, \(self.rpsMessages.count) rps messages")
+            print("[LilSauce] Loaded mode '\(mode)': \(self.defaultMessages.count) default, \(self.morningMessages.count) morning, \(self.bedtimeMessages.count) bedtime, \(self.rpsMessages.count) rps messages")
             return true
         } catch {
-            print("[FlipOff] JSON parse error: \(error)")
+            print("[LilSauce] JSON parse error: \(error)")
             return false
         }
     }

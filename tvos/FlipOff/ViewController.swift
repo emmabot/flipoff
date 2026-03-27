@@ -161,7 +161,7 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
                 } else {
                     self.fetchRetryCount += 1
                     if self.fetchRetryCount < Self.maxFetchRetries {
-                        print("[FlipOff] Fetch failed, retrying in \(Self.fetchRetryDelay)s (attempt \(self.fetchRetryCount)/\(Self.maxFetchRetries))")
+                        print("[LilSauce] Fetch failed, retrying in \(Self.fetchRetryDelay)s (attempt \(self.fetchRetryCount)/\(Self.maxFetchRetries))")
                         DispatchQueue.main.asyncAfter(deadline: .now() + Self.fetchRetryDelay) { [weak self] in
                             guard let self = self else { return }
                             self.fetchMessages(mode: mode)
@@ -171,7 +171,7 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
                         self.statusLabel.text = "Could not load messages"
                         self.view.addSubview(self.statusLabel)
                         self.setupStatusLabelConstraints()
-                        print("[FlipOff] Failed to fetch messages after \(Self.maxFetchRetries) retries")
+                        print("[LilSauce] Failed to fetch messages after \(Self.maxFetchRetries) retries")
                     }
                 }
             }
@@ -248,7 +248,7 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
     @objc private func handlePlayPause() {
         let muted = FlipSoundEngine.shared.toggleMute()
         UserDefaults.standard.set(muted, forKey: soundMuteKey)
-        print("[FlipOff] Sound \(muted ? "OFF" : "ON")")
+        print("[LilSauce] Sound \(muted ? "OFF" : "ON")")
     }
 
     @objc private func handleMenu() {
@@ -448,7 +448,7 @@ class ViewController: UIViewController, MessageSchedulerDelegate, ModePickerDele
         let muted = FlipSoundEngine.shared.toggleMute()
         UserDefaults.standard.set(muted, forKey: soundMuteKey)
         soundButton?.setTitle("SOUND: \(muted ? "OFF" : "ON")", for: .normal)
-        print("[FlipOff] Sound \(muted ? "OFF" : "ON")")
+        print("[LilSauce] Sound \(muted ? "OFF" : "ON")")
     }
 
     // Des-M4: 0.3s fade animation on dismiss
