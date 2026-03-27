@@ -26,11 +26,19 @@ button {
   font: inherit;
   cursor: pointer;
   border: none;
-  outline: none;
+}
+
+button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
 }
 
 input {
   font: inherit;
   border: none;
-  outline: none;
+}
+
+input:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
 }

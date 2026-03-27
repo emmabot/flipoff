@@ -92,6 +92,7 @@ export class Board {
     const segments = this.boardEl.querySelectorAll('.accent-segment');
     segments.forEach(seg => {
       seg.style.backgroundColor = color;
+      seg.style.color = color;
     });
   }
 
