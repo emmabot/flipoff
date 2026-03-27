@@ -1,7 +1,7 @@
 import UIKit
 
 /// A single split-flap character tile matching the web animation:
-/// rapid character scramble with cycling text colors, then a subtle perspective tilt to settle.
+/// rapid character scramble with cycling background colors, then a subtle perspective tilt to settle.
 class SplitFlapTileView: UIView {
 
     // MARK: - Constants
@@ -10,14 +10,18 @@ class SplitFlapTileView: UIView {
         UIColor(hex: "#E8A840"), UIColor(hex: "#D4735E"), UIColor(hex: "#6BA3BE"),
         UIColor(hex: "#7BA068"), UIColor(hex: "#E8DCC8"), UIColor(hex: "#9B8EC4")
     ]
-    static let creamColor = UIColor(hex: "#E8DCC8")
+    static let creamColor = UIColor(hex: "#F0E6D0")          // P1: matched web cream
     static let tileBgColor = UIColor(hex: "#2A2A2A")
     static let charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,-!?'/: "
 
-    // MARK: - Subviews
+    // MARK: - Layers & Subviews
 
+    private let bgGradient = CAGradientLayer()                // P2: subtle tile gradient
     private let characterLabel = UILabel()
-    private let splitLine = UIView()  // Cosmetic split line for the look
+    private let splitLine = UIView()
+    private let lightLine = UIView()                          // P2: light catch below split
+    private let shadowOverlay = CAGradientLayer()             // P1: inner shadow for depth
+    private let highlightLayer = CAGradientLayer()            // P2: metallic highlight
 
     private(set) var currentChar: Character = " "
     private var isAnimating = false
@@ -36,10 +40,25 @@ class SplitFlapTileView: UIView {
     }
 
     private func setupTile() {
-        backgroundColor = Self.tileBgColor
-        layer.cornerRadius = 2
-        clipsToBounds = false  // Allow slight 3D perspective overflow
+        backgroundColor = .clear                               // P2: gradient replaces flat bg
+        layer.cornerRadius = 4                                 // P1: increased from 2
+        clipsToBounds = true                                   // Clip gradient to rounded corners
 
+        // P1: outer bezel border
+        layer.borderWidth = 1
+        layer.borderColor = UIColor(white: 0, alpha: 0.5).cgColor
+
+        // --- Layer ordering (back → front) ---
+
+        // 1. Background gradient (P2)
+        bgGradient.colors = [
+            UIColor(hex: "#2E2E2E").cgColor,
+            UIColor(hex: "#262626").cgColor
+        ]
+        bgGradient.frame = bounds
+        layer.insertSublayer(bgGradient, at: 0)
+
+        // 2. Character label (subview)
         characterLabel.textAlignment = .center
         characterLabel.textColor = Self.creamColor
         characterLabel.adjustsFontSizeToFitWidth = true
@@ -48,16 +67,52 @@ class SplitFlapTileView: UIView {
         characterLabel.minimumScaleFactor = 0.5
         addSubview(characterLabel)
 
-        // Cosmetic split line across the middle
-        splitLine.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        // 3. Split line (P2: thicker)
+        splitLine.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         addSubview(splitLine)
+
+        // 4. Light catch below split (P2)
+        lightLine.backgroundColor = UIColor(white: 1, alpha: 0.03)
+        addSubview(lightLine)
+
+        // 5. Inner shadow overlay (P1: depth)
+        shadowOverlay.colors = [
+            UIColor(white: 0, alpha: 0.3).cgColor,
+            UIColor(white: 0, alpha: 0.0).cgColor,
+            UIColor(white: 0, alpha: 0.0).cgColor,
+            UIColor(white: 1, alpha: 0.02).cgColor
+        ]
+        shadowOverlay.locations = [0, 0.08, 0.92, 1.0]
+        shadowOverlay.frame = bounds
+        layer.addSublayer(shadowOverlay)
+
+        // 6. Metallic highlight (P2: visible during scramble only)
+        highlightLayer.colors = [
+            UIColor.clear.cgColor,
+            UIColor(white: 1, alpha: 0.08).cgColor,
+            UIColor(white: 1, alpha: 0.15).cgColor,
+            UIColor(white: 1, alpha: 0.08).cgColor,
+            UIColor.clear.cgColor
+        ]
+        highlightLayer.locations = [0, 0.45, 0.5, 0.55, 1.0]
+        highlightLayer.frame = bounds
+        highlightLayer.opacity = 0
+        layer.addSublayer(highlightLayer)
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
         let inset: CGFloat = 2
         characterLabel.frame = CGRect(x: inset, y: 0, width: bounds.width - inset * 2, height: bounds.height)
-        splitLine.frame = CGRect(x: 0, y: bounds.height / 2 - 0.5, width: bounds.width, height: 1)
+
+        // P2: thicker split line
+        splitLine.frame = CGRect(x: 0, y: bounds.height / 2 - 0.75, width: bounds.width, height: 1.5)
+        lightLine.frame = CGRect(x: 0, y: bounds.height / 2 + 0.75, width: bounds.width, height: 1)
+
+        // Resize CALayers
+        bgGradient.frame = bounds
+        shadowOverlay.frame = bounds
+        highlightLayer.frame = bounds
     }
 
     func configureFont(size: CGFloat) {
@@ -70,7 +125,9 @@ class SplitFlapTileView: UIView {
         currentChar = char
         characterLabel.text = char == " " ? "" : String(char)
         characterLabel.textColor = color
-        backgroundColor = Self.tileBgColor
+        // Restore gradient bg
+        bgGradient.isHidden = false
+        backgroundColor = .clear
         layer.transform = CATransform3DIdentity
     }
 
@@ -94,20 +151,25 @@ class SplitFlapTileView: UIView {
 
     private func startScramble(target: Character, completion: (() -> Void)?) {
         var scrambleCount = 0
-        let maxScrambles = 10 + Int.random(in: 0..<4)  // 10-13 steps, matching web's 10-14
-        let scrambleInterval: TimeInterval = 0.07  // 70ms, matching web exactly
+        let maxScrambles = 10 + Int.random(in: 0..<4)
+        let scrambleInterval: TimeInterval = 0.07
+
+        // P2: show metallic highlight during scramble
+        highlightLayer.opacity = 1
 
         scrambleTimer?.invalidate()
         scrambleTimer = Timer.scheduledTimer(withTimeInterval: scrambleInterval, repeats: true) { [weak self] timer in
             guard let self = self else { timer.invalidate(); return }
 
-            // Random character with cycling color
             let randChar = Self.charset.randomElement() ?? "A"
             let color = Self.scrambleColors[scrambleCount % Self.scrambleColors.count]
 
             self.characterLabel.text = randChar == " " ? "" : String(randChar)
-            self.characterLabel.textColor = color
-            self.backgroundColor = Self.tileBgColor  // Keep bg dark, color is on text
+
+            // P0: color the BACKGROUND, not the text
+            self.bgGradient.isHidden = true
+            self.backgroundColor = color
+            self.characterLabel.textColor = .white
 
             scrambleCount += 1
 
@@ -115,16 +177,26 @@ class SplitFlapTileView: UIView {
                 timer.invalidate()
                 self.scrambleTimer = nil
 
-                // Set final character
+                // Set final character — reset colors
                 let text = target == " " ? "" : String(target)
                 self.characterLabel.text = text
                 self.characterLabel.textColor = Self.creamColor
+                self.bgGradient.isHidden = false
+                self.backgroundColor = .clear
 
-                // Subtle perspective tilt to settle (matching web's rotateX(-8deg))
-                let flipDuration: TimeInterval = 0.15  // 150ms, matching web's FLIP_DURATION
+                // P2: fade out metallic highlight
+                let fadeOut = CABasicAnimation(keyPath: "opacity")
+                fadeOut.fromValue = 1
+                fadeOut.toValue = 0
+                fadeOut.duration = 0.15
+                self.highlightLayer.add(fadeOut, forKey: "fadeOut")
+                self.highlightLayer.opacity = 0
+
+                // Subtle perspective tilt to settle
+                let flipDuration: TimeInterval = 0.15
                 var perspective = CATransform3DIdentity
-                perspective.m34 = -1.0 / 400.0  // Match web's perspective(400px)
-                let tilt = CATransform3DRotate(perspective, -.pi / 22.5, 1, 0, 0)  // ~8 degrees
+                perspective.m34 = -1.0 / 400.0
+                let tilt = CATransform3DRotate(perspective, -.pi / 22.5, 1, 0, 0)
 
                 UIView.animate(withDuration: flipDuration / 2, delay: 0, options: .curveEaseIn, animations: {
                     self.layer.transform = tilt

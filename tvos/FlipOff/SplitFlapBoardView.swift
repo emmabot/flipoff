@@ -57,25 +57,31 @@ class SplitFlapBoardView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        let marginH: CGFloat = 20
-        let marginV: CGFloat = 20
-        let gapH: CGFloat = 3
-        let gapV: CGFloat = 3
+        let marginH: CGFloat = 60   // P1: increased from 20
+        let marginV: CGFloat = 40   // P1: increased from 20
+        let gapH: CGFloat = 5       // P1: increased from 3
+        let gapV: CGFloat = 5       // P1: increased from 3
 
-        let availableW = bounds.width - 2 * marginH - CGFloat(Self.gridCols - 1) * gapH
-        let availableH = bounds.height - 2 * marginV - CGFloat(Self.gridRows - 1) * gapV
+        let availableW = bounds.width - marginH * 2 - CGFloat(Self.gridCols - 1) * gapH
+        let availableH = bounds.height - marginV * 2 - CGFloat(Self.gridRows - 1) * gapV
 
         let tileW = availableW / CGFloat(Self.gridCols)
-        let tileH = availableH / CGFloat(Self.gridRows)
-        let fontSize = tileH * 0.7
+        let rawTileH = availableH / CGFloat(Self.gridRows)
+        let tileH = min(rawTileH, tileW * 1.5)  // P0: Cap at 1:1.5 aspect ratio
+
+        // Center the grid vertically (tiles may not fill full height)
+        let totalGridH = CGFloat(Self.gridRows) * tileH + CGFloat(Self.gridRows - 1) * gapV
+        let offsetY = (bounds.height - totalGridH) / 2
+        let offsetX = marginH
+
+        let fontSize = tileH * 0.55  // Adjusted for shorter tiles
 
         for r in 0..<Self.gridRows {
             for c in 0..<Self.gridCols {
-                let tile = tiles[r][c]
-                let x = marginH + CGFloat(c) * (tileW + gapH)
-                let y = marginV + CGFloat(r) * (tileH + gapV)
-                tile.frame = CGRect(x: x, y: y, width: tileW, height: tileH)
-                tile.configureFont(size: fontSize)
+                let x = offsetX + CGFloat(c) * (tileW + gapH)
+                let y = offsetY + CGFloat(r) * (tileH + gapV)
+                tiles[r][c].frame = CGRect(x: x, y: y, width: tileW, height: tileH)
+                tiles[r][c].configureFont(size: fontSize)
             }
         }
     }

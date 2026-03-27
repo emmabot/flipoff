@@ -1,4 +1,5 @@
 import AVFoundation
+import QuartzCore
 
 /// Generates a short mechanical click WAV in memory and plays it through a pool
 /// of `AVAudioPlayer` instances so overlapping tile flips each get their own click.
@@ -21,8 +22,13 @@ class FlipSoundEngine {
         }
     }
 
+    private var lastPlayTime: TimeInterval = 0
+
     func playClick() {
         guard !isMuted, !players.isEmpty else { return }
+        let now = CACurrentMediaTime()
+        guard now - lastPlayTime > 0.025 else { return }  // Max ~40 clicks/sec
+        lastPlayTime = now
         let player = players[currentPlayer % players.count]
         currentPlayer += 1
         player.currentTime = 0

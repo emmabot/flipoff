@@ -56,10 +56,10 @@ class ViewController: UIViewController, MessageSchedulerDelegate {
         boardView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(boardView)
         NSLayoutConstraint.activate([
-            boardView.topAnchor.constraint(equalTo: view.topAnchor),
-            boardView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            boardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            boardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            boardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            boardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            boardView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            boardView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
 
