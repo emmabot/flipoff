@@ -12,6 +12,7 @@
 		A10000010000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000003 /* Assets.xcassets */; };
 		A10000010000000000000004 /* SplitFlapTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000006 /* SplitFlapTileView.swift */; };
 		A10000010000000000000005 /* SplitFlapBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000007 /* SplitFlapBoardView.swift */; };
+		A10000010000000000000006 /* FlipSoundEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000008 /* FlipSoundEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		A10000020000000000000005 /* FlipOff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipOff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000020000000000000006 /* SplitFlapTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitFlapTileView.swift; sourceTree = "<group>"; };
 		A10000020000000000000007 /* SplitFlapBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitFlapBoardView.swift; sourceTree = "<group>"; };
+		A10000020000000000000008 /* FlipSoundEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipSoundEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,7 @@
 				A10000020000000000000001 /* AppDelegate.swift */,
 				A10000020000000000000006 /* SplitFlapTileView.swift */,
 				A10000020000000000000007 /* SplitFlapBoardView.swift */,
+				A10000020000000000000008 /* FlipSoundEngine.swift */,
 				A10000020000000000000002 /* ViewController.swift */,
 				A10000020000000000000003 /* Assets.xcassets */,
 				A10000020000000000000004 /* Info.plist */,
@@ -132,6 +135,7 @@
 				A10000010000000000000004 /* SplitFlapTileView.swift in Sources */,
 				A10000010000000000000005 /* SplitFlapBoardView.swift in Sources */,
 				A10000010000000000000002 /* ViewController.swift in Sources */,
+				A10000010000000000000006 /* FlipSoundEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

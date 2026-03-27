@@ -184,6 +184,9 @@ class SplitFlapTileView: UIView {
 
     private func performFlipAnimation(to char: Character, color: UIColor = creamColor,
                                        fast: Bool = false, completion: (() -> Void)? = nil) {
+        if !fast {
+            FlipSoundEngine.shared.playClick()
+        }
         let firstDuration: TimeInterval = fast ? 0.02 : 0.06
         let secondDuration: TimeInterval = fast ? 0.02 : 0.05
         let text = char == " " ? "" : String(char)

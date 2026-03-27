@@ -554,6 +554,10 @@ class ViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tap.allowedPressTypes = [NSNumber(value: UIPress.PressType.select.rawValue)]
         view.addGestureRecognizer(tap)
+
+        let playPause = UITapGestureRecognizer(target: self, action: #selector(handlePlayPause))
+        playPause.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue)]
+        view.addGestureRecognizer(playPause)
     }
 
     @objc private func handleSwipeLeft() {
@@ -569,5 +573,10 @@ class ViewController: UIViewController {
     @objc private func handleTap() {
         showNext()
         startAutoRotation()
+    }
+
+    @objc private func handlePlayPause() {
+        let muted = FlipSoundEngine.shared.toggleMute()
+        print("[FlipOff] Sound \(muted ? "OFF" : "ON")")
     }
 }

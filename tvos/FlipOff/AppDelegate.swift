@@ -1,3 +1,4 @@
+import AVFoundation
 import UIKit
 
 @main
@@ -13,6 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = ViewController()
         window.makeKeyAndVisible()
         self.window = window
+
+        // Configure audio session for ambient playback (mixes with other audio, respects mute)
+        try? AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
+        try? AVAudioSession.sharedInstance().setActive(true)
+
         return true
     }
 }
