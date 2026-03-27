@@ -114,8 +114,7 @@ class SplitFlapTileView: UIView {
     }
 
     func configureFont(size: CGFloat) {
-        let font = UIFont(name: "HelveticaNeue-Bold", size: size)
-            ?? .systemFont(ofSize: size, weight: .bold)
+        let font = UIFont.monospacedSystemFont(ofSize: size, weight: .bold)
         topLabel.font = font
         bottomLabel.font = font
         flapLabel.font = font
@@ -147,8 +146,8 @@ class SplitFlapTileView: UIView {
         }
         isAnimating = true
 
-        let scrambleCount = 5 + Int.random(in: 0..<3)
-        let scrambleInterval: TimeInterval = 0.035
+        let scrambleCount = 2 + Int.random(in: 0..<2)
+        let scrambleInterval: TimeInterval = 0.015
         let targetChar = character
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
@@ -170,18 +169,23 @@ class SplitFlapTileView: UIView {
         let randChar = Self.charset.randomElement() ?? "A"
         let color = Self.scrambleColors[step % Self.scrambleColors.count]
 
-        performFlipAnimation(to: randChar, color: color, fast: true) { [weak self] in
-            DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
-                self?.runScramble(step: step + 1, total: total, interval: interval,
-                                 target: target, completion: completion)
-            }
+        // Quick character swap without full 3D animation
+        let text = randChar == " " ? "" : String(randChar)
+        topLabel.text = text
+        topLabel.textColor = color
+        bottomLabel.text = text
+        bottomLabel.textColor = color
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + interval) { [weak self] in
+            self?.runScramble(step: step + 1, total: total, interval: interval,
+                             target: target, completion: completion)
         }
     }
 
     private func performFlipAnimation(to char: Character, color: UIColor = creamColor,
                                        fast: Bool = false, completion: (() -> Void)? = nil) {
-        let firstDuration: TimeInterval = fast ? 0.06 : 0.15
-        let secondDuration: TimeInterval = fast ? 0.06 : 0.12
+        let firstDuration: TimeInterval = fast ? 0.03 : 0.12
+        let secondDuration: TimeInterval = fast ? 0.03 : 0.10
         let text = char == " " ? "" : String(char)
 
         // 1. Flap shows current character (top half)
