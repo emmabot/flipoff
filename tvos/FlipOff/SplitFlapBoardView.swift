@@ -53,8 +53,8 @@ class SplitFlapBoardView: UIView {
             let v = UIView()
             v.layer.cornerRadius = 5  // Half of 10pt size = perfect circle
             v.clipsToBounds = false
-            v.layer.shadowRadius = 6
-            v.layer.shadowOpacity = 0.8
+            v.layer.shadowRadius = 4
+            v.layer.shadowOpacity = 0.5
             v.layer.shadowOffset = .zero
             return v
         }
@@ -98,6 +98,24 @@ class SplitFlapBoardView: UIView {
         ambientGradient.frame = bounds
         layer.addSublayer(ambientGradient)
         startAmbientAnimation()
+
+        // P2: Top-edge glass highlight — 1px horizontal gradient simulating ambient light on glass
+        let topHighlight = CAGradientLayer()
+        topHighlight.colors = [
+            UIColor.clear.cgColor,
+            UIColor(white: 1, alpha: 0.06).cgColor,
+            UIColor(white: 1, alpha: 0.08).cgColor,
+            UIColor(white: 1, alpha: 0.06).cgColor,
+            UIColor.clear.cgColor
+        ]
+        topHighlight.startPoint = CGPoint(x: 0.1, y: 0.5)
+        topHighlight.endPoint = CGPoint(x: 0.9, y: 0.5)
+        topHighlight.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 1)
+        layer.addSublayer(topHighlight)
+
+        // P2: Subtle board edge border
+        layer.borderWidth = 0.5
+        layer.borderColor = UIColor(white: 1, alpha: 0.04).cgColor
 
         // Corner vignette — glass edge darkening (matches web at ~0.25, softer than web's 0.4 for TV viewing)
         cornerVignette.type = .radial
@@ -168,7 +186,7 @@ class SplitFlapBoardView: UIView {
         let offsetY = (bounds.height - totalGridH) / 2
         let offsetX = marginH
 
-        let fontSize = tileH * 0.50  // Des-H3: reduced from 0.55
+        let fontSize = tileW * 0.52  // P2: Size from width for assertive fill (matches web)
 
         // Position accent indicator dots (10×10pt LED circles, 24pt from edges)
         let indicatorSize: CGFloat = 10
@@ -193,7 +211,7 @@ class SplitFlapBoardView: UIView {
 
     /// Display a message as 5 rows of strings. Each string is centered in the 22-column grid.
     func display(message: [String]) {
-        print("[FlipOff] Displaying: \(message)")
+        print("[LilSauce] Displaying: \(message)")
         if isTransitioning {
             pendingMessage = message
             return
@@ -264,7 +282,7 @@ class SplitFlapBoardView: UIView {
 
     /// Display grid content immediately without flip animation (used for first message).
     private func displayWithoutAnimation(grid: [[Character]]) {
-        print("[FlipOff] displayWithoutAnimation — setting chars directly")
+        print("[LilSauce] displayWithoutAnimation — setting chars directly")
         for r in 0..<Self.gridRows {
             for c in 0..<Self.gridCols {
                 let char = grid[r][c]

@@ -37,9 +37,13 @@ class ModePickerViewController: UIViewController {
 
         // Title: "LIL SAUCE" — large monospaced, cream on black
         let titleLabel = UILabel()
-        titleLabel.text = "LIL SAUCE"
-        titleLabel.font = UIFont.monospacedSystemFont(ofSize: 72, weight: .bold)
-        titleLabel.textColor = UIColor(hex: "#F0E6D0")
+        // P2: Kern (letter-spacing) for premium hardware-label feel
+        let titleAttr = NSAttributedString(string: "LIL SAUCE", attributes: [
+            .font: UIFont.monospacedSystemFont(ofSize: 72, weight: .bold),
+            .foregroundColor: UIColor(hex: "#F0E6D0"),
+            .kern: 12.0
+        ])
+        titleLabel.attributedText = titleAttr
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
