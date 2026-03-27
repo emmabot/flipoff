@@ -146,7 +146,7 @@ class SplitFlapTileView: UIView {
         }
         isAnimating = true
 
-        let scrambleCount = 2 + Int.random(in: 0..<2)
+        let scrambleCount = 1 + Int.random(in: 0..<2)
         let scrambleInterval: TimeInterval = 0.015
         let targetChar = character
 
@@ -184,8 +184,8 @@ class SplitFlapTileView: UIView {
 
     private func performFlipAnimation(to char: Character, color: UIColor = creamColor,
                                        fast: Bool = false, completion: (() -> Void)? = nil) {
-        let firstDuration: TimeInterval = fast ? 0.03 : 0.12
-        let secondDuration: TimeInterval = fast ? 0.03 : 0.10
+        let firstDuration: TimeInterval = fast ? 0.02 : 0.06
+        let secondDuration: TimeInterval = fast ? 0.02 : 0.05
         let text = char == " " ? "" : String(char)
 
         // 1. Flap shows current character (top half)

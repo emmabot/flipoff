@@ -7,7 +7,7 @@ class SplitFlapBoardView: UIView {
 
     static let gridCols = 22
     static let gridRows = 5
-    static let staggerDelay: TimeInterval = 0.03  // 30ms per column
+    static let staggerDelay: TimeInterval = 0.02  // 20ms per column
 
     // MARK: - Properties
 
