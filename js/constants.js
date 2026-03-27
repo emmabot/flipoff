@@ -895,10 +895,29 @@ const INNOVATOR_RIDDLES = [
   { type: 'riddle', question: ['', 'I CRASH BUT', 'IM NOT A CAR', 'WHAT AM I?', ''], answer: ['', '', 'A COMPUTER!', '', ''] },
 ];
 
+// --- INNOVATOR MODE: MOTIVATIONAL/BUILDER (15) ---
+const INNOVATOR_MOTIVATIONAL = [
+  { type: 'quote', lines: ['', '', 'BUILD SOMETHING', 'PEOPLE LOVE', ''] },
+  { type: 'quote', lines: ['', 'EVERY EXPERT WAS', 'ONCE A BEGINNER', '', ''] },
+  { type: 'quote', lines: ['', 'THE FUTURE BELONGS', 'TO THE CURIOUS', '', ''] },
+  { type: 'quote', lines: ['', 'DREAM IT BUILD IT', 'SHIP IT', '', ''] },
+  { type: 'quote', lines: ['', 'CODE IS POETRY', '', '', ''] },
+  { type: 'quote', lines: ['', 'CREATE THE THINGS', 'YOU WISH EXISTED', '', ''] },
+  { type: 'quote', lines: ['', 'NEVER STOP LEARNING', 'NEVER STOP GROWING', '', ''] },
+  { type: 'quote', lines: ['', 'TODAY IS A GREAT', 'DAY TO BUILD', 'SOMETHING NEW', ''] },
+  { type: 'quote', lines: ['', 'YOU ARE CAPABLE OF', 'AMAZING THINGS', '', ''] },
+  { type: 'quote', lines: ['', 'GREAT THINGS NEVER', 'CAME FROM COMFORT', 'ZONES', ''] },
+  { type: 'quote', lines: ['', 'MAKE IT WORK', 'MAKE IT RIGHT', 'MAKE IT FAST', ''] },
+  { type: 'quote', lines: ['', 'THE ONLY LIMIT IS', 'YOUR IMAGINATION', '', ''] },
+  { type: 'quote', lines: ['', 'SMALL STEPS LEAD TO', 'BIG CHANGES', '', ''] },
+  { type: 'quote', lines: ['', 'BE THE CHANGE YOU', 'WANT TO SEE', 'IN THE WORLD', ''] },
+  { type: 'quote', lines: ['', 'INVENT THE FUTURE', 'DONT WAIT FOR IT', '', ''] },
+];
+
 export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES, ...GEOGRAPHY, ...SEASONAL_FACTS, ...UNSCRAMBLE, ...COLOR_MIXING];
 
-// Placeholder arrays for additional modes — content will be added by content agents
-export const INNOVATOR_MESSAGES = [];
+// Innovator mode — combined from all innovator content arrays
+export const INNOVATOR_MESSAGES = [...INNOVATOR_TECH_HISTORY, ...INNOVATOR_QUOTES, ...INNOVATOR_SCIENCE, ...INNOVATOR_WISDOM, ...INNOVATOR_ON_THIS_DAY, ...INNOVATOR_RIDDLES, ...INNOVATOR_MOTIVATIONAL];
 
 export const TIME_SLOTS = [
   { startHour: 7, endHour: 8, messages: MORNING_MESSAGES },
