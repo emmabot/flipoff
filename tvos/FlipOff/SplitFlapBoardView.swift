@@ -99,12 +99,13 @@ class SplitFlapBoardView: UIView {
         layer.addSublayer(ambientGradient)
         startAmbientAnimation()
 
-        // Des-A2: Corner vignette — slight darkening at edges
+        // Corner vignette — glass edge darkening (matches web at ~0.25, softer than web's 0.4 for TV viewing)
         cornerVignette.type = .radial
         cornerVignette.colors = [
             UIColor.clear.cgColor,
-            UIColor(white: 0, alpha: 0.05).cgColor
+            UIColor(white: 0, alpha: 0.25).cgColor
         ]
+        cornerVignette.locations = [0.6, 1.0]
         cornerVignette.startPoint = CGPoint(x: 0.5, y: 0.5)
         cornerVignette.endPoint = CGPoint(x: 1, y: 1)
         cornerVignette.frame = bounds

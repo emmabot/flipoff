@@ -22,7 +22,7 @@ class SplitFlapTileView: UIView {
     ]
 
     static let creamColor = UIColor(hex: "#F0E6D0")
-    static let tileBgColor = UIColor(hex: "#2A2A2A")
+    static let tileBgColor = UIColor(hex: "#222222")  // Mid-value of gradient
     static let charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,-!?'/: "
 
     // Animation constants
@@ -84,11 +84,14 @@ class SplitFlapTileView: UIView {
 
         // --- Layer ordering (back → front) ---
 
-        // 1. Background gradient
+        // 1. Background gradient — 4-stop to match web (upper/lower flap catch light differently)
         bgGradient.colors = [
-            UIColor(hex: "#2E2E2E").cgColor,
-            UIColor(hex: "#262626").cgColor
+            UIColor(hex: "#2A2A2A").cgColor,  // top — brightest
+            UIColor(hex: "#222222").cgColor,  // just above seam
+            UIColor(hex: "#1D1D1D").cgColor,  // just below seam — darkest
+            UIColor(hex: "#202020").cgColor   // bottom
         ]
+        bgGradient.locations = [0, 0.48, 0.52, 1.0]
         bgGradient.cornerRadius = 3
         bgGradient.masksToBounds = true
         bgGradient.frame = bounds
@@ -110,12 +113,12 @@ class SplitFlapTileView: UIView {
         characterLabel.minimumScaleFactor = 0.5
         addSubview(characterLabel)
 
-        // 3. Split line (Des-M3: 1px at rgba(0,0,0,0.35))
-        splitLine.backgroundColor = UIColor.black.withAlphaComponent(0.35)
+        // 3. Split line — mechanical seam (matches web at 0.55)
+        splitLine.backgroundColor = UIColor.black.withAlphaComponent(0.55)
         addSubview(splitLine)
 
-        // 4. Light catch below split (Des-M3: rgba(255,255,255,0.05))
-        lightLine.backgroundColor = UIColor(white: 1, alpha: 0.05)
+        // 4. Light catch below split (subtle light edge)
+        lightLine.backgroundColor = UIColor(white: 1, alpha: 0.03)
         addSubview(lightLine)
 
         // 5. Inner shadow overlay (depth)
@@ -284,7 +287,7 @@ class SplitFlapTileView: UIView {
         let topFlap = CALayer()
         topFlap.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height / 2)
         topFlap.backgroundColor = scrambleColorLayer.isHidden
-            ? UIColor(hex: "#2E2E2E").cgColor
+            ? UIColor(hex: "#2A2A2A").cgColor
             : scrambleColorLayer.backgroundColor
         topFlap.cornerRadius = 4
         topFlap.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
