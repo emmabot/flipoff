@@ -42,7 +42,7 @@
   "messages": {
     "default": [
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "DO OR DO NOT",
@@ -52,7 +52,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "YOUR FOCUS",
@@ -62,7 +62,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "THE FORCE WILL BE",
@@ -72,7 +72,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "THE GREATEST",
@@ -82,7 +82,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "OUR CHOICES SHOW",
@@ -92,7 +92,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "HAPPINESS CAN BE",
@@ -102,7 +102,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "IT TAKES COURAGE TO",
@@ -112,7 +112,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "WORDS ARE OUR MOST",
@@ -122,7 +122,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "EVEN STRENGTH MUST",
@@ -132,7 +132,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "BEING A HERO DOESNT",
@@ -142,7 +142,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "BRAVE DOESNT MEAN",
@@ -152,7 +152,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "THE RIGHT CHOICE IS",
@@ -162,7 +162,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "WISDOM IS THE",
@@ -172,7 +172,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "TRUE HEROES",
@@ -182,7 +182,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "THE JOURNEY HOME IS",
@@ -192,7 +192,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "CLEVERNESS CAN",
@@ -202,7 +202,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "KNOW YOURSELF AND",
@@ -212,7 +212,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "EVERY MAZE HAS",
@@ -222,7 +222,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "BE STRONG LIKE THOR",
@@ -232,7 +232,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "EVEN THUNDER STARTS",
@@ -242,7 +242,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "A KIND WORD NEED",
@@ -252,7 +252,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "THE BRAVE LIVE",
@@ -262,7 +262,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "IN EVERY WINTER",
@@ -272,7 +272,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "quote",
         "lines": [
           "",
           "STAND TALL LIKE",
@@ -282,7 +282,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE COW",
@@ -292,7 +292,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -302,7 +302,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY ARE FISH",
@@ -312,7 +312,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -322,7 +322,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT IS A CATS",
@@ -332,7 +332,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -342,7 +342,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO COWS",
@@ -352,7 +352,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DONT LEOPARDS",
@@ -362,7 +362,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -372,7 +372,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT SOUND DO",
@@ -382,7 +382,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -392,7 +392,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO DUCKS",
@@ -402,7 +402,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -412,7 +412,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHERE DO COWS",
@@ -422,7 +422,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY CANT YOU TELL",
@@ -432,7 +432,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -442,7 +442,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO BEES HAVE",
@@ -452,7 +452,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO FROGS",
@@ -462,7 +462,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO SNAKES",
@@ -472,7 +472,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHERE DO SHEEP",
@@ -482,7 +482,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO CATS EAT",
@@ -492,7 +492,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE DUCK",
@@ -502,7 +502,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -512,7 +512,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DO BEES",
@@ -522,7 +522,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -532,7 +532,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU GIVE",
@@ -542,7 +542,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE HORSE",
@@ -552,7 +552,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO ELEPHANTS",
@@ -562,7 +562,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO FISH LIVE",
@@ -572,7 +572,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO TURTLES",
@@ -582,7 +582,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY ARE CATS",
@@ -592,7 +592,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -602,7 +602,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO OWLS SAY",
@@ -612,7 +612,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO GIRAFFES",
@@ -622,7 +622,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -632,7 +632,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY ARE DOGS",
@@ -642,7 +642,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -652,7 +652,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -662,7 +662,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE TOMATO",
@@ -672,7 +672,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE BANANA",
@@ -682,7 +682,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO ELVES",
@@ -692,7 +692,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE COOKIE",
@@ -702,7 +702,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE GRAPE",
@@ -712,7 +712,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE EGG",
@@ -722,7 +722,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DONT EGGS",
@@ -732,7 +732,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -742,7 +742,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DO YOU FIX",
@@ -752,7 +752,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE CAKE",
@@ -762,7 +762,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE",
@@ -772,7 +772,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE LEMON",
@@ -782,7 +782,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO APPLES",
@@ -792,7 +792,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT IS A PRETZELS",
@@ -802,7 +802,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -812,7 +812,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE MELON",
@@ -822,7 +822,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DO YOU MAKE",
@@ -832,7 +832,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT KIND OF NUT",
@@ -842,7 +842,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE HOT",
@@ -852,7 +852,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID BACON",
@@ -862,7 +862,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DOES A NOSY",
@@ -872,7 +872,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT VEGETABLES",
@@ -882,7 +882,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY WAS THE SOUP",
@@ -892,7 +892,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID KETCHUP",
@@ -902,7 +902,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID PEANUT",
@@ -912,7 +912,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -922,7 +922,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DO TACOS",
@@ -932,7 +932,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE PEACH",
@@ -942,7 +942,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO MUSHROOMS",
@@ -952,7 +952,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -962,7 +962,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DO PICKLES",
@@ -972,7 +972,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE KID",
@@ -982,7 +982,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT IS A WITCHS",
@@ -992,7 +992,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE BOOK",
@@ -1002,7 +1002,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -1012,7 +1012,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY WAS THE MATH",
@@ -1022,7 +1022,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE PEN",
@@ -1032,7 +1032,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO CALCULATORS",
@@ -1042,7 +1042,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE ERASER",
@@ -1052,7 +1052,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO ELVES",
@@ -1062,7 +1062,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT SCHOOL SUPPLY",
@@ -1072,7 +1072,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY WAS THE BROOM",
@@ -1082,7 +1082,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO MAGICIANS",
@@ -1092,7 +1092,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHATS A TEACHERS",
@@ -1102,7 +1102,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE CLOCK",
@@ -1112,7 +1112,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHATS A PIRATES",
@@ -1122,7 +1122,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DID THE MUSIC",
@@ -1132,7 +1132,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID ZERO SAY",
@@ -1142,7 +1142,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO WE NEVER",
@@ -1152,7 +1152,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO LIBRARIANS",
@@ -1162,7 +1162,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE PENCIL",
@@ -1172,7 +1172,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE PAPER",
@@ -1182,7 +1182,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO MATH",
@@ -1192,7 +1192,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY IS SIX AFRAID",
@@ -1202,7 +1202,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -1212,7 +1212,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY IS HISTORY",
@@ -1222,7 +1222,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHATS THE SMARTEST",
@@ -1232,7 +1232,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID SCIENCE",
@@ -1242,7 +1242,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE GYM",
@@ -1252,7 +1252,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO COMPUTERS",
@@ -1262,7 +1262,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE BICYCLE",
@@ -1272,7 +1272,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHATS BROWN",
@@ -1282,7 +1282,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "I DONT TRUST",
@@ -1292,7 +1292,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY CANT YOUR NOSE",
@@ -1302,7 +1302,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT HAS HANDS",
@@ -1312,7 +1312,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT HAS A HEAD",
@@ -1322,7 +1322,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE GOLFER",
@@ -1332,7 +1332,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -1342,7 +1342,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DO YOU",
@@ -1352,7 +1352,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DOES THE MOON",
@@ -1362,7 +1362,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE PICTURE",
@@ -1372,7 +1372,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO CLOUDS",
@@ -1382,7 +1382,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -1392,7 +1392,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE BELT",
@@ -1402,7 +1402,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -1412,7 +1412,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT FALLS BUT",
@@ -1422,7 +1422,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE SCARECROW",
@@ -1432,7 +1432,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DO MOUNTAINS",
@@ -1442,7 +1442,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID ONE WALL",
@@ -1452,7 +1452,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID ONE HAT",
@@ -1462,7 +1462,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO BALLOONS",
@@ -1472,7 +1472,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DO YOU CATCH",
@@ -1482,7 +1482,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE OCEAN",
@@ -1492,7 +1492,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY CANT YOU",
@@ -1502,7 +1502,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -1512,7 +1512,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT ROOM HAS",
@@ -1522,7 +1522,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE MATH",
@@ -1532,7 +1532,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DO TREES",
@@ -1542,7 +1542,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE TEDDY",
@@ -1552,7 +1552,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID ONE TOILET",
@@ -1562,7 +1562,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY WAS THE ROBOT",
@@ -1572,7 +1572,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE SHOE",
@@ -1582,7 +1582,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO DENTISTS",
@@ -1592,7 +1592,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE PHONE",
@@ -1602,7 +1602,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHATS A VAMPIRES",
@@ -1612,7 +1612,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO GHOSTS",
@@ -1622,7 +1622,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO SKELETONS",
@@ -1632,7 +1632,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY CANT SKELETONS",
@@ -1642,7 +1642,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY WAS THE",
@@ -1652,7 +1652,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE LAMP",
@@ -1662,7 +1662,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DOES A PENGUIN",
@@ -1672,7 +1672,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE",
@@ -1682,7 +1682,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE TRAFFIC",
@@ -1692,7 +1692,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE LEFT",
@@ -1702,7 +1702,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DOES A BARBER",
@@ -1712,7 +1712,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -1722,7 +1722,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE KID",
@@ -1732,7 +1732,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE JANITOR",
@@ -1742,7 +1742,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO ASTRONAUTS",
@@ -1752,7 +1752,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO WE TELL",
@@ -1762,7 +1762,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT IS A TORNADOS",
@@ -1772,7 +1772,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID EARTH SAY",
@@ -1782,7 +1782,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DOES THE MOON",
@@ -1792,7 +1792,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY CANT FLOWERS",
@@ -1802,7 +1802,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT IS A ROCKS",
@@ -1812,7 +1812,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO VOLCANOES",
@@ -1822,7 +1822,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE BIG",
@@ -1832,7 +1832,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT RUNS BUT",
@@ -1842,7 +1842,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW MUCH DOES IT",
@@ -1852,7 +1852,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT KIND OF MUSIC",
@@ -1862,7 +1862,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE LEAF",
@@ -1872,7 +1872,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO CLOUDS DO",
@@ -1882,7 +1882,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY IS THE GRASS",
@@ -1892,7 +1892,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DO SCIENTISTS",
@@ -1902,7 +1902,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU DO",
@@ -1912,7 +1912,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT IS A LIGHT",
@@ -1922,7 +1922,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY ARE ATOMS",
@@ -1932,7 +1932,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID MARS SAY",
@@ -1942,7 +1942,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DO YOU KNOW",
@@ -1952,7 +1952,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID THE TREE",
@@ -1962,7 +1962,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT IS WINDS",
@@ -1972,7 +1972,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DO HURRICANES",
@@ -1982,7 +1982,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID MARIO",
@@ -1992,7 +1992,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO MINIONS",
@@ -2002,7 +2002,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DOES PETER PAN",
@@ -2012,7 +2012,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT IS THORS",
@@ -2022,7 +2022,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY WAS CINDERELLA",
@@ -2032,7 +2032,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -2042,7 +2042,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -2052,7 +2052,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID YODA GO",
@@ -2062,7 +2062,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DOES IRONMAN",
@@ -2072,7 +2072,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DOES DARTH",
@@ -2082,7 +2082,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -2092,7 +2092,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY IS GROOT",
@@ -2102,7 +2102,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DOES SONIC",
@@ -2112,7 +2112,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "HOW DOES PIKACHU",
@@ -2122,7 +2122,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY CANT HARRY",
@@ -2132,7 +2132,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DO YOU CALL",
@@ -2142,7 +2142,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID SPONGEBOB",
@@ -2152,7 +2152,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY WAS THE",
@@ -2162,7 +2162,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT DID THE",
@@ -2172,7 +2172,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHAT CAR DOES",
@@ -2182,7 +2182,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "joke",
         "lines": [
           "",
           "WHY DID GOLLUM",
@@ -2957,7 +2957,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -2967,7 +2967,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -2977,7 +2977,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -2987,7 +2987,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -2997,7 +2997,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -3007,7 +3007,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -3017,7 +3017,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -3027,7 +3027,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -3037,7 +3037,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -3047,7 +3047,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -3057,7 +3057,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -3067,7 +3067,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -3077,7 +3077,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -3087,7 +3087,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -3097,7 +3097,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "DID YOU KNOW?",
@@ -3107,7 +3107,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3117,7 +3117,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3127,7 +3127,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3137,7 +3137,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3147,7 +3147,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3157,7 +3157,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3167,7 +3167,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3177,7 +3177,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3187,7 +3187,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3197,7 +3197,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3207,7 +3207,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3217,7 +3217,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3227,7 +3227,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3237,7 +3237,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3247,7 +3247,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPACE FACT!",
@@ -3767,7 +3767,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3777,7 +3777,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3787,7 +3787,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3797,7 +3797,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3807,7 +3807,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3817,7 +3817,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3827,7 +3827,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3837,7 +3837,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3847,7 +3847,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3857,7 +3857,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3867,7 +3867,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3877,7 +3877,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3887,7 +3887,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3897,7 +3897,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3907,7 +3907,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "GEOGRAPHY FACT!",
@@ -3917,7 +3917,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPRING FACT!",
@@ -3927,7 +3927,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPRING FACT!",
@@ -3937,7 +3937,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPRING FACT!",
@@ -3947,7 +3947,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPRING FACT!",
@@ -3957,7 +3957,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SPRING FACT!",
@@ -3967,7 +3967,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SUMMER FACT!",
@@ -3977,7 +3977,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SUMMER FACT!",
@@ -3987,7 +3987,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SUMMER FACT!",
@@ -3997,7 +3997,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SUMMER FACT!",
@@ -4007,7 +4007,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "SUMMER FACT!",
@@ -4017,7 +4017,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "FALL FACT!",
@@ -4027,7 +4027,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "FALL FACT!",
@@ -4037,7 +4037,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "FALL FACT!",
@@ -4047,7 +4047,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "FALL FACT!",
@@ -4057,7 +4057,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "FALL FACT!",
@@ -4067,7 +4067,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "WINTER FACT!",
@@ -4077,7 +4077,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "WINTER FACT!",
@@ -4087,7 +4087,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "WINTER FACT!",
@@ -4097,7 +4097,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "WINTER FACT!",
@@ -4107,7 +4107,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "fact",
         "lines": [
           "",
           "WINTER FACT!",
@@ -4476,7 +4476,7 @@
     ],
     "bedtime": [
       {
-        "type": "plain",
+        "type": "reminder",
         "lines": [
           "",
           "",
@@ -4486,7 +4486,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "bedtime_quote",
         "lines": [
           "",
           "TO SLEEP PERCHANCE",
@@ -4496,7 +4496,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "reminder",
         "lines": [
           "",
           "",
@@ -4506,7 +4506,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "bedtime_quote",
         "lines": [
           "",
           "TOMORROW IS A NEW DAY",
@@ -4516,7 +4516,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "reminder",
         "lines": [
           "",
           "",
@@ -4526,7 +4526,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "bedtime_quote",
         "lines": [
           "",
           "YOU ARE BRAVER THAN",
@@ -4536,7 +4536,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "reminder",
         "lines": [
           "",
           "",
@@ -4546,7 +4546,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "bedtime_quote",
         "lines": [
           "",
           "THE MOON IS A FRIEND",
@@ -4556,7 +4556,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "reminder",
         "lines": [
           "",
           "",
@@ -4566,7 +4566,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "bedtime_quote",
         "lines": [
           "",
           "SLEEP IS THE BEST",
@@ -4576,7 +4576,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "reminder",
         "lines": [
           "",
           "",
@@ -4586,7 +4586,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "bedtime_quote",
         "lines": [
           "",
           "EVERY SUNSET BRINGS",
@@ -4596,7 +4596,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "reminder",
         "lines": [
           "",
           "",
@@ -4606,7 +4606,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "bedtime_quote",
         "lines": [
           "",
           "EVEN SUPERHEROES",
@@ -4616,7 +4616,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "reminder",
         "lines": [
           "",
           "",
@@ -4626,7 +4626,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "bedtime_quote",
         "lines": [
           "",
           "THE NIGHT IS DARKEST",
@@ -4636,7 +4636,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "reminder",
         "lines": [
           "",
           "TOMORROW IS A",
@@ -4646,7 +4646,7 @@
         ]
       },
       {
-        "type": "plain",
+        "type": "bedtime_quote",
         "lines": [
           "",
           "AND SO TO BED",

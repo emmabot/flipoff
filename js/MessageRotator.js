@@ -44,45 +44,32 @@ export class MessageRotator {
 
   next() {
     this.currentIndex = (this.currentIndex + 1) % this.messages.length;
-    const msg = this.messages[this.currentIndex];
-
-    if (msg && msg.type === 'riddle') {
-      this._showWithDelay(msg.question, msg.answer);
-    } else if (this._isJoke(msg)) {
-      const question = [msg[0], msg[1], msg[2], '', msg[4]];
-      const answer = ['', '', msg[3], '', ''];
-      this._showWithDelay(question, answer);
-    } else {
-      this.board.displayMessage(msg);
-      this._scheduleNext();
-    }
+    this._displayCurrent();
   }
 
   prev() {
     this.currentIndex = (this.currentIndex - 1 + this.messages.length) % this.messages.length;
+    this._displayCurrent();
+  }
+
+  _displayCurrent() {
     const msg = this.messages[this.currentIndex];
 
     if (msg && msg.type === 'riddle') {
       this._showWithDelay(msg.question, msg.answer);
-    } else if (this._isJoke(msg)) {
-      const question = [msg[0], msg[1], msg[2], '', msg[4]];
-      const answer = ['', '', msg[3], '', ''];
+    } else if (msg && msg.type === 'joke') {
+      const lines = msg.lines;
+      const question = [lines[0], lines[1], lines[2], '', lines[4]];
+      const answer = ['', '', lines[3], '', ''];
       this._showWithDelay(question, answer);
-    } else {
+    } else if (msg && msg.lines) {
+      this.board.displayMessage(msg.lines);
+      this._scheduleNext();
+    } else if (Array.isArray(msg)) {
+      // Backward compat for dynamically created plain arrays (weather, moon)
       this.board.displayMessage(msg);
       this._scheduleNext();
     }
-  }
-
-  _isJoke(msg) {
-    // A joke is a plain array where rows 1, 2, and 3 all have text,
-    // but row 3 is not a quote attribution (starts with '-' or contains ' - ')
-    return Array.isArray(msg) && msg.length === 5
-      && msg[1] && msg[1].trim() !== ''
-      && msg[2] && msg[2].trim() !== ''
-      && msg[3] && msg[3].trim() !== ''
-      && !msg[3].trim().startsWith('-')
-      && !msg[3].includes(' - ');
   }
 
   _showWithDelay(question, answer) {
@@ -167,7 +154,7 @@ export class MessageRotator {
   async _fetchWeather() {
     // Always insert moon phase, regardless of weather success
     const moonPhase = this._getMoonPhase();
-    const moonMessage = ['', '  TONIGHTS MOON', `  ${moonPhase}`, '', ''];
+    const moonMessage = { type: 'info', lines: ['', '  TONIGHTS MOON', `  ${moonPhase}`, '', ''] };
 
     try {
       const res = await fetch(WEATHER_CONFIG.url);
@@ -181,7 +168,7 @@ export class MessageRotator {
       const code = data.current.weather_code;
       const label = WEATHER_CONFIG.weatherCodes[code] || 'CLEAR';
       const line = `${temp}°F  ${label}`;
-      this._weatherMessage = ['', '  GOOD MORNING', `  ${line}`, '', ''];
+      this._weatherMessage = { type: 'info', lines: ['', '  GOOD MORNING', `  ${line}`, '', ''] };
       // Insert weather at the beginning of morning rotation
       this.messages.unshift(this._weatherMessage);
       // Adjust index so we don't skip anything
