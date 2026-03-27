@@ -18,6 +18,7 @@
 		A10000010000000000000009 /* MessageScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002000000000000000B /* MessageScheduler.swift */; };
 		A1000001000000000000000A /* ModePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002000000000000000C /* ModePickerViewController.swift */; };
 		A1000001000000000000000B /* ModeDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002000000000000000D /* ModeDefinition.swift */; };
+		A1000001000000000000000C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1000002000000000000000E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		A1000002000000000000000B /* MessageScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageScheduler.swift; sourceTree = "<group>"; };
 		A1000002000000000000000C /* ModePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModePickerViewController.swift; sourceTree = "<group>"; };
 		A1000002000000000000000D /* ModeDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeDefinition.swift; sourceTree = "<group>"; };
+		A1000002000000000000000E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Base.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				A10000020000000000000002 /* ViewController.swift */,
 				A10000020000000000000003 /* Assets.xcassets */,
 				A10000020000000000000004 /* Info.plist */,
+				A1000002000000000000000E /* LaunchScreen.storyboard */,
 			);
 			path = FlipOff;
 			sourceTree = "<group>";
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10000010000000000000003 /* Assets.xcassets in Resources */,
+				A1000001000000000000000C /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +218,7 @@
 				MARKETING_VERSION = 1.0.0;
 				CURRENT_PROJECT_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lilsauce.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = LilSauce;
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -236,7 +240,7 @@
 				MARKETING_VERSION = 1.0.0;
 				CURRENT_PROJECT_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lilsauce.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = LilSauce;
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
