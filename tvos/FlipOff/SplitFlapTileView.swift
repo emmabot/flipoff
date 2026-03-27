@@ -171,8 +171,8 @@ class SplitFlapTileView: UIView {
     }
 
     func configureFont(size: CGFloat) {
-        // Des-M7: SF Pro Bold — more authentic split-flap feel; grid handles alignment
-        characterLabel.font = UIFont.systemFont(ofSize: size, weight: .bold)
+        // Des-M7: Monospaced SF — every character occupies the same width, authentic to real split-flap hardware
+        characterLabel.font = UIFont.monospacedSystemFont(ofSize: size, weight: .bold)
     }
 
     // MARK: - Des-D1: Idle Breathing Animation
