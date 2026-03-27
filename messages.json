@@ -1,0 +1,4660 @@
+{
+  "config": {
+    "gridCols": 22,
+    "gridRows": 5,
+    "riddleDelay": 6000,
+    "messageInterval": 4000,
+    "scrambleColors": [
+      "#E8A840",
+      "#D4735E",
+      "#6BA3BE",
+      "#7BA068",
+      "#E8DCC8",
+      "#9B8EC4"
+    ],
+    "weather": {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=37.87&longitude=-122.27&current=temperature_2m,weather_code&temperature_unit=fahrenheit",
+      "codes": {
+        "0": "CLEAR",
+        "1": "MOSTLY CLEAR",
+        "2": "PARTLY CLOUDY",
+        "3": "CLOUDY",
+        "45": "FOGGY",
+        "48": "FOGGY",
+        "51": "DRIZZLE",
+        "53": "DRIZZLE",
+        "55": "DRIZZLE",
+        "61": "RAINY",
+        "63": "RAINY",
+        "65": "HEAVY RAIN",
+        "71": "SNOWY",
+        "73": "SNOWY",
+        "75": "HEAVY SNOW",
+        "80": "RAIN SHOWERS",
+        "81": "RAIN SHOWERS",
+        "82": "HEAVY SHOWERS",
+        "95": "STORMY",
+        "96": "STORMY",
+        "99": "STORMY"
+      }
+    }
+  },
+  "messages": {
+    "default": [
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DO OR DO NOT",
+          "THERE IS NO TRY",
+          "- YODA",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "YOUR FOCUS",
+          "DETERMINES REALITY",
+          "- QUI-GON JINN",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "THE FORCE WILL BE",
+          "WITH YOU ALWAYS",
+          "- OBI-WAN KENOBI",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "THE GREATEST",
+          "TEACHER FAILURE IS",
+          "- YODA",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "OUR CHOICES SHOW",
+          "WHAT WE TRULY ARE",
+          "- DUMBLEDORE",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HAPPINESS CAN BE",
+          "FOUND IN DARKEST",
+          "TIMES - DUMBLEDORE",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "IT TAKES COURAGE TO",
+          "STAND UP TO FRIENDS",
+          "- DUMBLEDORE",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WORDS ARE OUR MOST",
+          "INEXHAUSTIBLE",
+          "MAGIC - DUMBLEDORE",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "EVEN STRENGTH MUST",
+          "BOW TO WISDOM",
+          "- ANNABETH CHASE",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "BEING A HERO DOESNT",
+          "MEAN INVINCIBLE",
+          "- PERCY JACKSON",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "BRAVE DOESNT MEAN",
+          "YOURE NOT SCARED",
+          "- PERCY JACKSON",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "THE RIGHT CHOICE IS",
+          "RARELY THE EASY ONE",
+          "- PERCY JACKSON",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WISDOM IS THE",
+          "GREATEST STRENGTH",
+          "- ATHENA",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "TRUE HEROES",
+          "HELP OTHERS",
+          "- HERCULES",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "THE JOURNEY HOME IS",
+          "WORTH EVERY STEP",
+          "- THE ODYSSEY",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "CLEVERNESS CAN",
+          "BEAT STRENGTH",
+          "- ODYSSEUS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "KNOW YOURSELF AND",
+          "YOU WILL KNOW THE",
+          "UNIVERSE - DELPHI",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "EVERY MAZE HAS",
+          "A WAY OUT",
+          "- THESEUS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "BE STRONG LIKE THOR",
+          "WISE LIKE ODIN",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "EVEN THUNDER STARTS",
+          "AS A WHISPER",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "A KIND WORD NEED",
+          "NOT COST MUCH",
+          "- ODIN",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "THE BRAVE LIVE",
+          "ON FOREVER",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "IN EVERY WINTER",
+          "SPRING HIDES",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "STAND TALL LIKE",
+          "A MIGHTY OAK",
+          "- YGGDRASIL",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE COW",
+          "CROSS THE ROAD?",
+          "TO THE UDDER SIDE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A SLEEPING BULL?",
+          "A BULLDOZER!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY ARE FISH",
+          "SO SMART?",
+          "THEY LIVE IN SCHOOLS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A BEAR WITH NO TEETH?",
+          "A GUMMY BEAR!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT IS A CATS",
+          "FAVORITE COLOR?",
+          "PURR-PLE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A FLY WITH NO WINGS?",
+          "A WALK!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO COWS",
+          "READ?",
+          "MOO-SPAPERS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DONT LEOPARDS",
+          "PLAY HIDE AND SEEK?",
+          "ALWAYS SPOTTED!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A LAZY KANGAROO?",
+          "A POUCH POTATO!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT SOUND DO",
+          "PORCUPINES MAKE?",
+          "OW OW OW!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "AN ALLIGATOR IN VEST?",
+          "INVESTIGATOR!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO DUCKS",
+          "GET AFTER THEY EAT?",
+          "A BILL!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A FISH WITHOUT EYES?",
+          "A FSH!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHERE DO COWS",
+          "GO FOR FUN?",
+          "THE MOO-VIES!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY CANT YOU TELL",
+          "A SECRET ON A FARM?",
+          "THE CORN HAS EARS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A DOG MAGICIAN?",
+          "A LABRACADABRADOR!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO BEES HAVE",
+          "STICKY HAIR?",
+          "THEY USE HONEYCOMBS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO FROGS",
+          "ORDER AT A CAFE?",
+          "CROAK-A-COLA!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO SNAKES",
+          "STUDY IN SCHOOL?",
+          "HISS-TORY!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHERE DO SHEEP",
+          "GO ON VACATION?",
+          "THE BAAAA-HAMAS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO CATS EAT",
+          "FOR BREAKFAST?",
+          "MICE KRISPIES!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE DUCK",
+          "GO TO THE DOCTOR?",
+          "IT WAS FEELING QUACK",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A COLD DOG?",
+          "A CHILI DOG!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DO BEES",
+          "GET TO SCHOOL?",
+          "ON THE BUZZ!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A PENGUIN IN DESERT?",
+          "LOST!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU GIVE",
+          "A SICK BIRD?",
+          "TWEET-MENT!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE HORSE",
+          "GO BEHIND THE TREE?",
+          "TO CHANGE HIS JOCKY",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO ELEPHANTS",
+          "USE TO TALK?",
+          "ELEPHONES!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO FISH LIVE",
+          "IN SALT WATER?",
+          "PEPPER MAKES SNEEZE",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO TURTLES",
+          "DO ON BIRTHDAYS?",
+          "THEY SHELLEBRATE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY ARE CATS",
+          "GOOD AT VIDEO GAMES?",
+          "THEY HAVE NINE LIVES",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A DINOSAUR THAT NAPS?",
+          "A DINO-SNORE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO OWLS SAY",
+          "ON HALLOWEEN?",
+          "HAPPY OWL-OWEEN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO GIRAFFES",
+          "HAVE LONG NECKS?",
+          "THEIR FEET SMELL!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A FUNNY CHICKEN?",
+          "A COMEDI-HEN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY ARE DOGS",
+          "BAD DANCERS?",
+          "TWO LEFT FEET!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "CHEESE THAT ISNT YOURS",
+          "NACHO CHEESE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "FAKE SPAGHETTI?",
+          "AN IMPASTA!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE TOMATO",
+          "TURN RED?",
+          "IT SAW THE DRESSING!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE BANANA",
+          "GO TO THE DOCTOR?",
+          "IT WASNT PEELING WELL",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO ELVES",
+          "MAKE SANDWICHES WITH?",
+          "SHORTBREAD!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE COOKIE",
+          "GO TO THE DOCTOR?",
+          "IT FELT CRUMMY!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE GRAPE",
+          "SAY WHEN STEPPED ON?",
+          "NOTHING JUST A WHINE",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE EGG",
+          "HIDE?",
+          "IT WAS A LITTLE CHICK",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DONT EGGS",
+          "TELL JOKES?",
+          "THEY MIGHT CRACK UP!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A SAD STRAWBERRY?",
+          "A BLUEBERRY!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DO YOU FIX",
+          "A BROKEN PIZZA?",
+          "WITH TOMATO PASTE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE CAKE",
+          "SAY TO THE FORK?",
+          "WANT A PIECE OF ME?",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE",
+          "BREAD SAY TO BUTTER?",
+          "YOU'RE ON A ROLL!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE LEMON",
+          "STOP ROLLING?",
+          "IT RAN OUT OF JUICE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO APPLES",
+          "AND ORANGES HAVE?",
+          "THEY'RE BOTH FRUIT!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT IS A PRETZELS",
+          "FAVORITE DAY?",
+          "TWISTS-DAY!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A SLEEPING PIZZA?",
+          "A PIZZZZZA!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE MELON",
+          "JUMP IN THE LAKE?",
+          "WANTED TO BE WATER",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DO YOU MAKE",
+          "A MILKSHAKE?",
+          "GIVE A COW A POGO!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT KIND OF NUT",
+          "ALWAYS HAS A COLD?",
+          "CASHEW!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE HOT",
+          "DOG SAY TO THE BUN?",
+          "STOP LOAFING AROUND",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID BACON",
+          "LAUGH?",
+          "THE EGG CRACKED ONE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DOES A NOSY",
+          "PEPPER DO?",
+          "GETS JALAPENO BIZ!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT VEGETABLES",
+          "DO LIBRARIANS LIKE?",
+          "QUIET PEAS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY WAS THE SOUP",
+          "SO GOOD AT BASEBALL?",
+          "IT HAD A GOOD STOCK!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID KETCHUP",
+          "SAY TO MUSTARD?",
+          "YOU'RE THE WURST!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID PEANUT",
+          "BUTTER SAY TO JELLY?",
+          "STUCK ON YOU!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A RICH ELF?",
+          "WELFY!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DO TACOS",
+          "SAY GRACE?",
+          "LETTUCE PRAY!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE PEACH",
+          "GO TO THE DENTIST?",
+          "BAD FUZZ ON TEETH!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO MUSHROOMS",
+          "GET INVITED TO PARTY?",
+          "THEY'RE FUN-GI!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A RUNNING TURKEY?",
+          "FAST FOOD!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DO PICKLES",
+          "ENJOY A DAY OUT?",
+          "THEY RELISH IT!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE KID",
+          "BRING A LADDER?",
+          "TO GO TO HIGH SCHOOL",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT IS A WITCHS",
+          "FAVORITE SUBJECT?",
+          "SPELLING!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE BOOK",
+          "GO TO THE HOSPITAL?",
+          "IT HURT ITS SPINE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A TEACHER WHO FARTS?",
+          "A PRIVATE TUTOR!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY WAS THE MATH",
+          "BOOK ALWAYS SAD?",
+          "IT HAD PROBLEMS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE PEN",
+          "SAY TO THE PENCIL?",
+          "YOU'RE POINTLESS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO CALCULATORS",
+          "MAKE GREAT FRIENDS?",
+          "YOU CAN COUNT ON EM!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE ERASER",
+          "GO TO SCHOOL?",
+          "TO CORRECT MISTAKES!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO ELVES",
+          "LEARN IN SCHOOL?",
+          "THE ELF-ABET!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT SCHOOL SUPPLY",
+          "IS KING OF THE CLASS?",
+          "THE RULER!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY WAS THE BROOM",
+          "LATE FOR SCHOOL?",
+          "IT OVERSWEPT!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO MAGICIANS",
+          "DO WELL IN SCHOOL?",
+          "GOOD AT TRICK TESTS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHATS A TEACHERS",
+          "FAVORITE NATION?",
+          "EXPLA-NATION!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE CLOCK",
+          "GET SENT TO OFFICE?",
+          "IT TOCKED TOO MUCH!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHATS A PIRATES",
+          "FAVORITE LETTER?",
+          "YOU THINK ITS RRRR!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DID THE MUSIC",
+          "TEACHER GET LOCKED OUT",
+          "SHE LOST HER KEYS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID ZERO SAY",
+          "TO EIGHT?",
+          "NICE BELT!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO WE NEVER",
+          "TELL SECRETS IN CLASS?",
+          "TOO MANY RULERS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO LIBRARIANS",
+          "TAKE FISHING?",
+          "BOOKWORMS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE PENCIL",
+          "WIN THE AWARD?",
+          "IT WAS SHARP!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE PAPER",
+          "SAY TO THE PENCIL?",
+          "WRITE ON!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO MATH",
+          "TEACHERS EAT?",
+          "SQUARE MEALS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY IS SIX AFRAID",
+          "OF SEVEN?",
+          "7 ATE 9!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A NUMBER THAT MOVES?",
+          "A ROAMIN NUMERAL!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY IS HISTORY",
+          "LIKE A FRUIT CAKE?",
+          "FULL OF DATES!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHATS THE SMARTEST",
+          "INSECT?",
+          "A SPELLING BEE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID SCIENCE",
+          "SAY TO ART?",
+          "YOU HAVE NO CLASS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE GYM",
+          "TEACHER GO TO BEACH?",
+          "TO TEST THE WATERS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO COMPUTERS",
+          "SNACK ON?",
+          "MICRO CHIPS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE BICYCLE",
+          "FALL OVER?",
+          "IT WAS TWO-TIRED!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHATS BROWN",
+          "AND STICKY?",
+          "A STICK!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "I DONT TRUST",
+          "STAIRS",
+          "ALWAYS UP TO STUFF!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY CANT YOUR NOSE",
+          "BE 12 INCHES LONG?",
+          "THEN IT'D BE A FOOT!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT HAS HANDS",
+          "BUT CANT CLAP?",
+          "A CLOCK!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT HAS A HEAD",
+          "AND A TAIL BUT NO BODY",
+          "A COIN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE GOLFER",
+          "BRING TWO PANTS?",
+          "HOLE IN ONE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A BOOMERANG THAT",
+          "WONT COME BACK? STICK",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DO YOU",
+          "ORGANIZE A SPACE PARTY",
+          "YOU PLANET!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DOES THE MOON",
+          "CUT HIS HAIR?",
+          "ECLIPSE IT!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE PICTURE",
+          "GO TO JAIL?",
+          "IT WAS FRAMED!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO CLOUDS",
+          "WEAR UNDERNEATH?",
+          "THUNDERWEAR!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A FUNNY MOUNTAIN?",
+          "HILL-ARIOUS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE BELT",
+          "GET ARRESTED?",
+          "HELD UP SOME PANTS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A SNOWMAN IN SUMMER?",
+          "A PUDDLE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT FALLS BUT",
+          "NEVER GETS HURT?",
+          "RAIN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE SCARECROW",
+          "WIN AN AWARD?",
+          "OUTSTANDING IN FIELD",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DO MOUNTAINS",
+          "SEE?",
+          "THEY PEAK!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID ONE WALL",
+          "SAY TO THE OTHER?",
+          "MEET YOU AT CORNER!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID ONE HAT",
+          "SAY TO THE OTHER?",
+          "YOU WAIT HERE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO BALLOONS",
+          "HATE GOING TO SCHOOL?",
+          "POP QUIZZES!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DO YOU CATCH",
+          "A SQUIRREL?",
+          "ACT LIKE A NUT!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE OCEAN",
+          "SAY TO THE BEACH?",
+          "NOTHING IT WAVED!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY CANT YOU",
+          "GIVE ELSA A BALLOON?",
+          "SHE'LL LET IT GO!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A TRAIN THAT SNEEZES?",
+          "ACHOO CHOO TRAIN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT ROOM HAS",
+          "NO DOORS OR WINDOWS?",
+          "A MUSHROOM!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE MATH",
+          "TEACHER GO OUTSIDE?",
+          "TO USE A PRO-TRACTOR",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DO TREES",
+          "GET ON THE INTERNET?",
+          "THEY LOG IN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE TEDDY",
+          "BEAR SKIP DESSERT?",
+          "IT WAS STUFFED!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID ONE TOILET",
+          "SAY TO THE OTHER?",
+          "YOU LOOK FLUSHED!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY WAS THE ROBOT",
+          "SO TIRED?",
+          "HAD A HARD DRIVE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE SHOE",
+          "GO TO THE DOCTOR?",
+          "IT HAD LOST ITS SOLE",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO DENTISTS",
+          "CALL THEIR X-RAYS?",
+          "TOOTH PICS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE PHONE",
+          "WEAR GLASSES?",
+          "LOST ITS CONTACTS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHATS A VAMPIRES",
+          "FAVORITE FRUIT?",
+          "A BLOOD ORANGE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO GHOSTS",
+          "MAKE BAD LIARS?",
+          "YOU SEE THROUGH EM!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO SKELETONS",
+          "ORDER AT A CAFE?",
+          "SPARE RIBS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY CANT SKELETONS",
+          "FIGHT EACH OTHER?",
+          "NO GUTS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY WAS THE",
+          "COMPUTER COLD?",
+          "LEFT ITS WINDOWS OPEN",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE LAMP",
+          "GO TO SCHOOL?",
+          "TO GET BRIGHTER!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DOES A PENGUIN",
+          "BUILD ITS HOUSE?",
+          "IGLOOS IT TOGETHER!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE",
+          "STAMP SAY TO ENVELOPE",
+          "STICK WITH ME!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE TRAFFIC",
+          "LIGHT SAY TO THE CAR?",
+          "DONT LOOK I CHANGE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE LEFT",
+          "EYE SAY TO THE RIGHT?",
+          "BETWEEN US SOMETHING",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DOES A BARBER",
+          "WIN A RACE?",
+          "HE KNOWS A SHORTCUT",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "A CAN OPENER THATS",
+          "BROKEN? CANT OPENER",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE KID",
+          "BRING A CLOCK TO LUNCH",
+          "HE WANTED SECONDS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE JANITOR",
+          "SAY WHEN HE JUMPED OUT",
+          "SUPPLIES!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO ASTRONAUTS",
+          "EAT FOR DINNER?",
+          "LAUNCH!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO WE TELL",
+          "ACTORS TO BREAK A LEG?",
+          "EVERY PLAY HAS CAST!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT IS A TORNADOS",
+          "FAVORITE GAME?",
+          "TWISTER!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID EARTH SAY",
+          "TO THE OTHER PLANETS?",
+          "YOU HAVE NO LIFE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DOES THE MOON",
+          "NEED A LOAN?",
+          "ITS DOWN TO QUARTER!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY CANT FLOWERS",
+          "RIDE A BICYCLE?",
+          "NO PETALS! OH WAIT!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT IS A ROCKS",
+          "FAVORITE MUSIC?",
+          "ROCK AND ROLL!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO VOLCANOES",
+          "GET INVITED OUT?",
+          "THEY'RE A BLAST!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE BIG",
+          "FLOWER SAY TO SMALL?",
+          "HEY THERE BUD!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT RUNS BUT",
+          "NEVER GETS TIRED?",
+          "WATER!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW MUCH DOES IT",
+          "COST TO GO TO SPACE?",
+          "A LOT OF BUCKS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT KIND OF MUSIC",
+          "DO PLANETS LISTEN TO?",
+          "NEPTUNES!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE LEAF",
+          "GO TO THE DOCTOR?",
+          "FEELING GREEN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO CLOUDS DO",
+          "WHEN THEY GET RICH?",
+          "MAKE IT RAIN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY IS THE GRASS",
+          "SO DANGEROUS?",
+          "FULL OF BLADES!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DO SCIENTISTS",
+          "FRESHEN THEIR BREATH?",
+          "EXPERI-MINTS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU DO",
+          "WITH A SICK CHEMIST?",
+          "CANT HELIUM CANT",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT IS A LIGHT",
+          "YEARS FAVORITE SNACK?",
+          "MARS BARS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY ARE ATOMS",
+          "ALWAYS LYING?",
+          "THEY MAKE EVERYTHING",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID MARS SAY",
+          "TO SATURN?",
+          "GIVE ME A RING!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DO YOU KNOW",
+          "THE OCEAN IS FRIENDLY?",
+          "IT WAVES!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID THE TREE",
+          "GO TO THE DENTIST?",
+          "ROOT CANAL!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT IS WINDS",
+          "FAVORITE COLOR?",
+          "BLEW!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DO HURRICANES",
+          "HAVE NAMES?",
+          "THEY'D GET LOST!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID MARIO",
+          "GO TO THE DOCTOR?",
+          "MUSHROOM PROBLEMS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO MINIONS",
+          "CALL THEIR LEADER?",
+          "BANANA!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DOES PETER PAN",
+          "ALWAYS FLY?",
+          "HE NEVERLANDS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT IS THORS",
+          "FAVORITE DAY?",
+          "THORS-DAY!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY WAS CINDERELLA",
+          "BAD AT SOCCER?",
+          "SHE RAN FROM BALL!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "SPIDERMAN ON A BREAK?",
+          "PETER PARKER!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "SHREK AT THE BEACH?",
+          "AN OGRE-TAN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID YODA GO",
+          "TO THE BANK?",
+          "NEED A FORCE DEPOSIT",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DOES IRONMAN",
+          "AND SILVER SURFER MAKE",
+          "ALLOYS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DOES DARTH",
+          "VADER LIKE HIS TOAST?",
+          "ON THE DARK SIDE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "ELSA WITH A SUNBURN?",
+          "MELTDOWN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY IS GROOT",
+          "BAD AT TESTS?",
+          "HE ONLY KNOWS ONE!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DOES SONIC",
+          "EAT FOR BREAKFAST?",
+          "FAST FOOD!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "HOW DOES PIKACHU",
+          "SAY HELLO?",
+          "WATTS UP!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY CANT HARRY",
+          "POTTER TELL JOKES?",
+          "RIDDIKULUS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DO YOU CALL",
+          "HOGWARTS WITHOUT MAGIC",
+          "BORING SCHOOL!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID SPONGEBOB",
+          "FAIL HIS TEST?",
+          "BELOW C LEVEL!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY WAS THE",
+          "MATH WIZARD SO COOL?",
+          "HAD TOO MANY FANS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT DID THE",
+          "POKEMON SAY AT EASTER?",
+          "PIKACHU EGGS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHAT CAR DOES",
+          "LUKE SKYWALKER DRIVE?",
+          "A TOY-YODA!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WHY DID GOLLUM",
+          "GO TO THERAPY?",
+          "RING ATTACHMENT ISSUE",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "I HAVE HANDS BUT",
+          "CANT CLAP",
+          "WHAT AM I?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A CLOCK!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "I HAVE A HEAD AND",
+          "A TAIL BUT NO BODY",
+          "WHAT AM I?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A COIN!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT HAS KEYS BUT",
+          "CANT OPEN LOCKS?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A PIANO!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT HAS LEGS BUT",
+          "DOESNT WALK?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A TABLE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT CAN YOU CATCH",
+          "BUT NOT THROW?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A COLD!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT GOES UP BUT",
+          "NEVER COMES DOWN?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "YOUR AGE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT HAS WORDS BUT",
+          "NEVER SPEAKS?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A BOOK!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT HAS A NECK",
+          "BUT NO HEAD?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A BOTTLE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT HAS TEETH BUT",
+          "CANT EAT?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A COMB!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT CAN TRAVEL",
+          "AROUND THE WORLD",
+          "STAYING IN A CORNER?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A STAMP!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT GETS WETTER",
+          "THE MORE IT DRIES?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A TOWEL!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT HAS ONE EYE",
+          "BUT CANT SEE?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A NEEDLE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT CAN FILL A",
+          "ROOM BUT TAKES",
+          "NO SPACE?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "LIGHT!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT INVENTION",
+          "LETS YOU LOOK RIGHT",
+          "THROUGH A WALL?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A WINDOW!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT HAS A THUMB",
+          "AND FOUR FINGERS",
+          "BUT IS NOT A HAND?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A GLOVE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "I FOLLOW YOU ALL",
+          "DAY BUT DISAPPEAR",
+          "AT NIGHT WHAT AM I?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "YOUR SHADOW!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT HAS CITIES",
+          "BUT NO HOUSES?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A MAP!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT CAN YOU BREAK",
+          "WITHOUT TOUCHING IT?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A PROMISE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT GOES THROUGH",
+          "TOWNS AND OVER HILLS",
+          "BUT DOESNT MOVE?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A ROAD!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT HAS BARK",
+          "BUT IS NOT A DOG?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A TREE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT RUNS BUT",
+          "NEVER WALKS?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "WATER!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT BUILDING HAS",
+          "THE MOST STORIES?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A LIBRARY!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT HAS EARS",
+          "BUT CANNOT HEAR?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "CORN!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT CAN BE",
+          "CRACKED AND MADE",
+          "TOLD AND PLAYED?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A JOKE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT HAS A RING",
+          "BUT NO FINGER?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A PHONE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT TASTES BETTER",
+          "THAN IT SMELLS?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "YOUR TONGUE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT GETS BIGGER",
+          "THE MORE YOU TAKE AWAY",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A HOLE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT BELONGS TO",
+          "YOU BUT OTHERS USE",
+          "MORE THAN YOU?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "YOUR NAME!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "THE MORE YOU HAVE",
+          "THE LESS YOU SEE",
+          "WHAT IS IT?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "DARKNESS!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT CAN RUN BUT",
+          "NEVER WALKS HAS A",
+          "MOUTH BUT NEVER TALKS?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "A RIVER!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "LETTUCE",
+          ""
+        ],
+        "answer": [
+          "",
+          "LETTUCE WHO?",
+          "LETTUCE IN ITS COLD!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "BOO",
+          ""
+        ],
+        "answer": [
+          "",
+          "BOO WHO?",
+          "DONT CRY ITS JUST ME",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "ORANGE",
+          ""
+        ],
+        "answer": [
+          "",
+          "ORANGE WHO?",
+          "ORANGE YOU GLAD",
+          "I DIDNT SAY BANANA?",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "NOBEL",
+          ""
+        ],
+        "answer": [
+          "",
+          "NOBEL WHO?",
+          "NOBEL SO I KNOCKED!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "TANK",
+          ""
+        ],
+        "answer": [
+          "",
+          "TANK WHO?",
+          "YOURE WELCOME!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "ATCH",
+          ""
+        ],
+        "answer": [
+          "",
+          "ATCH WHO?",
+          "BLESS YOU!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "WHO",
+          ""
+        ],
+        "answer": [
+          "",
+          "WHO WHO?",
+          "IS THERE AN OWL",
+          "IN HERE?",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "COW",
+          ""
+        ],
+        "answer": [
+          "",
+          "COW WHO?",
+          "NO A COW SAYS MOO!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "DISHES",
+          ""
+        ],
+        "answer": [
+          "",
+          "DISHES WHO?",
+          "DISHES THE POLICE",
+          "OPEN UP!",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "HARRY",
+          ""
+        ],
+        "answer": [
+          "",
+          "HARRY WHO?",
+          "HARRY UP ITS COLD!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "WOODEN SHOE",
+          ""
+        ],
+        "answer": [
+          "",
+          "WOODEN SHOE WHO?",
+          "WOODEN SHOE LIKE",
+          "TO HEAR A JOKE?",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "ICE CREAM",
+          ""
+        ],
+        "answer": [
+          "",
+          "ICE CREAM WHO?",
+          "ICE CREAM EVERY",
+          "TIME I SEE A BUG!",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "BANANA",
+          ""
+        ],
+        "answer": [
+          "",
+          "BANANA WHO?",
+          "KNOCK KNOCK",
+          "ORANGE YOU GLAD?",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "INTERRUPTING COW",
+          ""
+        ],
+        "answer": [
+          "",
+          "INTERRUPTING C--",
+          "MOOOOO!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "KNOCK KNOCK",
+          "WHOS THERE?",
+          "BROCCOLI",
+          ""
+        ],
+        "answer": [
+          "",
+          "BROCCOLI WHO?",
+          "BROCCOLI DOESNT",
+          "HAVE A LAST NAME!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "A GROUP OF FLAMINGOS",
+          "IS A FLAMBOYANCE",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "HONEY NEVER",
+          "GOES BAD EVER!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "OCTOPUSES HAVE",
+          "THREE HEARTS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "BANANAS ARE",
+          "ACTUALLY BERRIES!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "A SNAIL CAN SLEEP",
+          "FOR THREE YEARS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "COWS HAVE",
+          "BEST FRIENDS!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "YOUR NOSE CAN SMELL",
+          "ONE TRILLION SCENTS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "DOLPHINS SLEEP WITH",
+          "ONE EYE OPEN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "A SHRIMP HAS ITS",
+          "HEART IN ITS HEAD!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "FROGS DRINK WATER",
+          "THROUGH THEIR SKIN!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "BUTTERFLIES TASTE",
+          "WITH THEIR FEET!",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "SEA OTTERS HOLD",
+          "HANDS WHEN SLEEPING",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "A BOLT OF LIGHTNING",
+          "IS FIVE TIMES HOTTER",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "YOUR BONES ARE",
+          "STRONGER THAN STEEL",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "DID YOU KNOW?",
+          "CATS SPEND 70 PERCENT",
+          "OF THEIR LIFE NAPPING",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "JUPITER HAS",
+          "95 MOONS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "THE SUN IS A STAR",
+          "NOT A PLANET",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "ONE DAY ON VENUS",
+          "IS 243 EARTH DAYS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "SATURN COULD FLOAT",
+          "IN A GIANT BATHTUB",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "THE MOON HAS",
+          "NO WIND AT ALL",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "MARS IS CALLED",
+          "THE RED PLANET",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "SPACE IS TOTALLY",
+          "SILENT",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "A YEAR ON MERCURY",
+          "IS JUST 88 DAYS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "NEPTUNE HAS",
+          "SUPERSONIC WINDS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "YOU WEIGH LESS",
+          "ON THE MOON",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "THE SUN IS 93",
+          "MILLION MILES AWAY",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "THERE ARE MORE STARS",
+          "THAN GRAINS OF SAND",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "FOOTPRINTS ON THE",
+          "MOON LAST FOREVER",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "EARTH SPINS AT",
+          "1000 MILES PER HOUR",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPACE FACT!",
+          "ASTRONAUTS GROW",
+          "TALLER IN SPACE",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "COURAGEOUS",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "COURAGEOUS MEANS",
+          "BRAVE AND NOT",
+          "AFRAID",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "ENORMOUS",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "ENORMOUS MEANS",
+          "REALLY REALLY",
+          "BIG",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "PECULIAR",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "PECULIAR MEANS",
+          "STRANGE OR",
+          "UNUSUAL",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "BRILLIANT",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "BRILLIANT MEANS",
+          "VERY SMART OR",
+          "VERY BRIGHT",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "DETERMINED",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "DETERMINED MEANS",
+          "YOU WONT GIVE UP",
+          "NO MATTER WHAT",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "FAMISHED",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "FAMISHED MEANS",
+          "SUPER DUPER",
+          "HUNGRY",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "FRAGILE",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "FRAGILE MEANS",
+          "EASY TO BREAK",
+          "HANDLE WITH CARE",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "FURIOUS",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "FURIOUS MEANS",
+          "REALLY REALLY",
+          "ANGRY",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "GENEROUS",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "GENEROUS MEANS",
+          "HAPPY TO SHARE",
+          "WITH OTHERS",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "ANCIENT",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "ANCIENT MEANS",
+          "VERY VERY OLD",
+          "LIKE DINOSAUR OLD",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "HAZARDOUS",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "HAZARDOUS MEANS",
+          "DANGEROUS OR",
+          "NOT SAFE",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "MAGNIFICENT",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "MAGNIFICENT MEANS",
+          "AMAZING AND",
+          "WONDERFUL",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "EXHAUSTED",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "EXHAUSTED MEANS",
+          "SO TIRED YOU",
+          "CANT MOVE",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "ABSURD",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "ABSURD MEANS",
+          "SO SILLY IT MAKES",
+          "NO SENSE AT ALL",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WORD OF THE DAY",
+          "TRIUMPHANT",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "TRIUMPHANT MEANS",
+          "YOU WON AND YOU",
+          "FEEL GREAT",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "",
+          "WHAT IS 7 x 8?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "56!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "",
+          "WHAT IS 9 x 6?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "54!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "",
+          "WHAT IS 8 x 8?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "64!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "",
+          "WHAT IS 12 x 4?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "48!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "",
+          "WHAT IS 25 + 37?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "62!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "",
+          "WHAT IS 48 + 36?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "84!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "",
+          "WHAT IS 99 - 47?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "52!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COMES NEXT?",
+          "10  20  30  ...",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "40!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COMES NEXT?",
+          "2  4  8  16  ...",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "32!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "IF YOU HAVE 3 BAGS",
+          "WITH 6 APPLES EACH",
+          "HOW MANY APPLES?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "18 APPLES!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "A PIZZA HAS 8",
+          "SLICES AND YOU EAT 3",
+          "HOW MANY ARE LEFT?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "5 SLICES!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "",
+          "WHAT IS 6 x 7?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "42!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "WHAT COMES NEXT?",
+          "5  10  15  20  ...",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "25!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "YOU HAVE 4 BOXES",
+          "WITH 5 CRAYONS EACH",
+          "HOW MANY CRAYONS?",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "20 CRAYONS!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "",
+          "WHAT IS 11 x 11?",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "121!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "THE PACIFIC IS THE",
+          "BIGGEST OCEAN",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "MT EVEREST IS THE",
+          "TALLEST MOUNTAIN",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "THERE ARE SEVEN",
+          "CONTINENTS ON EARTH",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "THE NILE IS THE",
+          "LONGEST RIVER",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "VATICAN CITY IS THE",
+          "SMALLEST COUNTRY",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "ANTARCTICA IS THE",
+          "COLDEST CONTINENT",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "SAHARA IS THE",
+          "LARGEST HOT DESERT",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "EARTH HAS FIVE",
+          "OCEANS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "MARIANA TRENCH IS",
+          "THE DEEPEST POINT",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "AMAZON RAINFOREST",
+          "IS THE LARGEST",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "AUSTRALIA IS BOTH",
+          "COUNTRY AND CONTINENT",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "RUSSIA IS THE",
+          "BIGGEST COUNTRY",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "AFRICA HAS 54",
+          "COUNTRIES",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "THE DEAD SEA IS",
+          "THE LOWEST POINT",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "GEOGRAPHY FACT!",
+          "GREENLAND IS THE",
+          "BIGGEST ISLAND",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPRING FACT!",
+          "BABY ANIMALS ARE",
+          "BORN IN SPRING",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPRING FACT!",
+          "FLOWERS START TO",
+          "BLOOM IN SPRING",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPRING FACT!",
+          "DAYS GET LONGER",
+          "IN SPRINGTIME",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPRING FACT!",
+          "BUTTERFLIES COME",
+          "BACK IN SPRING",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SPRING FACT!",
+          "APRIL SHOWERS BRING",
+          "MAY FLOWERS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SUMMER FACT!",
+          "JUNE 21 IS THE",
+          "LONGEST DAY",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SUMMER FACT!",
+          "FIREFLIES GLOW TO",
+          "FIND THEIR FRIENDS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SUMMER FACT!",
+          "THE SUN DOESNT SET",
+          "IN PARTS OF ALASKA",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SUMMER FACT!",
+          "ICE CREAM WAS",
+          "INVENTED IN CHINA",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SUMMER FACT!",
+          "WATERMELONS ARE",
+          "92 PERCENT WATER",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "FALL FACT!",
+          "LEAVES CHANGE COLOR",
+          "BECAUSE LESS SUNLIGHT",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "FALL FACT!",
+          "BIRDS FLY SOUTH",
+          "FOR THE WINTER",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "FALL FACT!",
+          "SQUIRRELS HIDE NUTS",
+          "FOR THE WINTER",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "FALL FACT!",
+          "FALL IS ALSO CALLED",
+          "AUTUMN",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "FALL FACT!",
+          "PUMPKINS ARE FRUIT",
+          "NOT VEGETABLES",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WINTER FACT!",
+          "NO TWO SNOWFLAKES",
+          "ARE THE SAME",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WINTER FACT!",
+          "BEARS HIBERNATE",
+          "ALL WINTER LONG",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WINTER FACT!",
+          "DEC 21 IS THE",
+          "SHORTEST DAY",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WINTER FACT!",
+          "AURORA BOREALIS IS",
+          "THE NORTHERN LIGHTS",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "WINTER FACT!",
+          "SOME LAKES FREEZE",
+          "SOLID IN WINTER",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "NCOEA",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "OCEAN!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "LENPAT",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "PLANET!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "TIRGUA",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "GUITAR!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "KNYEMO",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "MONKEY!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "GRAODN",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "DRAGON!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "STACLE",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "CASTLE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "TRIPAE",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "PIRATE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "CKROTE",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "ROCKET!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "GLNUJE",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "JUNGLE!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "HPINDOL",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "DOLPHIN!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "WBORANI",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "RAINBOW!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "COLVANO",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "VOLCANO!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "GUNEPIN",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "PENGUIN!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "SAUNIROD",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "DINOSAUR!",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "riddle",
+        "question": [
+          "",
+          "UNSCRAMBLE THIS!",
+          "SURTEARE",
+          "",
+          ""
+        ],
+        "answer": [
+          "",
+          "",
+          "TREASURE!",
+          "",
+          ""
+        ]
+      }
+    ],
+    "morning": [
+      {
+        "type": "reminder",
+        "lines": [
+          "",
+          "",
+          "BRUSH YOUR TEETH",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "joke",
+        "lines": [
+          "",
+          "WHAT DO CATS EAT",
+          "FOR BREAKFAST?",
+          "MICE KRISPIES!",
+          ""
+        ]
+      },
+      {
+        "type": "reminder",
+        "lines": [
+          "",
+          "",
+          "BRUSH YOUR HAIR",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "joke",
+        "lines": [
+          "",
+          "WHY DONT EGGS",
+          "TELL JOKES?",
+          "THEY MIGHT CRACK UP!",
+          ""
+        ]
+      },
+      {
+        "type": "reminder",
+        "lines": [
+          "",
+          "",
+          "PUT YOUR SOCKS ON",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "joke",
+        "lines": [
+          "",
+          "WHY DID THE KID",
+          "BRING A LADDER?",
+          "TO GO TO HIGH SCHOOL",
+          ""
+        ]
+      },
+      {
+        "type": "reminder",
+        "lines": [
+          "",
+          "",
+          "BE NICE",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "joke",
+        "lines": [
+          "",
+          "WHAT DO ELVES",
+          "LEARN IN SCHOOL?",
+          "THE ELF-ABET!",
+          ""
+        ]
+      },
+      {
+        "type": "reminder",
+        "lines": [
+          "",
+          "GET READY FOR A",
+          "BEAUTIFUL DAY",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "joke",
+        "lines": [
+          "",
+          "WHY DID BACON",
+          "LAUGH?",
+          "THE EGG CRACKED ONE!",
+          ""
+        ]
+      }
+    ],
+    "bedtime": [
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "",
+          "BRUSH YOUR TEETH",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "TO SLEEP PERCHANCE",
+          "TO DREAM",
+          "- SHAKESPEARE",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "",
+          "CHANGE YOUR CLOTHES",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "TOMORROW IS A NEW DAY",
+          "WITH NO MISTAKES YET",
+          "- ANNE SHIRLEY",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "",
+          "PACK YOUR BACKPACK",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "YOU ARE BRAVER THAN",
+          "YOU BELIEVE",
+          "- WINNIE THE POOH",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "",
+          "READ A BOOK",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "THE MOON IS A FRIEND",
+          "FOR THE LONESOME",
+          "- CARL SANDBURG",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "",
+          "DRINK SOME WATER",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "SLEEP IS THE BEST",
+          "MEDITATION",
+          "- DALAI LAMA",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "",
+          "SAY GOODNIGHT",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "EVERY SUNSET BRINGS",
+          "THE PROMISE OF",
+          "A NEW DAWN - EMERSON",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "",
+          "SWEET DREAMS",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "EVEN SUPERHEROES",
+          "NEED SLEEP",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "",
+          "YOU DID GREAT TODAY",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "THE NIGHT IS DARKEST",
+          "JUST BEFORE THE DAWN",
+          "- THOMAS FULLER",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "TOMORROW IS A",
+          "NEW ADVENTURE",
+          "",
+          ""
+        ]
+      },
+      {
+        "type": "plain",
+        "lines": [
+          "",
+          "AND SO TO BED",
+          "",
+          "- SAMUEL PEPYS",
+          ""
+        ]
+      }
+    ]
+  }
+}
