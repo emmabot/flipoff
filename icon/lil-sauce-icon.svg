@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <rect width="400" height="240" fill="#1A1A1A" rx="8"/>
+  
+  <!-- Row 1: L I L -->
+  <g transform="translate(95, 35)">
+    <!-- L -->
+    <rect x="0" y="0" width="60" height="75" fill="#2A2A2A" rx="4"/>
+    <line x1="0" y1="37.5" x2="60" y2="37.5" stroke="#111" stroke-width="1.5"/>
+    <text x="30" y="52" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-weight="bold" font-size="45" fill="#F0E6D0">L</text>
+    
+    <!-- I -->
+    <rect x="70" y="0" width="60" height="75" fill="#2A2A2A" rx="4"/>
+    <line x1="70" y1="37.5" x2="130" y2="37.5" stroke="#111" stroke-width="1.5"/>
+    <text x="100" y="52" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-weight="bold" font-size="45" fill="#F0E6D0">I</text>
+    
+    <!-- L -->
+    <rect x="140" y="0" width="60" height="75" fill="#2A2A2A" rx="4"/>
+    <line x1="140" y1="37.5" x2="200" y2="37.5" stroke="#111" stroke-width="1.5"/>
+    <text x="170" y="52" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-weight="bold" font-size="45" fill="#F0E6D0">L</text>
+  </g>
+  
+  <!-- Row 2: S A U C E -->
+  <g transform="translate(25, 130)">
+    <!-- S -->
+    <rect x="0" y="0" width="60" height="75" fill="#2A2A2A" rx="4"/>
+    <line x1="0" y1="37.5" x2="60" y2="37.5" stroke="#111" stroke-width="1.5"/>
+    <text x="30" y="52" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-weight="bold" font-size="45" fill="#F0E6D0">S</text>
+    
+    <!-- A -->
+    <rect x="70" y="0" width="60" height="75" fill="#2A2A2A" rx="4"/>
+    <line x1="70" y1="37.5" x2="130" y2="37.5" stroke="#111" stroke-width="1.5"/>
+    <text x="100" y="52" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-weight="bold" font-size="45" fill="#F0E6D0">A</text>
+    
+    <!-- U -->
+    <rect x="140" y="0" width="60" height="75" fill="#2A2A2A" rx="4"/>
+    <line x1="140" y1="37.5" x2="200" y2="37.5" stroke="#111" stroke-width="1.5"/>
+    <text x="170" y="52" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-weight="bold" font-size="45" fill="#F0E6D0">U</text>
+    
+    <!-- C -->
+    <rect x="210" y="0" width="60" height="75" fill="#2A2A2A" rx="4"/>
+    <line x1="210" y1="37.5" x2="270" y2="37.5" stroke="#111" stroke-width="1.5"/>
+    <text x="240" y="52" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-weight="bold" font-size="45" fill="#F0E6D0">C</text>
+    
+    <!-- E -->
+    <rect x="280" y="0" width="60" height="75" fill="#2A2A2A" rx="4"/>
+    <line x1="280" y1="37.5" x2="340" y2="37.5" stroke="#111" stroke-width="1.5"/>
+    <text x="310" y="52" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-weight="bold" font-size="45" fill="#F0E6D0">E</text>
+  </g>
+</svg>

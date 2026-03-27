@@ -716,6 +716,26 @@ const HISTORY_RIDDLES = [
   { type: 'riddle', question: ['', 'I AM A DOCUMENT', 'SIGNED IN 1215 BY', 'KING JOHN', ''], answer: ['', '', 'MAGNA CARTA!', '', ''] },
 ];
 
+const HISTORY_GEOGRAPHY = [
+  { type: 'fact', lines: ['HISTORY FACT!', 'THE SILK ROAD WAS', '4000 MILES LONG', '', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'THE PANAMA CANAL', 'TOOK 10 YEARS', 'TO BUILD', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'THE ROMAN ROADS', 'STRETCHED 250000', 'MILES TOTAL', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'CONSTANTINOPLE WAS', 'RENAMED ISTANBUL', 'IN 1930', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'THE SUEZ CANAL', 'OPENED IN 1869', 'IN EGYPT', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'TENOCHTITLAN WAS', 'BUILT ON A LAKE', 'IN MEXICO', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'PETRA WAS CARVED', 'INTO ROCK IN', 'JORDAN', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'ANGKOR WAT IS THE', 'LARGEST RELIGIOUS', 'MONUMENT EVER BUILT', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'TIMBUKTU WAS A', 'CENTER OF LEARNING', 'IN AFRICA', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'THE NILE GAVE LIFE', 'TO ANCIENT EGYPT', 'FOR THOUSANDS YEARS', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'MESOPOTAMIA MEANS', 'LAND BETWEEN', 'TWO RIVERS', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'THE COLOSSEUM HELD', '50000 SPECTATORS', 'IN ANCIENT ROME', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'THE PARTHENON WAS', 'BUILT IN 447 BC', 'IN ATHENS', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'THE FORBIDDEN CITY', 'HAS 9999 ROOMS', 'IN BEIJING', ''] },
+  { type: 'fact', lines: ['HISTORY FACT!', 'EASTER ISLAND HAS', '887 GIANT STONE', 'STATUES CALLED MOAI', ''] },
+];
+
+export const HISTORY_MESSAGES = [...HISTORY_EVENTS, ...HISTORY_QUOTES, ...HISTORY_MILESTONES, ...HISTORY_FIRSTS, ...HISTORY_ON_THIS_DAY, ...HISTORY_RIDDLES, ...HISTORY_GEOGRAPHY];
+
 // --- INNOVATOR MODE: TECH HISTORY FACTS (30) ---
 const INNOVATOR_TECH_HISTORY = [
   { type: 'fact', lines: ['', 'TECH HISTORY!', 'APPLE FOUNDED 1976', 'IN A GARAGE', ''] },
@@ -784,11 +804,101 @@ const INNOVATOR_QUOTES = [
   { type: 'quote', lines: ['', 'IF I HAVE SEEN FAR', 'IT IS BY STANDING', 'ON GIANTS - NEWTON', ''] },
 ];
 
+// --- INNOVATOR MODE: SCIENCE BREAKTHROUGHS (20) ---
+const INNOVATOR_SCIENCE = [
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'DNA DISCOVERED', 'IN 1953', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'HUMANS LANDED ON', 'THE MOON IN 1969', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'ELECTRICITY WAS', 'HARNESSED IN 1879', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'PENICILLIN FOUND', 'BY ACCIDENT IN 1928', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'FIRST VACCINE MADE', 'IN 1796 FOR SMALLPOX', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'X-RAYS DISCOVERED', 'IN 1895', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'GRAVITY DISCOVERED', 'BY ISAAC NEWTON', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'THE SPEED OF LIGHT', 'IS 186000 MILES/SEC', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'ATOMS ARE 99.9', 'PERCENT EMPTY SPACE', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'WATER IS H2O TWO', 'HYDROGEN ONE OXYGEN', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'THE SUN IS A GIANT', 'BALL OF HOT GAS', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'DINOSAURS WENT', 'EXTINCT 65M YRS AGO', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'EARTH IS 4.5', 'BILLION YEARS OLD', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'SOUND CANT TRAVEL', 'THROUGH SPACE', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'LIGHT TAKES 8 MIN', 'TO REACH EARTH', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'HUMAN BODY HAS 206', 'BONES', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'VENUS IS THE', 'HOTTEST PLANET', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'TELESCOPE INVENTED', 'IN 1608', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'PERIODIC TABLE HAS', '118 ELEMENTS', ''] },
+  { type: 'fact', lines: ['', 'SCIENCE FACT!', 'MARIE CURIE WON', 'TWO NOBEL PRIZES', ''] },
+];
+
+// --- INNOVATOR MODE: STARTUP WISDOM (20) ---
+const INNOVATOR_WISDOM = [
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'MOVE FAST AND LEARN', '', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'DONE IS BETTER', 'THAN PERFECT', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'FAIL FAST', 'LEARN FASTER', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'SHIP IT TODAY', 'FIX IT TOMORROW', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'SOLVE A PROBLEM', 'PEOPLE ACTUALLY HAVE', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'MAKE SOMETHING', 'PEOPLE WANT', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'START SMALL', 'DREAM BIG', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'TALK TO YOUR USERS', '', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'BUILD MEASURE LEARN', 'REPEAT', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'STAY CURIOUS', 'ALWAYS', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'YOUR IDEA IS WORTH', 'NOTHING WITHOUT WORK', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'DO THINGS THAT', 'DONT SCALE AT FIRST', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'FOCUS ON ONE THING', 'AND DO IT WELL', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'THE BEST CODE IS', 'NO CODE AT ALL', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'ITERATE ITERATE', 'ITERATE', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'LAUNCH BEFORE', 'YOURE READY', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'DATA BEATS', 'OPINIONS', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'KEEP IT SIMPLE', '', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'THINK BIG START', 'SMALL ACT FAST', ''] },
+  { type: 'quote', lines: ['', 'STARTUP WISDOM', 'CULTURE EATS', 'STRATEGY', ''] },
+];
+
+// --- INNOVATOR MODE: ON THIS DAY IN TECH (20) ---
+const INNOVATOR_ON_THIS_DAY = [
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'JAN 1 1983', 'THE INTERNET IS BORN', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'FEB 4 2004', 'FACEBOOK LAUNCHES', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'MAR 21 2006', 'TWITTER IS FOUNDED', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'APR 1 1976', 'APPLE IS FOUNDED', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'MAY 14 1973', 'SKYLAB LAUNCHES', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'JUN 29 2007', 'FIRST IPHONE SOLD', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'JUL 20 1969', 'MOON LANDING!', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'AUG 6 1991', 'FIRST WEBSITE EVER', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'SEP 4 1998', 'GOOGLE IS FOUNDED', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'OCT 29 1969', 'FIRST ARPANET MSG', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'NOV 10 1983', 'WINDOWS 1.0 RELEASED', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'DEC 25 1990', 'FIRST WEB BROWSER', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'JAN 9 2007', 'JOBS UNVEILS IPHONE', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'FEB 14 2005', 'YOUTUBE IS CREATED', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'MAR 10 2000', 'DOT COM BUBBLE POPS', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'APR 12 1961', 'FIRST HUMAN IN SPACE', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'MAY 11 1997', 'DEEP BLUE BEATS', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'JUL 5 1994', 'AMAZON IS FOUNDED', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'AUG 12 1981', 'IBM PC IS RELEASED', ''] },
+  { type: 'fact', lines: ['', 'ON THIS DAY', 'OCT 1 2001', 'FIRST IPOD REVEALED', ''] },
+];
+
+// --- INNOVATOR MODE: TECH RIDDLES (15) ---
+const INNOVATOR_RIDDLES = [
+  { type: 'riddle', question: ['', 'I HAVE A MOUSE', 'BUT NO CAT', 'WHAT AM I?', ''], answer: ['', '', 'A COMPUTER!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE KEYS BUT', 'NO LOCKS', 'WHAT AM I?', ''], answer: ['', '', 'A KEYBOARD!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE A WEB BUT', 'IM NOT A SPIDER', 'WHAT AM I?', ''], answer: ['', '', 'THE INTERNET!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE PAGES BUT', 'IM NOT A BOOK', 'WHAT AM I?', ''], answer: ['', '', 'A WEBSITE!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE CHIPS BUT', 'YOU CANT EAT ME', 'WHAT AM I?', ''], answer: ['', '', 'A MOTHERBOARD!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE A CLOUD BUT', 'NO RAIN', 'WHAT AM I?', ''], answer: ['', '', 'CLOUD STORAGE!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE WINDOWS BUT', 'NO GLASS', 'WHAT AM I?', ''], answer: ['', '', 'A PC!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE A DRIVE BUT', 'NO STEERING WHEEL', 'WHAT AM I?', ''], answer: ['', '', 'A HARD DRIVE!', '', ''] },
+  { type: 'riddle', question: ['', 'I TAKE SCREENSHOTS', 'BUT HAVE NO CAMERA', 'WHAT AM I?', ''], answer: ['', '', 'A COMPUTER!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE MEMORY BUT', 'NO BRAIN', 'WHAT AM I?', ''], answer: ['', '', 'A USB STICK!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE A TABLET', 'BUT NO MEDICINE', 'WHAT AM I?', ''], answer: ['', '', 'AN IPAD!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE BARS BUT', 'IM NOT A PRISON', 'WHAT AM I?', ''], answer: ['', '', 'A PHONE SIGNAL!', '', ''] },
+  { type: 'riddle', question: ['', 'I STREAM BUT', 'IM NOT A RIVER', 'WHAT AM I?', ''], answer: ['', '', 'NETFLIX!', '', ''] },
+  { type: 'riddle', question: ['', 'I HAVE FOLLOWERS', 'BUT IM NOT A LEADER', 'WHAT AM I?', ''], answer: ['', '', 'SOCIAL MEDIA!', '', ''] },
+  { type: 'riddle', question: ['', 'I CRASH BUT', 'IM NOT A CAR', 'WHAT AM I?', ''], answer: ['', '', 'A COMPUTER!', '', ''] },
+];
+
 export const DEFAULT_MESSAGES = [...QUOTES, ...JOKES, ...RIDDLES, ...KNOCK_KNOCKS, ...FUN_FACTS, ...SPACE_FACTS, ...VOCABULARY, ...MATH_PUZZLES, ...GEOGRAPHY, ...SEASONAL_FACTS, ...UNSCRAMBLE, ...COLOR_MIXING];
 
 // Placeholder arrays for additional modes — content will be added by content agents
 export const INNOVATOR_MESSAGES = [];
-export const HISTORY_MESSAGES = [];
 
 export const TIME_SLOTS = [
   { startHour: 7, endHour: 8, messages: MORNING_MESSAGES },
